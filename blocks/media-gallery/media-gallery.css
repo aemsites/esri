@@ -1,0 +1,69 @@
+.media-gallery {
+    display: grid;
+    grid-gap: 1rem;
+    width: calc(100vw - 64px);
+    margin: 0 32px;
+
+}
+
+.media-gallery p {
+    margin: 0;
+}
+
+.media-gallery br {
+    display: none;
+}
+
+.media-gallery picture {
+    display: block;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    position: relative;
+}
+
+.media-gallery picture:after {
+    --gradient-angle: to top;
+    --gradient-angle-m: to top;
+    --gradient-transition: 60%;
+    content: "";
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    inset-block-end: 0;
+    inset-inline-start: 0;
+    background: linear-gradient(to top, rgba(53, 53, 53, 0.8), transparent 60%);
+}
+
+.media-gallery > div > div {
+    position: relative;
+}
+
+.media-gallery > div > div > :nth-child(3) {
+    aspect-ratio: 16/9;
+}
+
+.media-gallery > div > div > :first-child {
+    color: white;
+    font-weight: 400;
+    position: absolute;
+    z-index: 1;
+    font-family: var(--calcite-sans-family);
+    font-size: var(--font-2);
+    text-align: start;
+    bottom: 0;
+    margin: 24px
+}
+
+.media-gallery a {
+    display: none;
+}
+
+.media-gallery img {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+}
+
+.media-gallery > div > div > :nth-child(2) {
+    display: none;
+}
