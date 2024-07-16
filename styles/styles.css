@@ -56,6 +56,8 @@
   --space-56: calc(14 * var(--unit));
   --space-64: calc(16 * var(--unit));
 
+  --header-font-size: 16px;
+
 
   --body-font-size-m: 22px;
   --body-font-size-s: 18px;
@@ -74,13 +76,7 @@
 
 
 body {
-  font-size: var(--body-font-size-m);
-  margin: 0;
-  font-family: var(--body-font-family);
-  line-height: 1.6;
-  color: var(--text-color);
-  background-color: var(--background-color);
-  display: none;
+  font-size: var(--font-0);
 }
 
 body.appear {
@@ -89,28 +85,10 @@ body.appear {
 
 header {
   height: var(--nav-height);
+  font-size: 16px;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: var(--heading-font-family);
-  font-weight: 600;
-  line-height: 1.25;
-  margin-top: 1em;
-  margin-bottom: 0.5em;
-  scroll-margin: calc(var(--nav-height) + 1em);
-}
 
-h1 { font-size: var(--heading-font-size-xxl); }
-h2 { font-size: var(--heading-font-size-xl); }
-h3 { font-size: var(--heading-font-size-l); }
-h4 { font-size: var(--heading-font-size-m); }
-h5 { font-size: var(--heading-font-size-s); }
-h6 { font-size: var(--heading-font-size-xs); }
 
 p,
 dl,
