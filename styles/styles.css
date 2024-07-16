@@ -44,10 +44,7 @@
   --space-48: calc(12 * var(--unit));
   --space-56: calc(14 * var(--unit));
   --space-64: calc(16 * var(--unit));
-
   --header-font-size: 0.2525;
-
-
   --body-font-size-m: 22px;
   --body-font-size-s: 18px;
   --body-font-size-xs: 16px;
@@ -59,7 +56,6 @@
   --heading-font-size-m: 24px;
   --heading-font-size-s: 20px;
   --heading-font-size-xs: 18px;
-
   --nav-height: 64px;
 }
 
