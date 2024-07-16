@@ -20,7 +20,7 @@
   --text-color: black;
 
   /* fonts */
-  --body-font-family: avenir-next;
+  --body-font-family: "Avenir Next";
   --heading-font-family: var(--body-font-family);
 
   /* body sizes */
