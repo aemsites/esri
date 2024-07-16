@@ -24,19 +24,8 @@
   --heading-font-family: var(--body-font-family);
 
   /* font sizes */
-  --font--3: clamp(.625rem, .625rem + 0vw, .625rem);
-  --font--2: clamp(.625rem, 0.568181818rem + 0.252525253vw, .75rem);
-  --font--1: clamp(0.75rem, 0.693181818rem + 0.252525253vw, 0.875rem);
-  --font-0: clamp(0.875rem, 0.818181818rem + 0.252525253vw, 1rem);
-  --font-1: clamp(1rem, 0.943181818rem + 0.252525253vw, 1.125rem);
-  --font-2: clamp(1.125rem, 1.068181818rem + 0.252525253vw, 1.25rem);
-  --font-3: clamp(1.25rem, 1.079545455rem + 0.757575758vw, 1.625rem);
-  --font-4: clamp(1.625rem, 1.454545455rem + 0.757575758vw, 2rem);
-  --font-5: clamp(1.625rem, 1.227272727rem + 1.767676768vw, 2.5rem);
-  --font-6: clamp(2rem, 1.545454545rem + 2.02020202vw, 3rem);
-  --font-7: clamp(2.5rem, 2.045454545rem + 2.02020202vw, 3.5rem);
-  --font-8: clamp(2.5rem, 1.818181818rem + 3.03030303vw, 4rem);
-  
+  --font-0: 16px
+
   /* margin sizes */ 
   --space-1: calc(0.25 * 1rem);
   --space-2: calc(0.5 * var(--unit));
@@ -56,7 +45,7 @@
   --space-56: calc(14 * var(--unit));
   --space-64: calc(16 * var(--unit));
 
-  --header-font-size: 16px;
+  --header-font-size: 0.2525;
 
 
   --body-font-size-m: 22px;
