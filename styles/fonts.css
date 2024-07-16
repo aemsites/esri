@@ -2,6 +2,6 @@
   font-family: avenir-next;
   font-style: normal;
   font-weight: 400;
-  font-display: bloc;
+  font-display: block;
   src: url('../fonts/avenirnext-regular.woff2') format('woff2');
 }
