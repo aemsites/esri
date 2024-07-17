@@ -21,7 +21,8 @@
 
   /* fonts */
   --calcite-code-family: "Consolas", "Andale Mono", "Lucida Console", "Monaco", monospace;
-  --calcite-sans-family: "Avenir Next", "Avenir", "Helvetica Neue", sans-serif;    --font--3: clamp(.625rem, .625rem + 0vw, .625rem);
+  --calcite-sans-family: "Avenir Next", "Avenir", "Helvetica Neue", sans-serif;    
+  --font--3: clamp(.625rem, .625rem + 0vw, .625rem);
   --font--2: clamp(.625rem, 0.568181818rem + 0.252525253vw, .75rem);
   --font--1: clamp(0.75rem, 0.693181818rem + 0.252525253vw, 0.875rem);
   --font-0: clamp(0.875rem, 0.818181818rem + 0.252525253vw, 1rem);

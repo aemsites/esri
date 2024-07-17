@@ -1,25 +1,56 @@
 import { createOptimizedPicture } from '../../scripts/aem.js';
 
 export default function decorate(block) {
-    // modify card structure to have a card-content div
-    for(let idx = 0; idx < block.children.length; ++idx) {
-        const child = block.children[idx];
-        child.classList.add('card');
-        child.classList.add(`card-${idx}`);
+    /* change to ul, li */
+    const ul = document.createElement('ul');
+    [...block.children].forEach((row) => {
+        const li = document.createElement('li');
+        while (row.firstElementChild) li.append(row.firstElementChild);
+        [...li.children].forEach((div) => {
+            if (div.children.length === 1 && div.querySelector('picture')) div.className = 'cards-card-image';
+            else div.className = 'cards-card-body';
+        });
+        ul.append(li);
+    });
+    ul.querySelectorAll('img').forEach((img) => img.closest('picture').replaceWith(createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }])));
+    block.textContent = '';
+    block.append(ul);
 
+    const cards = block.querySelectorAll('.cards-card-body');
+    for(let idx = 0; idx < cards.length; ++idx) {
+        const card = cards[idx];
+        card.querySelectorAll('br').forEach((br) => br.remove());
+
+        // wrap card in anchor tag
+        const anchor = card.querySelector('a');
+        if(anchor) {
+            anchor.textContent = '';
+            const cardParent = card.parentElement;
+            const anchorParent = anchor.parentElement;
+            anchorParent.removeChild(anchor);
+            cardParent.appendChild(anchor);
+
+            cardParent.removeChild(card);
+            anchor.appendChild(card);
+            console.log(anchor.href)
+        }
+
+        card.parentElement.parentElement.classList.add(`grid-item-${idx}`)
+
+        // modify card structure to have a card-content div
         const cardContent = document.createElement('div');
         cardContent.classList.add('card-content');
 
-        console.log(block.classList);
-        if(block.classList.contains('alternate-2-1')) {
+        const isVideo = anchor.href.startsWith('https://mediaspace.esri.com/');
+        if(isVideo) {
             const startButton = document.createElement('button');
             startButton.classList.add('start-button');
-            startButton.innerHTML = "<svg aria-hidden='true' class='svg' fill='currentColor' height='100%' viewBox='0 0 24 24' width='100%' xmlns='http://www.w3.org/2000/svg'><path d='M6 1.773l15 10.23L6 22.226z'></path></svg>";
+            startButton.innerHTML = "<svg aria-hidden='true' class='svg' fill='currentColor' height='100%' viewBox='0 0 24 24' width='100%' xmlns='http://www.w2.org/2000/svg'><path d='M6 1.773l15 10.23L6 22.226z'></path></svg>";
             cardContent.appendChild(startButton);
         }
         
-        const cardTitle = child.children[0].children[0];
-        const cardDescription = child.children[0].children[1];
+        const cardTitle = card.children[0];
+        const cardDescription = card.children[1];
 
         cardTitle.classList.add('card-title');
         cardDescription.classList.add('card-description');
@@ -27,6 +58,6 @@ export default function decorate(block) {
         cardContent.appendChild(cardTitle);
         cardContent.appendChild(cardDescription);
 
-        child.children[0].appendChild(cardContent);
+        card.appendChild(cardContent);
     }
 }
