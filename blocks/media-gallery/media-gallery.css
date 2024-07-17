@@ -30,7 +30,7 @@
         position: absolute;
         inset-block-end: 0;
         inset-inline-start: 0;
-        background: linear-gradient(to top, rgba(53, 53, 53, 0.8), transparent 60%);
+        background: linear-gradient(to top, #353535cc, transparent 60%);
     }
     .cards-card-body {
         position: relative;
@@ -83,7 +83,7 @@
         transition: 0.2s ease;
     }
     .cards-card-body:is(:hover,:focus,:focus-within) .card-content {
-        box-shadow: 0 0 0 10px inset rgba(255, 255, 255, 0.8);
+        box-shadow: 0 0 0 10px inset #ffffffcc;
     }
     .cards-card-body:is(:hover,:focus,:focus-within) img {
         transform: scale(1.08);
@@ -93,8 +93,8 @@
         margin-bottom: 8px;
         width: 44px;
         height: 44px;
-        color: rgb(21, 21, 21);
-        background-color: rgb(248, 248, 248);
+        color: #151515;
+        background-color: #f8f8f8;
         display: flex;
         justify-content: center;
         align-items: center;
