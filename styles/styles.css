@@ -35,7 +35,7 @@
   --font-7: clamp(2.5rem, 2.045454545rem + 2.02020202vw, 3.5rem);
   --font-8: clamp(2.5rem, 1.818181818rem + 3.03030303vw, 4rem);
 
-  --body-font-family: roboto, roboto-fallback;
+  --body-font-family: "Avenir Next";
   --heading-font-family: var(--body-font-family);
 
   /* body sizes */
