@@ -43,9 +43,20 @@ export default function decorate(block) {
 
         const isVideo = anchor.href.startsWith('https://mediaspace.esri.com/');
         if(isVideo) {
-            const startButton = document.createElement('button');
+            const startButton = document.createElement('calcite-button');
+            startButton.setAttribute('appearance', 'solid');
+            startButton.setAttribute('kind', 'inverse');
+            startButton.setAttribute('color', 'light');
+            startButton.setAttribute('scale', 'l');
+            startButton.setAttribute('round', '');
+            startButton.setAttribute('icon-start', 'play-f');
+            startButton.setAttribute('dir', 'ltr');
+            startButton.setAttribute('alignment', 'center');
+            startButton.setAttribute('width', 'auto');
+            startButton.setAttribute('label', 'play video');
+            startButton.setAttribute('type', 'button');
+            startButton.setAttribute('calcite-hydrated', '');
             startButton.classList.add('start-button');
-            startButton.innerHTML = "<svg aria-hidden='true' class='svg' fill='currentColor' height='100%' viewBox='0 0 24 24' width='100%' xmlns='http://www.w2.org/2000/svg'><path d='M6 1.773l15 10.23L6 22.226z'></path></svg>";
             cardContent.appendChild(startButton);
         }
         
