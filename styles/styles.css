@@ -203,12 +203,6 @@ main .section {
   padding: 64px 0;
 }
 
-@media (width >= 600px) {
-  main .section {
-    padding: 64px 0;
-  }
-}
-
 @media (width >= 900px) {
   .section > div {
     margin: auto;
