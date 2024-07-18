@@ -49,7 +49,7 @@ async function loadFonts() {
  * @param {Element} element container element
  */
 
-function openVideoIframe(element) {
+function decorateVideoLinks(element) {
   const anchors = element.querySelectorAll('a');
   anchors.forEach((a) => {
     if (a.href.startsWith('https://mediaspace.esri.com/')) {
@@ -126,7 +126,7 @@ export function decorateMain(main) {
   buildAutoBlocks(main);
   decorateSections(main);
   decorateBlocks(main);
-  openVideoIframe(main);
+  decorateVideoLinks(main);
 }
 
 /**
