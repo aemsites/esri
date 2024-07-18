@@ -1,4 +1,4 @@
-import { createOptimizedPicture } from '../../scripts/aem.js';
+import { createOptimizedPicture, openVideoIframe } from '../../scripts/aem.js';
 import { domEl, div } from '../../scripts/dom-helpers.js';
 
 export default function decorate(block) {
@@ -27,6 +27,7 @@ export default function decorate(block) {
 
   const cards = block.querySelectorAll('.cards-card-body');
   for (let idx = 0; idx < cards.length; idx += 1) {
+    openVideoIframe(cards[idx]);
     const card = cards[idx];
     card.querySelectorAll('br').forEach((br) => br.remove());
 

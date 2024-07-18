@@ -10,6 +10,8 @@
  * governing permissions and limitations under the License.
  */
 
+import { div, iframe, domEl } from './dom-helpers.js';
+
 /* eslint-env browser */
 
 /**
@@ -410,6 +412,63 @@ function wrapTextNodes(block) {
 }
 
 /**
+ * Opens an iframe with the video when clicking on anchor tags.
+ * @param {Element} element container element
+ */
+
+function openVideoIframe(element) {
+  const anchors = element.querySelectorAll('a');
+  anchors.forEach((a) => {
+    if (a.href.startsWith('https://mediaspace.esri.com/')) {
+      const closeButton = div(
+        {
+          class: 'video-close-button',
+        },
+        domEl('calcite-icon', {
+          icon: 'x',
+          tabindex: '0',
+          scale: 'l',
+          alignment: 'center',
+          'aria-hidden': 'true',
+        }),
+      );
+      const ifr = div(
+        {
+          class: 'video-iframe-box',
+        },
+        div(
+          { class: 'video-iframe-wrapper' },
+          iframe({
+            src: a.href,
+            class: 'video-iframe',
+            scrolling: 'no',
+            sandbox: 'allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation',
+            allow: 'autoplay *; fullscreen *; encrypted-media *',
+          }),
+          closeButton,
+        ),
+      );
+
+      a.addEventListener('click', (event) => {
+        event.preventDefault();
+        document.body.append(ifr);
+        document.body.style.overflow = 'hidden';
+      });
+
+      const closeIframe = (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        ifr.remove();
+        document.body.style.overflow = 'auto';
+      };
+
+      closeButton.addEventListener('click', closeIframe);
+      ifr.addEventListener('click', closeIframe);
+    }
+  });
+}
+
+/**
  * Decorates paragraphs containing a single link as buttons.
  * @param {Element} element container element
  */
@@ -762,4 +821,5 @@ export {
   updateSectionsStatus,
   waitForLCP,
   wrapTextNodes,
+  openVideoIframe,
 };
