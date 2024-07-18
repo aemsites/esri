@@ -1,0 +1,116 @@
+body {
+  background-color: #2B2B2B;
+}
+
+.quote-container {
+  padding-top: 0;
+  width: 100vw;
+}
+
+.quote {
+  margin: 0;
+  width: 100%;
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0 auto;
+    width: 1440px;
+    max-width: 96vw;
+    
+    li {
+      padding: 0.5rem;
+    }
+  }
+
+  .cards-card-body {
+    box-sizing: border-box;
+    padding: 3rem 0.5rem 1.5rem 1rem;
+    font-family: var(--calcite-sans-family);
+    width: 1440px;
+    max-width: 96vw;
+
+    .quote-icon {
+      --calcite-ui-icon-color: #009AF2;
+
+      width: 48px;
+      height: 48px;      
+      margin-bottom: 0.25rem;
+    }
+  }
+
+  .quote-text {
+    line-height: 1.375;
+    color: #bfbfbf;
+    font-weight: 400;
+    font-size: var(--font-3);
+    margin: 1rem 0;
+    font-style: italic;
+  }
+
+  .quote-author {
+    line-height: 1.375;
+    color: white;
+    font-weight: 500;
+    font-size: var(--font-1);
+    margin: 0;
+  }
+
+  .quote-location {
+    line-height: 1.375;
+    color: white;
+    font-weight: 400;
+    font-size: var(--font-1);
+    padding-bottom: 1.5rem;
+    margin: 0;
+  }
+
+  .cards-card-image {
+    box-sizing: border-box;
+    width: 1440px;
+    max-width: 96vw;
+
+    img {
+      border-radius: 50%;
+      width: 95%;
+    }
+  }
+}
+
+@media (width >= 480px) {
+  .quote {
+    li {
+      display: grid;
+      grid-template-columns: 3fr 9fr;
+      grid-template-rows: 1fr;
+    }
+
+    .cards-card-body {
+      padding: 4.5rem 0.5rem 4.5rem 1rem;
+      width: 960px;
+      max-width: 64vw;
+    }
+
+    .cards-card-image {
+      padding: 4.5rem 0.5rem;
+      margin-top: 3rem;
+      width: 480px;
+      max-width: 32vw;
+    }
+  }
+}
+
+@media (width >= 860px) {
+  .quote {
+    .cards-card-body {
+      width: 780px;
+      max-width: 52vw;
+    }
+
+    .cards-card-image {
+      width: 360px;
+      max-width: 24vw;
+      margin-top: 1.5rem;
+    }
+  }
+}
