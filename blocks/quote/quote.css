@@ -19,7 +19,7 @@
     }
   }
 
-  .cards-card-body {
+  .quote-block-body {
     box-sizing: border-box;
     padding: 3rem 0.5rem 1.5rem 1.5rem;
     font-family: var(--calcite-sans-family);
@@ -59,7 +59,7 @@
     margin: 0;
   }
 
-  .cards-card-image {
+  .quote-block-image {
     box-sizing: border-box;
     width: 1440px;
     max-width: 96vw;
@@ -91,13 +91,13 @@
       margin: auto;
     }
 
-    .cards-card-body {
+    .quote-block-body {
       padding: 4.5rem 0.5rem 4.5rem 1rem;
       width: 960px;
       max-width: 64vw;
     }
 
-    .cards-card-image {
+    .quote-block-image {
       padding: 4.5rem 0.5rem;
       margin-top: 3rem;
       width: 480px;
@@ -114,13 +114,13 @@
 
 @media (width >= 860px) {
   .quote {
-    .cards-card-body {
+    .quote-block-body {
       padding-left: 0.5rem;
       width: 780px;
       max-width: 52vw;
     }
 
-    .cards-card-image {
+    .quote-block-image {
       width: 360px;
       max-width: 24vw;
       margin-top: 1.5rem;
@@ -130,7 +130,7 @@
 
 @media (width >= 1024px) {
   .quote {
-    .cards-card-body {
+    .quote-block-body {
       padding-left: 1.5rem;
     }
   }

@@ -1,31 +1,27 @@
 import { createOptimizedPicture, decorateIcons } from '../../scripts/aem.js';
-import { span } from '../../scripts/dom-helpers.js';
+import { span, ul, li } from '../../scripts/dom-helpers.js';
 
 export default function decorate(block) {
-  /* change to ul, li */
-  const ul = document.createElement('ul');
-  [...block.children].forEach((row) => {
-    const li = document.createElement('li');
-    while (row.firstElementChild) li.append(row.firstElementChild);
-    [...li.children].forEach((divElement) => {
-      if (
-        divElement.children.length === 1
-        && divElement.querySelector('picture')
-      ) {
-        divElement.className = 'cards-card-image';
-      } else divElement.className = 'cards-card-body';
-    });
-    ul.append(li);
-  });
-  ul.querySelectorAll('img').forEach((img) => img
+  const list = ul(...[...block.children].map((row) => li(...[...row.children].map((divElement) => {
+    if (
+      divElement.children.length === 1
+      && divElement.querySelector('picture')
+    ) {
+      divElement.className = 'quote-block-image';
+    } else divElement.className = 'quote-block-body';
+
+    return divElement;
+  }))));
+
+  list.querySelectorAll('img').forEach((img) => img
     .closest('picture')
     .replaceWith(
       createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }]),
     ));
   block.textContent = '';
-  block.append(ul);
+  block.append(list);
 
-  const body = block.querySelector('.cards-card-body');
+  const body = block.querySelector('.quote-block-body');
 
   body.children[0].classList.add('quote-text');
   body.children[1].classList.add('quote-author');
