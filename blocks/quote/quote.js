@@ -1,4 +1,4 @@
-import { createOptimizedPicture, decorateIcons } from '../../scripts/aem.js';
+import { decorateIcons } from '../../scripts/aem.js';
 import { span, ul, li } from '../../scripts/dom-helpers.js';
 
 export default function decorate(block) {
@@ -13,11 +13,6 @@ export default function decorate(block) {
     return divElement;
   }))));
 
-  list.querySelectorAll('img').forEach((img) => img
-    .closest('picture')
-    .replaceWith(
-      createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }]),
-    ));
   block.textContent = '';
   block.append(list);
 
