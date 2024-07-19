@@ -32,7 +32,7 @@
     }
   }
 
-  .quote-text {
+  p:nth-child(2) {
     line-height: 1.375;
     color: #bfbfbf;
     font-weight: 400;
@@ -42,7 +42,7 @@
     font-style: italic;
   }
 
-  .quote-author {
+  p:nth-child(3) {
     line-height: 1.375;
     color: white;
     font-weight: 500;
@@ -50,7 +50,7 @@
     margin: 0;
   }
 
-  .quote-location {
+  p:nth-child(4) {
     line-height: 1.375;
     color: white;
     font-weight: 400;

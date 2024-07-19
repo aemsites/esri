@@ -18,10 +18,6 @@ export default function decorate(block) {
 
   const body = block.querySelector('.quote-block-body');
 
-  body.children[0].classList.add('quote-text');
-  body.children[1].classList.add('quote-author');
-  body.children[2].classList.add('quote-location');
-
   const quoteIcon = span({ class: 'icon icon-quote' });
   body.prepend(quoteIcon);
 
