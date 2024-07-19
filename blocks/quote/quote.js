@@ -1,5 +1,5 @@
-import { createOptimizedPicture } from '../../scripts/aem.js';
-import { domEl } from '../../scripts/dom-helpers.js';
+import { createOptimizedPicture, decorateIcons } from '../../scripts/aem.js';
+import { span } from '../../scripts/dom-helpers.js';
 
 export default function decorate(block) {
   /* change to ul, li */
@@ -31,11 +31,8 @@ export default function decorate(block) {
   body.children[1].classList.add('quote-author');
   body.children[2].classList.add('quote-location');
 
-  const quoteIcon = domEl('calcite-icon', {
-    icon: 'quote',
-    class: 'quote-icon',
-    appearance: 'solid',
-    scale: 'l',
-  });
+  const quoteIcon = span({ class: 'icon icon-quote' });
   body.prepend(quoteIcon);
+
+  decorateIcons(block);
 }

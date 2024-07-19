@@ -1,7 +1,3 @@
-body {
-  background-color: #2B2B2B;
-}
-
 .quote-container {
   padding-top: 0;
   width: 100vw;
@@ -30,9 +26,7 @@ body {
     width: 1440px;
     max-width: 96vw;
 
-    .quote-icon {
-      --calcite-ui-icon-color: #009AF2;
-
+    .icon-quote {
       width: 48px;
       height: 48px;      
       margin-bottom: 0.25rem;
