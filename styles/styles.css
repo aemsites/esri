@@ -44,9 +44,9 @@
   /* fonts */
   --calcite-code-family: "Consolas", "Andale Mono", "Lucida Console", "Monaco", monospace;
   --calcite-sans-family: "Avenir Next", "Avenir", "Helvetica Neue", sans-serif;
-  --font--3: clamp(.625rem, .625rem + 0vw, .625rem);
-  --font--2: clamp(.625rem, 0.568181818rem + 0.252525253vw, .75rem);
-  --font--1: clamp(0.75rem, 0.693181818rem + 0.252525253vw, 0.875rem);
+  --font-3: clamp(.625rem, .625rem + 0vw, .625rem);
+  --font-2: clamp(.625rem, 0.5682rem + 0.2525vw, .75rem);
+  --font-1: clamp(0.75rem, 0.6932rem + 0.2525vw, 0.875rem);
   --font-0: clamp(0.875rem, 0.8181rem + 0.2525vw, 1rem);
   --font-1: clamp(1rem, 0.9431rem + 0.2525vw, 1.125rem);
   --font-2: clamp(1.125rem, 1.0681rem + 0.2525vw, 1.25rem);
@@ -146,7 +146,7 @@ pre {
 
 sup,
 sub {
-	font-size: var(--font--2);
+	font-size: var(--font-2);
   line-height: 0;
 }
 
