@@ -1,0 +1,66 @@
+.tabs {
+  calcite-tabs {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    width: 100vw;
+
+    calcite-tab-nav {
+      display: none;
+    }
+
+    calcite-tab {
+      width: 100vw;
+      position: relative;
+      padding: 0;
+    }
+
+    p:first-child img {
+      position: absolute;
+      object-fit: cover;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+
+    }
+
+    p:nth-child(2) {
+      font-size: var(--font-0);
+      font-weight: var(--calcite-font-weight-bold);
+      text-transform: uppercase;
+      color: var(--calcite-ui-text-2);
+    }
+
+    p:last-child {
+      margin-bottom: 0;
+      display: flex;
+      justify-content: center;
+
+      picture {
+        display: block;
+        position: relative;
+        width: 90vw;
+        aspect-ratio: 1/1;
+      }
+
+      img {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}
+
+@media (width >= 1024px) {
+  .tabs {
+    calcite-tabs {
+      calcite-tab-nav {
+        display: block;
+        width: 100vw;
+      }
+    }
+  }
+}
