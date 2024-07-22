@@ -1,5 +1,7 @@
 .tabs {
-  calcite-tabs {
+  -webkit-font-smoothing: antialiased;
+
+  calcite-tabs, calcite-carousel {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -9,7 +11,7 @@
       display: none;
     }
 
-    calcite-tab {
+    calcite-tab, calcite-carousel-item {
       width: 100vw;
       position: relative;
       padding: 0;
@@ -22,14 +24,62 @@
       width: 100%;
       height: 100%;
       z-index: -1;
-
     }
 
-    p:nth-child(2) {
-      font-size: var(--font-0);
-      font-weight: var(--calcite-font-weight-bold);
-      text-transform: uppercase;
-      color: var(--calcite-ui-text-2);
+    .buttons-wrapper {
+      width: 90%;
+      margin: auto;
+      margin-top: 2rem;
+
+      calcite-button {
+        padding-bottom: 0.75rem;
+        margin-bottom: 0.5rem;
+        margin-right: 0.7rem;
+
+        span {
+          color: white;
+        }
+      }
+    }
+
+    .text-wrapper {
+      --description-size: clamp(0.875rem, 0.8181rem + 0.2525vw, 1rem);
+      --font-0: clamp(0.875rem, 0.8181rem + 0.2525vw, 1rem);
+      --calcite-sans-family: "Avenir Next", "Avenir", "Helvetica Neue", sans-serif;
+      --calcite-ui-text-2: #bfbfbf;
+      --font-8: clamp(2.5rem, 1.8181rem + 3.0303vw, 4rem);
+
+      padding: 0 5vw;
+      padding-top: 4rem;
+
+      p, h2 {
+        width: 90%;
+        font: 400 var(--font-0) / 1.5 var(--calcite-sans-family);
+      }
+
+      p:first-child {
+        font-size: var(--font-0);
+        font-weight: 600;
+        text-transform: uppercase;
+        color: var(--calcite-ui-text-2);
+        margin: 0;
+        margin-bottom: 0.5rem;
+      }
+
+      p:last-child {
+        color: white;
+        margin: 0;
+        margin-bottom: 1.5rem;
+      }
+
+      h2 {
+        font-weight: 600;
+        color: white;
+        font-size: var(--font-8);
+        line-height: 1.375;
+        margin: 0;
+        margin-bottom: 0.6rem;
+      }
     }
 
     p:last-child {

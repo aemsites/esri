@@ -1,7 +1,9 @@
 import { createOptimizedPicture } from '../../scripts/aem.js';
-import { domEl } from '../../scripts/dom-helpers.js';
+import { domEl, div } from '../../scripts/dom-helpers.js';
 
 export default function decorate(block) {
+  block.classList.add('calcite-mode-dark')
+
   block.querySelectorAll('img').forEach((img) => img
     .closest('picture')
     .replaceWith(
@@ -10,13 +12,57 @@ export default function decorate(block) {
 
     const tabTitles = [...block.children].map(child => child.children[0].children[0].textContent);
     const tabContents = [...block.children].map(child => [...child.children[1].children]);
-    const calciteTabs = domEl(
-      'calcite-tabs',
-      domEl(
-        'calcite-tab-nav',
-        ...tabTitles.map(title => domEl('calcite-tab-title', title))),
-        ...tabContents.map(content => domEl('calcite-tab', ...content)));
+
+
+    tabContents.forEach(content => {
+      const text = [content[1], content[2], content[3]];
+      const textWrapper = div({ class: 'text-wrapper' }, ...text);
+      content.splice(1, 3, textWrapper);
+
+      const hrefs = [content[2].children[0].href, content[3].children[0].href];
+      const buttons = [
+        domEl('calcite-button', {
+          "icon-end": 'play-f',
+          href: hrefs[0],
+          appearance: 'solid',
+          alignment: 'center',
+          scale: 'm',
+          type: 'button',
+          width: 'auto',
+          kind: 'inverse',
+          color: "inverse",
+          "calcite-hydrated": '',
+        }, content[2].textContent),
+        domEl('calcite-button', {
+          "icon-end": 'arrowRight',
+          href: hrefs[1],
+          appearance: 'outline',
+          alignment: 'center',
+          scale: 'm',
+          type: 'button',
+          width: 'auto',
+          kind: 'inverse',
+          "calcite-hydrated": '',
+        }, content[3].textContent),
+      ]
+
+      const buttonsWrapper = div({ class: 'buttons-wrapper' }, ...buttons);
+      content.splice(2, 2, buttonsWrapper);
+    });
+
+    // const calciteTabs = domEl(
+    //   'calcite-tabs',
+    //   domEl(
+    //     'calcite-tab-nav',
+    //     ...tabTitles.map(title => domEl('calcite-tab-title', title))),
+    //     ...tabContents.map(content => domEl('calcite-tab', ...content)));
+
+    const calciteCarousel = domEl(
+      'calcite-carousel',
+      { 'arrowType': 'edge' },
+      ...tabContents.map(content => domEl('calcite-carousel-item', ...content)));
 
     while(block.firstChild) block.removeChild(block.firstChild);
-    block.appendChild(calciteTabs);
+    // block.appendChild(calciteTabs);
+    block.appendChild(calciteCarousel);
 }
