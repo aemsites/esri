@@ -1,20 +1,110 @@
+@keyframes in-up {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 5px, 0);
+  }
+
+  100% {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+  }
+}
+
 .tabs {
   -webkit-font-smoothing: antialiased;
 
-  calcite-tabs, calcite-carousel {
+  .tab-component {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
     width: 100vw;
 
-    calcite-tab-nav {
-      display: none;
+    p:last-child {
+      margin-bottom: 0;
+      display: flex;
+      justify-content: center;
+
+      picture {
+        display: block;
+        position: relative;
+        width: 90vw;
+        aspect-ratio: 1/1;
+      }
+
+      img {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+      }
     }
 
-    calcite-tab, calcite-carousel-item {
+    .tab-nav {
+      position: relative;
+      list-style-type: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 96vw;
+      font-family: var(--calcite-sans-family);
+      padding: 0;
+      margin: 0 auto;
+
+      calcite-icon {
+        color: var(--calcite-ui-inverse);
+      }
+
+      .arrow-button {
+        position: absolute;
+        border: none;
+        padding: 0;
+        width: 40px;
+        height: 40px;
+        background-color: var(--calcite-ui-foreground-2); 
+        opacity: .96;
+        margin: auto 0;
+      }
+
+      .arrow-button.left {
+        left: 0;
+      }
+
+      .arrow-button.right {
+        right: 0;
+      }
+
+      .tab-title {
+        display: none;
+        border-bottom: 1px solid var(--calcite-ui-border-2);
+        padding-bottom: 2px;
+
+        button {
+          background: none;
+          color: white;
+          font-size: var(--font-0);
+          font-weight: 400;
+        }
+      }
+
+      .tab-title.visible {
+        display: block;
+      }
+
+      .tab-title.selected {
+        border-bottom: 3px solid #0079c1;
+        padding-bottom: 0;
+      }
+    }
+
+    .tab-content {
+      display: none;
       width: 100vw;
       position: relative;
       padding: 0;
+    }
+
+    .tab-content.selected {
+      display: block;
     }
 
     p:first-child img {
@@ -43,12 +133,6 @@
     }
 
     .text-wrapper {
-      --description-size: clamp(0.875rem, 0.8181rem + 0.2525vw, 1rem);
-      --font-0: clamp(0.875rem, 0.8181rem + 0.2525vw, 1rem);
-      --calcite-sans-family: "Avenir Next", "Avenir", "Helvetica Neue", sans-serif;
-      --calcite-ui-text-2: #bfbfbf;
-      --font-8: clamp(2.5rem, 1.8181rem + 3.0303vw, 4rem);
-
       padding: 0 5vw;
       padding-top: 4rem;
 
@@ -82,34 +166,112 @@
       }
     }
 
-    p:last-child {
-      margin-bottom: 0;
-      display: flex;
-      justify-content: center;
+    .tab-content .text-wrapper, .tab-content .buttons-wrapper {
+      animation-duration: 550ms;
+      animation-delay: 50ms;
+      animation-timing-function: ease-in-out;
+      animation-fill-mode: both;
+    }
 
-      picture {
-        display: block;
-        position: relative;
-        width: 90vw;
-        aspect-ratio: 1/1;
-      }
-
-      img {
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        height: 100%;
-      }
+    .tab-content.selected .text-wrapper, .tab-content.selected .buttons-wrapper {
+      animation-name: in-up;
     }
   }
 }
 
 @media (width >= 1024px) {
   .tabs {
-    calcite-tabs {
-      calcite-tab-nav {
-        display: block;
-        width: 100vw;
+    .tab-component { 
+      position: relative;
+
+      .tab-nav {
+        position: absolute;
+        top: 10px;
+        max-width: 93vw;
+        width: 1420px;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        box-sizing: content-box;
+        z-index: 2;
+
+        .arrow-button {
+          display: none !important;
+        }
+
+        .tab-title {
+          display: block;
+          flex: 1;
+          border-bottom: 1px solid white;
+
+          button {
+            width: 100%;
+            padding: 5px 0;
+          }
+        }
+
+      }
+      
+      .tab-content.selected {
+        min-height: 960px;
+        display: grid;
+        grid-template-areas: 
+          "text img" auto
+          "buttons img" auto
+          / 1fr 1fr;
+
+        .buttons-wrapper {
+          grid-area: buttons;
+          margin-top: 0;
+        }
+
+        .text-wrapper {
+          grid-area: text;
+          padding-right: 0;
+          padding-left: 2vw;
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-end;
+        }
+        
+        p:last-child {
+          grid-area: img;
+
+          picture {
+            width: 100%;
+
+            img {
+              object-fit: cover;
+              object-position: center;
+              block-size: 100%;
+            }
+          }
+        }
+      }
+
+      .tab-content.selected > p:first-child {
+        position: absolute;
+        object-fit: cover;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        z-index: -1;
+
+      }
+    }
+  }
+}
+
+@media (width >= 1480px) {
+  .tabs {
+    .tab-component {
+      .tab-content.selected {
+        .text-wrapper, .buttons-wrapper {
+          width: 720px;
+          margin-right: 0;
+          margin-left: auto;
+        }
       }
     }
   }
