@@ -124,7 +124,9 @@ export default function decorate(block) {
   titles[selectedIdx].setAttribute('aria-selected', 'true');
 
   titles.forEach((title, index) => {
-    title.addEventListener('click', () => {
+    title.addEventListener('click', (e) => {
+      e.preventDefault();
+
       titles[selectedIdx].setAttribute('aria-selected', 'false');
       contents[selectedIdx].setAttribute('aria-selected', 'false');
 
@@ -132,7 +134,7 @@ export default function decorate(block) {
       contents[index].setAttribute('aria-selected', 'true');
       selectedIdx = index;
 
-      window.location.hash = titles[index].textContent.toLowerCase().replace(' ', '-');
+      window.history.pushState(null, null, `#${titles[index].textContent.toLowerCase().replace(' ', '-')}`);
     });
   });
 
