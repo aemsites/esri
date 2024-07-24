@@ -1,6 +1,6 @@
 import { createOptimizedPicture } from '../../scripts/aem.js';
 import {
-  domEl,
+  calciteButton,
   div,
   ul,
   li,
@@ -26,7 +26,7 @@ export default function decorate(block) {
 
     const hrefs = [content[2].children[0].href, content[3].children[0].href];
     const buttons = [
-      domEl('calcite-button', {
+      calciteButton({
         'icon-end': 'play-f',
         href: hrefs[0],
         appearance: 'solid',
@@ -36,9 +36,8 @@ export default function decorate(block) {
         width: 'auto',
         kind: 'inverse',
         color: 'inverse',
-        'calcite-hydrated': '',
       }, content[2].textContent),
-      domEl('calcite-button', {
+      calciteButton({
         'icon-end': 'arrowRight',
         href: hrefs[1],
         appearance: 'outline',
@@ -47,7 +46,6 @@ export default function decorate(block) {
         type: 'button',
         width: 'auto',
         kind: 'inverse',
-        'calcite-hydrated': '',
       }, content[3].textContent),
     ];
 
@@ -63,8 +61,7 @@ export default function decorate(block) {
     'aria-selected': false,
   }, button(...title)));
 
-  const arrowLeft = domEl(
-    'calcite-button',
+  const arrowLeft = calciteButton(
     {
       class: 'arrow-button left',
       'icon-end': 'chevronLeft',
@@ -74,8 +71,7 @@ export default function decorate(block) {
     },
   );
 
-  const arrowRight = domEl(
-    'calcite-button',
+  const arrowRight = calciteButton(
     {
       class: 'arrow-button right',
       'icon-end': 'chevronRight',
@@ -87,12 +83,8 @@ export default function decorate(block) {
 
   const titleIndex = tabTitles.findIndex((el) => el.toLowerCase().replace(' ', '-') === window.location.hash.substring(1));
   const realTitleIndex = titleIndex !== -1 ? titleIndex : 0;
-  let selectedIdx = (window.location.hash !== ''
-    ? realTitleIndex
-    : 0);
+  let selectedIdx = window.location.hash !== '' ? realTitleIndex : 0;
   let visibleTitleIdx = selectedIdx;
-  if (visibleTitleIdx === 0) arrowLeft.setAttribute('aria-hidden', 'true');
-  if (visibleTitleIdx === titles.length - 1) arrowRight.setAttribute('aria-hidden', 'true');
 
   arrowLeft.addEventListener('click', () => {
     const newVisibleTitleIdx = visibleTitleIdx - 1;
@@ -118,7 +110,7 @@ export default function decorate(block) {
     visibleTitleIdx = newVisibleTitleIdx;
   });
 
-  const calciteTabs = div(
+  const tabComponent = div(
     { class: 'tab-component' },
     ul(
       { class: 'tab-nav' },
@@ -130,8 +122,6 @@ export default function decorate(block) {
   );
   contents[selectedIdx].setAttribute('aria-selected', 'true');
   titles[selectedIdx].setAttribute('aria-selected', 'true');
-
-  titles[visibleTitleIdx].setAttribute('aria-hidden', 'false');
 
   titles.forEach((title, index) => {
     title.addEventListener('click', () => {
@@ -146,5 +136,30 @@ export default function decorate(block) {
     });
   });
 
-  block.replaceChildren(calciteTabs);
+  const addAccessiblityAttributes = () => {
+    if (window.innerWidth >= 1024) {
+      titles.forEach((title) => {
+        title.setAttribute('aria-hidden', 'false');
+      });
+      arrowLeft.setAttribute('aria-hidden', 'true');
+      arrowRight.setAttribute('aria-hidden', 'true');
+    } else {
+      arrowLeft.setAttribute('aria-hidden', 'false');
+      arrowRight.setAttribute('aria-hidden', 'false');
+      if (visibleTitleIdx === 0) arrowLeft.setAttribute('aria-hidden', 'true');
+      if (visibleTitleIdx === titles.length - 1) arrowRight.setAttribute('aria-hidden', 'true');
+
+      titles[visibleTitleIdx].setAttribute('aria-hidden', 'false');
+      titles.forEach((title, index) => {
+        if (index !== visibleTitleIdx) {
+          title.setAttribute('aria-hidden', 'true');
+        }
+      });
+    }
+  };
+
+  addAccessiblityAttributes();
+  window.addEventListener('resize', () => addAccessiblityAttributes());
+
+  block.replaceChildren(tabComponent);
 }

@@ -11,8 +11,6 @@
 }
 
 .tabs {
-  -webkit-font-smoothing: antialiased;
-
   .tab-component {
     display: flex;
     flex-direction: column;
@@ -75,7 +73,7 @@
       }
 
       .tab-title {
-        display: none;
+        display: block;
         border-bottom: 1px solid var(--calcite-ui-border-2);
         padding-bottom: 2px;
 
@@ -88,8 +86,8 @@
         }
       }
 
-      .tab-title[aria-hidden='false'] {
-        display: block;
+      .tab-title[aria-hidden='true'] {
+        display: none;
       }
 
       .tab-title[aria-selected='true'] {
@@ -203,7 +201,7 @@
 
           button {
             width: 100%;
-            padding: 5px 0;
+            padding: 1rem;
           }
         }
 
