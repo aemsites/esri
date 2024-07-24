@@ -46,7 +46,7 @@ p.button-container .button {
   margin-block-start: 0;
 }
 
-@media (min-width: 1px) and (max-width: 768px) {
+@media screen and (max-width: 768px) {
   .call-to-action > div {
     align-items: center;
     flex-direction: column;
