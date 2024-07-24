@@ -84,6 +84,7 @@
           color: white;
           font-size: var(--font-0);
           font-weight: 400;
+          padding: 0.75rem;
         }
       }
 

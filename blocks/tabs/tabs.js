@@ -56,13 +56,17 @@ export default function decorate(block) {
   });
 
   const contents = tabContents.map((content) => div({ class: 'tab-content' }, ...content));
-  const titles = tabTitles.map((title) => li({ class: 'tab-title', 'aria-hidden': true, 'aria-selected': false }, button(...title)));
+  const titles = tabTitles.map((title) => li({
+    class: 'tab-title',
+    id: title.toLowerCase().replace(' ', '-'),
+    'aria-hidden': true,
+    'aria-selected': false,
+  }, button(...title)));
 
   const arrowLeft = domEl(
     'calcite-button',
     {
       class: 'arrow-button left',
-      'aria-hidden': 'true',
       'icon-end': 'chevronLeft',
       scale: 'l',
       kind: 'neutral',
@@ -81,7 +85,15 @@ export default function decorate(block) {
     },
   );
 
-  let visibleTitleIdx = 0;
+  const titleIndex = tabTitles.findIndex((el) => el.toLowerCase().replace(' ', '-') === window.location.hash.substring(1));
+  const realTitleIndex = titleIndex !== -1 ? titleIndex : 0;
+  let selectedIdx = (window.location.hash !== ''
+    ? realTitleIndex
+    : 0);
+  let visibleTitleIdx = selectedIdx;
+  if (visibleTitleIdx === 0) arrowLeft.setAttribute('aria-hidden', 'true');
+  if (visibleTitleIdx === titles.length - 1) arrowRight.setAttribute('aria-hidden', 'true');
+
   arrowLeft.addEventListener('click', () => {
     const newVisibleTitleIdx = visibleTitleIdx - 1;
     if (newVisibleTitleIdx < 0) return;
@@ -116,7 +128,6 @@ export default function decorate(block) {
     ),
     ...contents,
   );
-  let selectedIdx = 0;
   contents[selectedIdx].setAttribute('aria-selected', 'true');
   titles[selectedIdx].setAttribute('aria-selected', 'true');
 
@@ -124,13 +135,14 @@ export default function decorate(block) {
 
   titles.forEach((title, index) => {
     title.addEventListener('click', () => {
-
       titles[selectedIdx].setAttribute('aria-selected', 'false');
       contents[selectedIdx].setAttribute('aria-selected', 'false');
 
       titles[index].setAttribute('aria-selected', 'true');
       contents[index].setAttribute('aria-selected', 'true');
       selectedIdx = index;
+
+      window.location.hash = titles[index].textContent.toLowerCase().replace(' ', '-');
     });
   });
 
