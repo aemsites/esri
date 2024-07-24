@@ -55,27 +55,25 @@ export default function decorate(block) {
     content.splice(2, 2, buttonsWrapper);
   });
 
-  const contents = tabContents.map((content, index) => div({ class: 'tab-content', id: `tab-content-${index}` }, ...content));
-  const titles = tabTitles.map((title, index) => li({ class: 'tab-title', id: `tab-title-${index}` }, button(...title)));
+  const contents = tabContents.map((content) => div({ class: 'tab-content' }, ...content));
+  const titles = tabTitles.map((title) => li({ class: 'tab-title' }, button(...title)));
 
   const arrowLeft = button(
-    { class: 'arrow-button left' },
+    {
+      class: 'arrow-button left',
+      'aria-hidden': 'true',
+    },
     domEl('calcite-icon', {
       icon: 'chevronLeft',
       scale: 'm',
-      'aria-hidden': 'true',
-      'calcite-hydrated': '',
     }),
   );
-  arrowLeft.style.display = 'none';
 
   const arrowRight = button(
     { class: 'arrow-button right' },
     domEl('calcite-icon', {
       icon: 'chevronRight',
       scale: 'm',
-      'aria-hidden': 'true',
-      'calcite-hydrated': '',
     }),
   );
 
@@ -83,8 +81,8 @@ export default function decorate(block) {
   arrowLeft.addEventListener('click', () => {
     const newVisibleTitleIdx = visibleTitleIdx - 1;
     if (newVisibleTitleIdx < 0) return;
-    if (newVisibleTitleIdx === 0) arrowLeft.style.display = 'none';
-    arrowRight.style.display = 'block';
+    if (newVisibleTitleIdx === 0) arrowLeft.setAttribute('aria-hidden', 'true');
+    arrowRight.setAttribute('aria-hidden', 'false');
 
     titles[visibleTitleIdx].classList.toggle('visible');
     titles[newVisibleTitleIdx].classList.toggle('visible');
@@ -95,8 +93,8 @@ export default function decorate(block) {
   arrowRight.addEventListener('click', () => {
     const newVisibleTitleIdx = visibleTitleIdx + 1;
     if (newVisibleTitleIdx >= titles.length) return;
-    if (newVisibleTitleIdx === titles.length - 1) arrowRight.style.display = 'none';
-    arrowLeft.style.display = 'block';
+    if (newVisibleTitleIdx === titles.length - 1) arrowRight.setAttribute('aria-hidden', 'true');
+    arrowLeft.setAttribute('aria-hidden', 'false');
 
     titles[visibleTitleIdx].classList.toggle('visible');
     titles[newVisibleTitleIdx].classList.toggle('visible');
@@ -128,6 +126,5 @@ export default function decorate(block) {
     });
   });
 
-  while (block.firstChild) block.removeChild(block.firstChild);
-  block.appendChild(calciteTabs);
+  block.replaceChildren(calciteTabs);
 }
