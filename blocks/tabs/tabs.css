@@ -58,9 +58,6 @@
         position: absolute;
         border: none;
         padding: 0;
-        width: 40px;
-        height: 40px;
-        background-color: var(--calcite-ui-foreground-2); 
         opacity: .96;
         margin: auto 0;
       }
@@ -90,11 +87,11 @@
         }
       }
 
-      .tab-title.visible {
+      .tab-title[aria-hidden='false'] {
         display: block;
       }
 
-      .tab-title.selected {
+      .tab-title[aria-selected='true'] {
         border-bottom: 3px solid #0079c1;
         padding-bottom: 0;
       }
@@ -107,7 +104,7 @@
       padding: 0;
     }
 
-    .tab-content.selected {
+    .tab-content[aria-selected='true'] {
       display: block;
     }
 
@@ -172,7 +169,7 @@
       animation-fill-mode: both;
     }
 
-    .tab-content.selected .text-wrapper, .tab-content.selected .buttons-wrapper {
+    .tab-content[aria-selected='true'] .text-wrapper, .tab-content[aria-selected='true'] .buttons-wrapper {
       animation-name: in-up;
     }
   }
@@ -211,7 +208,7 @@
 
       }
       
-      .tab-content.selected {
+      .tab-content[aria-selected='true'] {
         min-height: 960px;
         display: grid;
         grid-template: 
@@ -248,7 +245,7 @@
         }
       }
 
-      .tab-content.selected > p:first-child {
+      .tab-content[aria-selected='true'] > p:first-child {
         position: absolute;
         object-fit: cover;
         top: 0;
@@ -265,7 +262,7 @@
 @media (width >= 1480px) {
   .tabs {
     .tab-component {
-      .tab-content.selected {
+      .tab-content[aria-selected='true'] {
         .text-wrapper, .buttons-wrapper {
           width: 720px;
           margin-right: 0;

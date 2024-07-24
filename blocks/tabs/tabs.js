@@ -8,7 +8,7 @@ import {
 } from '../../scripts/dom-helpers.js';
 
 export default function decorate(block) {
-  block.classList.add('calcite-mode-dark');
+  document.querySelector('.tabs-container').classList.add('calcite-mode-dark');
 
   block.querySelectorAll('img').forEach((img) => img
     .closest('picture')
@@ -56,25 +56,29 @@ export default function decorate(block) {
   });
 
   const contents = tabContents.map((content) => div({ class: 'tab-content' }, ...content));
-  const titles = tabTitles.map((title) => li({ class: 'tab-title' }, button(...title)));
+  const titles = tabTitles.map((title) => li({ class: 'tab-title', 'aria-hidden': true, 'aria-selected': false }, button(...title)));
 
-  const arrowLeft = button(
+  const arrowLeft = domEl(
+    'calcite-button',
     {
       class: 'arrow-button left',
       'aria-hidden': 'true',
+      'icon-end': 'chevronLeft',
+      scale: 'l',
+      kind: 'neutral',
+      round: '',
     },
-    domEl('calcite-icon', {
-      icon: 'chevronLeft',
-      scale: 'm',
-    }),
   );
 
-  const arrowRight = button(
-    { class: 'arrow-button right' },
-    domEl('calcite-icon', {
-      icon: 'chevronRight',
-      scale: 'm',
-    }),
+  const arrowRight = domEl(
+    'calcite-button',
+    {
+      class: 'arrow-button right',
+      'icon-end': 'chevronRight',
+      scale: 'l',
+      kind: 'neutral',
+      round: '',
+    },
   );
 
   let visibleTitleIdx = 0;
@@ -84,8 +88,8 @@ export default function decorate(block) {
     if (newVisibleTitleIdx === 0) arrowLeft.setAttribute('aria-hidden', 'true');
     arrowRight.setAttribute('aria-hidden', 'false');
 
-    titles[visibleTitleIdx].classList.toggle('visible');
-    titles[newVisibleTitleIdx].classList.toggle('visible');
+    titles[visibleTitleIdx].setAttribute('aria-hidden', 'true');
+    titles[newVisibleTitleIdx].setAttribute('aria-hidden', 'false');
 
     visibleTitleIdx = newVisibleTitleIdx;
   });
@@ -96,8 +100,8 @@ export default function decorate(block) {
     if (newVisibleTitleIdx === titles.length - 1) arrowRight.setAttribute('aria-hidden', 'true');
     arrowLeft.setAttribute('aria-hidden', 'false');
 
-    titles[visibleTitleIdx].classList.toggle('visible');
-    titles[newVisibleTitleIdx].classList.toggle('visible');
+    titles[visibleTitleIdx].setAttribute('aria-hidden', 'true');
+    titles[newVisibleTitleIdx].setAttribute('aria-hidden', 'false');
 
     visibleTitleIdx = newVisibleTitleIdx;
   });
@@ -112,17 +116,21 @@ export default function decorate(block) {
     ),
     ...contents,
   );
+  let selectedIdx = 0;
+  contents[selectedIdx].setAttribute('aria-selected', 'true');
+  titles[selectedIdx].setAttribute('aria-selected', 'true');
 
-  contents[0].classList.toggle('selected');
-  titles[0].classList.toggle('selected');
-  titles[visibleTitleIdx].classList.toggle('visible');
+  titles[visibleTitleIdx].setAttribute('aria-hidden', 'false');
 
   titles.forEach((title, index) => {
     title.addEventListener('click', () => {
-      block.querySelectorAll('.selected').forEach((selected) => selected.classList.remove('selected'));
 
-      title.classList.add('selected');
-      contents[index].classList.add('selected');
+      titles[selectedIdx].setAttribute('aria-selected', 'false');
+      contents[selectedIdx].setAttribute('aria-selected', 'false');
+
+      titles[index].setAttribute('aria-selected', 'true');
+      contents[index].setAttribute('aria-selected', 'true');
+      selectedIdx = index;
     });
   });
 
