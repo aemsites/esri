@@ -55,11 +55,13 @@ export default function decorate(block) {
 
   const contents = tabContents.map((content) => div({
     class: 'tab-content',
+    role: 'tabpanel',
     'aria-hidden': true,
   }, ...content));
   const titles = tabTitles.map((title) => li({
     class: 'tab-title',
     id: title.toLowerCase().replace(' ', '-'),
+    role: 'tab',
     'aria-hidden': true,
   }, button(...title)));
 
@@ -129,7 +131,10 @@ export default function decorate(block) {
       { class: 'tab-nav' },
       arrowLeft,
       ul(
-        { class: 'tab-titles' },
+        {
+          class: 'tab-titles',
+          role: 'tablist',
+        },
         ...titles,
       ),
       arrowRight,
@@ -138,7 +143,6 @@ export default function decorate(block) {
   );
 
   contents[selectedIdx].setAttribute('aria-hidden', 'false');
-  // titles[selectedIdx].setAttribute('aria-selected', 'true');
 
   titles.forEach((title, index) => {
     title.addEventListener('click', (e) => {
