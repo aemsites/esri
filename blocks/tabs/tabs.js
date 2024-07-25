@@ -53,17 +53,20 @@ export default function decorate(block) {
     content.splice(2, 2, buttonsWrapper);
   });
 
-  const contents = tabContents.map((content) => div({ class: 'tab-content' }, ...content));
+  const contents = tabContents.map((content) => div({
+    class: 'tab-content',
+    'aria-hidden': true,
+  }, ...content));
   const titles = tabTitles.map((title) => li({
     class: 'tab-title',
     id: title.toLowerCase().replace(' ', '-'),
     'aria-hidden': true,
-    'aria-selected': false,
   }, button(...title)));
 
   const arrowLeft = calciteButton(
     {
       class: 'arrow-button left',
+      label: 'Previous Tab',
       'icon-end': 'chevronLeft',
       scale: 'l',
       kind: 'neutral',
@@ -74,6 +77,7 @@ export default function decorate(block) {
   const arrowRight = calciteButton(
     {
       class: 'arrow-button right',
+      label: 'Next Tab',
       'icon-end': 'chevronRight',
       scale: 'l',
       kind: 'neutral',
@@ -84,54 +88,70 @@ export default function decorate(block) {
   const titleIndex = tabTitles.findIndex((el) => el.toLowerCase().replace(' ', '-') === window.location.hash.substring(1));
   const realTitleIndex = titleIndex !== -1 ? titleIndex : 0;
   let selectedIdx = window.location.hash !== '' ? realTitleIndex : 0;
-  let visibleTitleIdx = selectedIdx;
 
   arrowLeft.addEventListener('click', () => {
-    const newVisibleTitleIdx = visibleTitleIdx - 1;
-    if (newVisibleTitleIdx < 0) return;
-    if (newVisibleTitleIdx === 0) arrowLeft.setAttribute('aria-hidden', 'true');
+    const newSelectedIdx = selectedIdx - 1;
+    if (newSelectedIdx < 0) return;
+    if (newSelectedIdx === 0) arrowLeft.setAttribute('aria-hidden', 'true');
     arrowRight.setAttribute('aria-hidden', 'false');
 
-    titles[visibleTitleIdx].setAttribute('aria-hidden', 'true');
-    titles[newVisibleTitleIdx].setAttribute('aria-hidden', 'false');
+    titles[selectedIdx].setAttribute('aria-hidden', 'true');
+    titles[newSelectedIdx].setAttribute('aria-hidden', 'false');
 
-    visibleTitleIdx = newVisibleTitleIdx;
+    contents[selectedIdx].setAttribute('aria-hidden', 'true');
+    contents[newSelectedIdx].setAttribute('aria-hidden', 'false');
+
+    selectedIdx = newSelectedIdx;
+
+    window.history.pushState(null, null, `#${titles[selectedIdx].textContent.toLowerCase().replace(' ', '-')}`);
   });
 
   arrowRight.addEventListener('click', () => {
-    const newVisibleTitleIdx = visibleTitleIdx + 1;
-    if (newVisibleTitleIdx >= titles.length) return;
-    if (newVisibleTitleIdx === titles.length - 1) arrowRight.setAttribute('aria-hidden', 'true');
+    const newSelectedIdx = selectedIdx + 1;
+    if (newSelectedIdx >= titles.length) return;
+    if (newSelectedIdx === titles.length - 1) arrowRight.setAttribute('aria-hidden', 'true');
     arrowLeft.setAttribute('aria-hidden', 'false');
 
-    titles[visibleTitleIdx].setAttribute('aria-hidden', 'true');
-    titles[newVisibleTitleIdx].setAttribute('aria-hidden', 'false');
+    titles[selectedIdx].setAttribute('aria-hidden', 'true');
+    titles[newSelectedIdx].setAttribute('aria-hidden', 'false');
 
-    visibleTitleIdx = newVisibleTitleIdx;
+    contents[selectedIdx].setAttribute('aria-hidden', 'true');
+    contents[newSelectedIdx].setAttribute('aria-hidden', 'false');
+
+    selectedIdx = newSelectedIdx;
+
+    window.history.pushState(null, null, `#${titles[selectedIdx].textContent.toLowerCase().replace(' ', '-')}`);
   });
 
   const tabComponent = div(
     { class: 'tab-component' },
-    ul(
+    div(
       { class: 'tab-nav' },
       arrowLeft,
-      ...titles,
+      ul(
+        { class: 'tab-titles' },
+        ...titles,
+      ),
       arrowRight,
     ),
     ...contents,
   );
-  contents[selectedIdx].setAttribute('aria-selected', 'true');
-  titles[selectedIdx].setAttribute('aria-selected', 'true');
+
+  contents[selectedIdx].setAttribute('aria-hidden', 'false');
+  // titles[selectedIdx].setAttribute('aria-selected', 'true');
 
   titles.forEach((title, index) => {
     title.addEventListener('click', (e) => {
       e.preventDefault();
 
-      titles[selectedIdx].setAttribute('aria-selected', 'false');
-      contents[selectedIdx].setAttribute('aria-selected', 'false');
+      if (titles[selectedIdx].hasAttribute('aria-selected')) {
+        titles[selectedIdx].setAttribute('aria-selected', 'false');
+        titles[index].setAttribute('aria-selected', 'true');
+      }
 
-      titles[index].setAttribute('aria-selected', 'true');
-      contents[index].setAttribute('aria-selected', 'true');
+      contents[selectedIdx].setAttribute('aria-hidden', 'true');
+      contents[index].setAttribute('aria-hidden', 'false');
+
       selectedIdx = index;
 
       window.history.pushState(null, null, `#${titles[index].textContent.toLowerCase().replace(' ', '-')}`);
@@ -140,20 +160,25 @@ export default function decorate(block) {
 
   const addAccessiblityAttributes = () => {
     if (window.innerWidth >= 1024) {
-      titles.forEach((title) => {
+      titles.forEach((title, index) => {
         title.setAttribute('aria-hidden', 'false');
+        title.setAttribute('aria-selected', 'false');
+        if (index === selectedIdx) {
+          title.setAttribute('aria-selected', 'true');
+        }
       });
       arrowLeft.setAttribute('aria-hidden', 'true');
       arrowRight.setAttribute('aria-hidden', 'true');
     } else {
       arrowLeft.setAttribute('aria-hidden', 'false');
       arrowRight.setAttribute('aria-hidden', 'false');
-      if (visibleTitleIdx === 0) arrowLeft.setAttribute('aria-hidden', 'true');
-      if (visibleTitleIdx === titles.length - 1) arrowRight.setAttribute('aria-hidden', 'true');
+      if (selectedIdx === 0) arrowLeft.setAttribute('aria-hidden', 'true');
+      if (selectedIdx === titles.length - 1) arrowRight.setAttribute('aria-hidden', 'true');
 
-      titles[visibleTitleIdx].setAttribute('aria-hidden', 'false');
+      titles[selectedIdx].setAttribute('aria-hidden', 'false');
       titles.forEach((title, index) => {
-        if (index !== visibleTitleIdx) {
+        title.removeAttribute('aria-selected');
+        if (index !== selectedIdx) {
           title.setAttribute('aria-hidden', 'true');
         }
       });
