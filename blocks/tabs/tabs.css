@@ -1,15 +1,3 @@
-@keyframes in-up {
-  0% {
-    opacity: 0;
-    transform: translate3d(0, 5px, 0);
-  }
-
-  100% {
-      opacity: 1;
-      transform: translate3d(0, 0, 0);
-  }
-}
-
 .tabs {
   .tab-component {
     display: flex;
@@ -91,7 +79,7 @@
       }
 
       .tab-title[aria-selected='true'] {
-        border-bottom: 3px solid #0079c1;
+        border-bottom: 3px solid var(--calcite-ui-brand);
         padding-bottom: 0;
       }
     }
@@ -190,10 +178,6 @@
         box-sizing: content-box;
         z-index: 2;
 
-        .arrow-button {
-          display: none !important;
-        }
-
         .tab-title {
           display: block;
           flex: 1;
@@ -204,7 +188,6 @@
             padding: 1rem;
           }
         }
-
       }
       
       .tab-content[aria-selected='true'] {
@@ -218,6 +201,9 @@
         .buttons-wrapper {
           grid-area: buttons;
           margin-top: 0;
+          padding-left: 2vw;
+          box-sizing: border-box;
+          width: 100%;
         }
 
         .text-wrapper {
@@ -266,6 +252,7 @@
           width: 720px;
           margin-right: 0;
           margin-left: auto;
+          padding-left: 0;
         }
       }
     }
