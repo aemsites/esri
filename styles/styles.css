@@ -316,6 +316,10 @@ main .section {
   }
 }
 
+.has-background {
+  background-color: var(--bg-color);
+}
+
 @media (width >= 900px) {
   .section > div {
     margin: auto;
