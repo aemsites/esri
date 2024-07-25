@@ -1,53 +1,3 @@
-.block.esri-text {
-    ul {
-        list-style-type: none;
-        padding: 0;
-        margin: 0 auto;
-
-        li {
-            max-width: 80ch;
-            word-break: break-word;
-            margin-bottom: var(--content-spacing);
-        }
-    }
-
-    .esritext-image {
-        img {
-            block-size: 48px;
-            inline-size: 48px;
-        }
-    }
-
-    .esritext-body {
-
-        p:nth-child(1) {
-            font-weight: var(--calcite-font-weight-bold);
-            text-transform: uppercase;
-            color: var(--calcite-ui-text-2);
-            font-size: var(--category-size);
-            margin-block-end: var(--content-spacing);
-        }
-
-        h3 {
-            color: var(--calcite-ui-text-1);
-            font-size: var(--title-size);
-            margin-block-end: var(--content-spacing);
-        }
-
-        h4 {
-            color: var(--calcite-ui-text-2);
-            font-size: var(--subtitle-size);
-            margin-block-end: var(--content-spacing); 
-        }
-
-        p {
-            color: var(--calcite-ui-text-1);
-            font-size: var(--description-size);
-            margin-block-end: var(--content-end-spacing);
-        }
-    }
-}
-
 .esritext-body {
     --category-size: var(--font-minus-2);
     --title-size: var(--font-4);
@@ -58,6 +8,21 @@
 }
 
 /* Modifies text code based on sizes */
+
+:where(.size-7, .size-6, .size-5) .esritext-body{
+    --content-spacing: var(--space-2);
+    --content-end-spacing: var(--space-8);
+}
+
+:where(.size-2, .size-1, .size-0) .esritext-body{
+    --content-spacing: var(--space-2);
+    --content-end-spacing: var(--space-5);
+}
+
+:where(.size-4, .size-3) .esritext-body{
+    --content-spacing: var(--space-2);
+    --content-end-spacing: var(--space-6);
+}
 
 .size-8 .esritext-body {
     --category-size: var(--font-0);
@@ -89,11 +54,6 @@
     --description-size: var(--font-1);
 }
 
-:where(.size-7, .size-6, .size-5) .esritext-body{
-    --content-spacing: var(--space-2);
-    --content-end-spacing: var(--space-8);
-}
-
 .size-4 .esritext-body {
     --category-size: var(--font-minus-2);
     --title-size: var(--font-4);
@@ -106,11 +66,6 @@
     --title-size: var(--font-3);
     --subtitle-size: var(--font-1);
     --description-size: var(--font-0);
-}
-
-:where(.size-4, .size-3) .esritext-body{
-    --content-spacing: var(--space-2);
-    --content-end-spacing: var(--space-6);
 }
 
 .size-2 .esritext-body {
@@ -134,13 +89,57 @@
     --description-size: var(--font-minus-1);
 }
 
-:where(.size-2, .size-1, .size-0) .esritext-body{
-    --content-spacing: var(--space-2);
-    --content-end-spacing: var(--space-5);
-}
-
 /* Icon size */
 :where(.size-6, .size-7, .size-8) .esritext-image :is(img, svg) {
     inline-size: 64px;
     block-size: 64px;
+}
+
+.block.esri-text {
+    ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0 auto;
+
+        li {
+            max-width: 80ch;
+            word-break: break-word;
+            margin-bottom: var(--content-spacing);
+        }
+    }
+
+    .esritext-image {
+        img {
+            block-size: 48px;
+            inline-size: 48px;
+        }
+    }
+
+    .esritext-body {
+        p {
+            color: var(--calcite-ui-text-1);
+            font-size: var(--description-size);
+            margin-block-end: var(--content-end-spacing);
+        }
+
+        p:nth-child(1) {
+            font-weight: var(--calcite-font-weight-bold);
+            text-transform: uppercase;
+            color: var(--calcite-ui-text-2);
+            font-size: var(--category-size);
+            margin-block-end: var(--content-spacing);
+        }
+
+        h3 {
+            color: var(--calcite-ui-text-1);
+            font-size: var(--title-size);
+            margin-block-end: var(--content-spacing);
+        }
+
+        h4 {
+            color: var(--calcite-ui-text-2);
+            font-size: var(--subtitle-size);
+            margin-block-end: var(--content-spacing); 
+        }
+    }
 }
