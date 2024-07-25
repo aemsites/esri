@@ -11,7 +11,7 @@ export default function decorate(block) {
     } else divElement.className = 'esritext-body';
 
     return divElement;
-    }))));
+  }))));
 
   block.textContent = '';
   block.append(list);
