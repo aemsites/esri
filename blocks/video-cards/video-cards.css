@@ -6,7 +6,7 @@
   margin: 0 auto;
 
   a {
-    display: none;
+    text-decoration: none;
   }
 
   p {
@@ -32,14 +32,45 @@
     font-size: var(--font-minus-1);
   }
 
-  & > div {
+  & > a > div {
     border: 1px solid #cacaca;
     margin: var(--space-2);
+    cursor: pointer;
+
+    &:hover {
+      border-color: #00619b;
+      & > p > button {
+        background-color: white;
+      }
+    }
+
+    & > p {
+      position: relative;
+
+      & > button {
+        --calcite-ui-icon-color: black;
+
+        position: absolute;
+        top: calc(50% - 25px);
+        left: calc(50% - 25px);
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        margin: 0;
+        padding: 0;
+        background-color: #f3f3f3;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
 
     & > ul {
       list-style-type: none;
       padding: var(--space-5) var(--space-5) var(--space-6) var(--space-5);
       margin: 0;
+      height: 124px;
+      box-sizing: border-box;
     }
   }
 }
@@ -51,7 +82,7 @@
     flex-wrap: wrap;
     justify-content: center;
 
-    & > div {
+    & > a > div {
       width: 45.5vw;
     }
   }
@@ -60,7 +91,8 @@
 @media (width >= 1024px) {
   .video-cards {
     max-width: 97vw;
-    & > div {
+
+    & > a > div {
       width: 460px;
       max-width: 30vw;
     }
