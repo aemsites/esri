@@ -1,0 +1,68 @@
+.video-cards {
+  width: 1440px;
+  max-width: 92vw;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+
+  a {
+    display: none;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 342 / 192;
+    object-fit: cover; 
+    object-position: center;
+  }
+
+  .video-card-title {
+    color: var(--calcite-ui-text-1);
+    font-size: var(--font-2);
+    margin-bottom: var(--space-2);
+  }
+
+  .video-card-description {
+    color: var(--calcite-ui-text-1);
+    font-size: var(--font-minus-1);
+  }
+
+  & > div {
+    border: 1px solid #cacaca;
+    margin: var(--space-2);
+
+    & > ul {
+      list-style-type: none;
+      padding: var(--space-5) var(--space-5) var(--space-6) var(--space-5);
+      margin: 0;
+    }
+  }
+}
+
+@media (width >= 768px) {
+  .video-cards {
+    max-width: 96vw;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    & > div {
+      width: 45.5vw;
+    }
+  }
+}
+
+@media (width >= 1024px) {
+  .video-cards {
+    max-width: 97vw;
+    & > div {
+      width: 460px;
+      max-width: 30vw;
+    }
+  }
+}
