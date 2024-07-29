@@ -52,9 +52,8 @@ async function loadFonts() {
 function decorateVideoLinks(element) {
   const anchors = element.querySelectorAll('a');
   anchors.forEach((a) => {
-    
     // change urls to be allowed to be embedded
-    if(a.href.startsWith('https://youtu.be')) {
+    if (a.href.startsWith('https://youtu.be')) {
       a.href = a.href.replace('youtu.be', 'www.youtube.com/embed');
     }
 
