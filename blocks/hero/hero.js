@@ -22,7 +22,7 @@ export default function decorate() {
   videoSrc.setAttribute('src', videoAssets[1].getAttribute('href'));
   heroWrapper.classList.add(defaultSize);
 
-  if (foregroundImgContainer) foregroundImgContainer.append(foregroundImg[1])
+  if (foregroundImgContainer) foregroundImgContainer.append(foregroundImg[1]);
   if (videoElement) videoElement.append(videoSrc);
   if (videoAssets) heroWrapper.prepend(videoElement);
   if (heroWrapper) heroWrapper.prepend(picturePath);
