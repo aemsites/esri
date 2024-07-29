@@ -1,34 +1,106 @@
 main .hero-container > div {
-  max-width: unset;
+  max-inline-size: unset;
 }
 
 main .hero-container {
   padding: 0;
 }
 
+.hero-wrapper {
+  display: flex;
+  position:relative;
+  flex-direction: column;
+  overflow: hidden;
+}
+
 .hero {
+  position: absolute;
+  min-block-size: inherit;
+  margin-inline: 4vw;
+}
+
+.hero.block {
+  display: flex;
+  justify-content: center;
+}
+
+.half-container {
   position: relative;
-  padding: var(--space-8);
-  min-height: 300px;
+  align-items: center;
+}
+
+.hero.block p {
+  color: var(--calcite-ui-text-1);
+  font-size: var(--description-size);
+  margin-block-end: var(--content-end-spacing);
+}
+
+.hero-wrapper.large h1 {
+  font-size: var(--font-8);
+}
+
+.hero-wrapper.medium h1 {
+  font-size: var(--font-7);
+}
+
+.hero-wrapper.small h1 {
+  font-size: var(--font-5);
 }
 
 .hero h1 {
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
+  margin-block-end: .6rem;
+  font-size: var(--font-8);
   color: var(--calcite-ui-text-1);
-}
-
-.hero picture {
-  position: absolute;
-  z-index: -1;
-  inset: 0;
-  object-fit: cover;
-  box-sizing: border-box;
+  font-weight: var(--calcite-font-weight-bold);
 }
 
 .hero img {
+  block-size: 100%;
+  inline-size: 100%;
   object-fit: cover;
-  width: 100%;
-  height: 100%;
+}
+
+.hero-picture {
+  position: absolute;
+  object-fit: cover;
+  block-size: 100%;
+  inline-size: 100%;
+  block-size: 100%;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  aspect-ratio: 21 / 5;
+}
+
+.hero-video {
+  display: block;
+  object-fit: cover;
+  background-size: cover;
+  position: absolute;
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+@media (width >= 768px) {
+  .hero.block {
+    inline-size: 50%;
+  }
+  .hero-wrapper {
+    flex-direction: row;
+  }
+  .hero-wrapper.xlarge {
+    block-size: 960px;
+  }
+  .hero-wrapper.large { 
+    block-size: 700px;
+  }
+  .hero-wrapper.medium {
+    block-size: 576px;
+  }
+  .hero-wrapper.small {
+    block-size: 360px;
+  }
+  .hero {
+    margin-inline: 2vw;
+  }
+  
 }
