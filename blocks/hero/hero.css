@@ -35,6 +35,13 @@ main .hero-container {
   margin-block-end: var(--content-end-spacing);
 }
 
+.hero h1 {
+  margin-block-end: .6rem;
+  font-size: var(--font-8);
+  color: var(--calcite-ui-text-1);
+  font-weight: var(--calcite-font-weight-bold);
+}
+
 .hero-wrapper.large h1 {
   font-size: var(--font-8);
 }
@@ -45,13 +52,6 @@ main .hero-container {
 
 .hero-wrapper.small h1 {
   font-size: var(--font-5);
-}
-
-.hero h1 {
-  margin-block-end: .6rem;
-  font-size: var(--font-8);
-  color: var(--calcite-ui-text-1);
-  font-weight: var(--calcite-font-weight-bold);
 }
 
 .hero img {
@@ -65,7 +65,6 @@ main .hero-container {
   object-fit: cover;
   block-size: 100%;
   inline-size: 100%;
-  block-size: 100%;
   inset-block-start: 0;
   inset-inline-start: 0;
   aspect-ratio: 21 / 5;
@@ -84,21 +83,27 @@ main .hero-container {
   .hero.block {
     inline-size: 50%;
   }
+
   .hero-wrapper {
     flex-direction: row;
   }
+
   .hero-wrapper.xlarge {
     block-size: 960px;
   }
+
   .hero-wrapper.large { 
     block-size: 700px;
   }
+
   .hero-wrapper.medium {
     block-size: 576px;
   }
+
   .hero-wrapper.small {
     block-size: 360px;
   }
+
   .hero {
     margin-inline: 2vw;
   }
