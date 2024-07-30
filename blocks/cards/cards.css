@@ -1,4 +1,7 @@
 .cards {
+  background-color: var(--calcite-ui-foreground-1);
+  padding: 4rem 0;
+
   .cards-card-body {
     margin: 8px;
   
@@ -18,6 +21,7 @@
   
     h3, p:last-child {
       padding-right: var(--space-5);
+      color: var(--calcite-ui-text-1);
     }
 
     & > *:first-child {
