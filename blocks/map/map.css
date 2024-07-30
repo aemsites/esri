@@ -1,0 +1,110 @@
+
+#eam-app-wrapper {
+    height: 575px;
+    padding: 0%;
+    transition: all .25s ease-in;
+}
+
+#eam-map-wrapper {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    /*transition: height .25s ease-in, width .25s ease-in, top .25s ease-in, left .25s ease-in;*/
+    background-color: #f3f5f4;
+}
+
+#eam-map {
+    width: 100%;
+    height: 100%;
+}
+
+#eam-app-wrapper .esri-popup__feature-buttons {
+    position: relative;
+    order: 4;
+}
+
+#eam-app-wrapper .esri-popup__header {
+    background-color: #bcdaed
+}
+
+#eam-app-wrapper .esri-popup__header-title {
+    padding-bottom: 0;
+    padding-left: 14px;
+    background-color: #bcdaed
+}
+
+#eam-app-wrapper .esri-view-width-xsmall .esri-popup--is-docked-bottom-center .esri-popup__main-container {
+    max-height: 40%;
+    background-color: #fff;
+}
+
+#eam-app-wrapper .esri-popup__content p {
+    line-height: 2em;
+    margin-top: 10px;
+}
+#eam-app-wrapper .esri-popup__content a[href]{
+    color: #0079c1;
+
+}
+
+#eam-app-wrapper .esri-popup__feature-buttons .esri-popup__actions {
+    padding-left: 7px;
+}
+#eam-app-wrapper span.esri-popup__icon.esri-icon-close {
+    color: #fff;
+}
+
+#eam-app-wrapper .esri-popup__header{
+    background-color: #0079c1;
+    color: #fff;
+}
+#eam-app-wrapper .esri-popup__header-title{
+    background-color: #0079c1;
+}
+#eam-app-wrapper .esri-popup__header-title esri-popup__header-title--button{
+    background-color: #0079c1;
+}
+
+
+
+#eam-map-wrapper.is-popped{
+    box-shadow: 7px 20px 13px 5px #0000008c;
+    position: fixed;
+    width: 1080px;
+    max-width: 72vw;
+    height:675px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%)
+}
+
+#eam-map-wrapper.is-fullscreen{
+
+    top: 0%;
+    left: 0%;
+
+    margin: 0;
+    height: 100vh;
+    width: 100vw;
+    max-width: 100vw;
+
+    position:fixed;
+    padding: 0;
+    z-index: 11110;
+}
+.fullscreen-btn{
+z-index:1;
+}
+.return-btn{
+    position: fixed;
+    top: 16px;
+    left: 50%;
+    display: none;
+    z-index: 11111;
+    transform: translate(-50%);
+
+}
+.btn-vis{
+    display:block;
+}
+
