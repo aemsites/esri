@@ -176,11 +176,10 @@ async function loadLazy(doc) {
   sampleRUM.observe(main.querySelectorAll('picture > img'));
 }
 
-async function loadGlobalNav () {
+async function loadGlobalNav() {
   const head = document.querySelector('head');
   const json = document.createElement('script');
-  const jsonPath = '20220-nav-config.25.json';
-  json.appendChild(document.createTextNode("window.gnav_jsonPath = " + jsonPath));
+  json.appendChild(document.createTextNode('window.gnav_jsonPath = 20220-nav-config.25.json'));
 
   head.appendChild(json);
   const script = document.createElement('script');
