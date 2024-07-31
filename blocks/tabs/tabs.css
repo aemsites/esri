@@ -1,10 +1,11 @@
-/* stylelint-disable */
 .tabs {
+  /* tabs updated by Tim */
   .tab-component {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
     width: 100vw;
+  }
 
     p:last-child {
       margin-bottom: 0;
@@ -32,7 +33,6 @@
       align-items: center;
       justify-content: center;
       width: 96vw;
-      font-family: var(--calcite-sans-family);
       padding: 0;
       margin: 0 auto;
 
@@ -72,15 +72,15 @@
         display: block;
         border-bottom: 1px solid var(--calcite-ui-border-2);
         padding-bottom: 2px;
-
-        button {
-          background: none;
-          color: white;
-          font-size: var(--font-0);
-          font-weight: 400;
-          padding: 0.75rem;
-          margin: auto;
-        }
+      }
+      
+      .tab-title button {
+        background: none;
+        color: white;
+        font-size: var(--font-0);
+        font-weight: 400;
+        padding: 0.75rem;
+        margin: auto;
       }
 
       .tab-title[aria-hidden='true'] {
@@ -168,7 +168,7 @@
     .tab-content[aria-hidden='false'] .text-wrapper, .tab-content[aria-hidden='false'] .buttons-wrapper {
       animation-name: in-up;
     }
-  }
+  
 }
 
 @media (width >= 1024px) {
@@ -214,7 +214,7 @@
         "text img"
         "buttons img"
         auto / 1fr 1fr;
-
+      
         .buttons-wrapper {
           grid-area: buttons;
           margin-top: 0;
@@ -222,7 +222,7 @@
           box-sizing: border-box;
           width: 100%;
         }
-
+      
         .text-wrapper {
           grid-area: text;
           padding-right: 0;
@@ -231,20 +231,20 @@
           flex-direction: column;
           justify-content: flex-end;
         }
-        
-        p:last-child {
-          grid-area: img;
-
-          picture {
-            width: 100%;
-
-            img {
-              object-fit: cover;
-              object-position: center;
-              block-size: 100%;
-            }
-          }
-        }
+      }
+      
+      .tab-content[aria-hidden='false'] p:last-child {
+        grid-area: img;
+      }
+      
+      .tab-content[aria-hidden='false'] p:last-child picture {
+        width: 100%;
+      }
+      
+      .tab-content[aria-hidden='false'] p:last-child picture img {
+        object-fit: cover;
+        object-position: center;
+        block-size: 100%;
       }
 
       .tab-content[aria-hidden='false'] > p:first-child {
@@ -262,17 +262,10 @@
 }
 
 @media (width >= 1480px) {
-  .tabs {
-    .tab-component {
-      .tab-content[aria-hidden='false'] {
-        .text-wrapper, .buttons-wrapper {
+  .tabs .tab-content[aria-hidden='false'] :is(.text-wrapper, .buttons-wrapper) {
           width: 720px;
           margin-right: 0;
           margin-left: auto;
           padding-left: 0;
-        }
-      }
-    }
   }
 }
-/* stylelint-disable */
