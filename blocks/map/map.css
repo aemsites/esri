@@ -67,6 +67,119 @@ canvas {
     pointer-events: none;
 }
 
+.esri-ui-corner {
+    max-width: 100%;
+    position: absolute;
+    display: flex;
+}
+
+.esri-ui-inner-container {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+}
+
+.esri-ui-top-left, .esri-ui-top-right {
+    flex-flow: column;
+}
+
+.esri-ui-top-left {
+    top: 0;
+    left: 0;
+    align-items: flex-start;
+
+}
+
+
+.esri-zoom {
+    display: flex;
+    flex-flow: column nowrap;
+}
+.esri-ui-top-left .esri-component {
+    margin-bottom: 10px;
+}
+.esri-widget {
+    box-sizing: border-box;
+    color: #323232;
+    font-size: 14px;
+    font-family: "Avenir Next W00","Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 1.3em;
+    background-color: #fff;
+}
+
+
+.esri-zoom .esri-widget--button:first-child {
+    margin-bottom: 0;
+}
+
+.esri-zoom .esri-widget--button {
+    box-shadow: none;
+}
+
+.esri-widget--button {
+    font-size: 14px;
+    background-color: #fff;
+    color: #6e6e6e;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    cursor: pointer;
+    text-align: center;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 125ms ease-in-out;
+}
+.esri-ui-corner .esri-component {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+.esri-ui-top-right .esri-component, .esri-ui-top-left .esri-component {
+    margin-bottom: 10px;
+}
+
+.esri-ui .esri-component {
+    pointer-events: auto;
+}
+.esri-zoom .esri-widget--button:last-child {
+    border-top: solid 1px rgba(50,50,50,0.25);
+}
+
+.esri-interactive {
+    cursor: pointer;
+}
+
+.esri-view .esri-view-surface {
+    position: absolute;
+    border: none;
+    padding: 0;
+    margin: 0;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    direction: ltr;
+}
+
+.esri-overlay-surface {
+    position: absolute;
+    border: none;
+    padding: 0;
+    margin: 0;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0;
+    pointer-events: none;
+}
+
 .esri-ui {
     position: absolute;
     left: 0;
