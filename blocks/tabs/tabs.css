@@ -1,5 +1,4 @@
 .tabs {
-  /* tabs updated by Tim */
   .tab-component {
     display: flex;
     flex-direction: column;
@@ -76,7 +75,7 @@
       
       .tab-title button {
         background: none;
-        color: white;
+        color: var(--calcite-ui-text-1);
         font-size: var(--font-0);
         font-weight: 400;
         padding: 0.75rem;
@@ -123,7 +122,7 @@
         margin-right: 0.7rem;
 
         span {
-          color: white;
+          color: var(--calcite-ui-text-1);
         }
       }
     }
@@ -146,7 +145,7 @@
       }
 
       p:last-child {
-        color: white;
+        color: var(--calcite-ui-text-1);
         margin: 0;
         margin-bottom: 1.5rem;
       }
@@ -190,16 +189,16 @@
         .tab-title {
           display: block;
           flex: 1;
-          border-bottom: 1px solid white;
-
-          button {
-            width: 100%;
-            padding: 1rem;
-          }
+          border-bottom: 1px solid var(--calcite-ui-text-1);
+        }
+        
+        .tab-title button {
+          width: 100%;
+          padding: 1rem;
         }
 
         .tab-title[aria-hidden='false'] {
-          border-bottom: 1px solid white;
+          border-bottom: 1px solid var(--calcite-ui-text-1);
         }
         
         .tab-title[aria-selected='true'] {
