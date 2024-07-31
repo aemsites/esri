@@ -51,6 +51,8 @@ canvas {
     height: 100%;
     overflow: hidden;
     direction: ltr;
+    touch-action: none;
+    user-select: none;
 }
 
 .esri-overlay-surface {
@@ -71,6 +73,35 @@ canvas {
     max-width: 100%;
     position: absolute;
     display: flex;
+}
+
+.esri-view .esri-display-object, .esri-view .esri-bitmap {
+    position: absolute;
+    border: none;
+    margin: 0;
+    padding: 0;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+}
+
+/* .esri-display-object {
+    width: 790px;
+    height: 575px;
+    display: block;
+    opacity: 1;
+} */
+
+
+.esri-popup__main-container {
+    outline: none;
+    pointer-events: auto;
+    position: relative;
+    z-index: 1;
+    width: 340px;
+    max-height: 300px;
+    background-color: #fff;
+    display: flex;
+    flex-flow: column nowrap;
 }
 
 .esri-ui-inner-container {
@@ -100,6 +131,7 @@ canvas {
 .esri-ui-top-left .esri-component {
     margin-bottom: 10px;
 }
+
 .esri-widget {
     box-sizing: border-box;
     color: #323232;
