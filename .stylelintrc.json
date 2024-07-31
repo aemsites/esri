@@ -1,5 +1,6 @@
 {
   "extends": ["stylelint-config-standard"],
+  "plugins": ["stylelint-use-logical"],
   "rules": {
     "custom-property-pattern": null,
     "declaration-no-important": true,
@@ -9,6 +10,7 @@
       }
     ],
     "declaration-property-value-no-unknown": true,
-    "keyframes-name-pattern": null
+    "keyframes-name-pattern": null,
+    "csstools/use-logical": "always"
   }
 }
