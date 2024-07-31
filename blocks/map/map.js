@@ -2,20 +2,21 @@ import {
     loadScript,
   } from '../../scripts/aem.js';
 
+import { div } from '../../scripts/dom-helpers.js'
+
 export default function decorate(block) {
-
-
 return loadScript('https://js.arcgis.com/4.9/').then((res) => {
-    const map = document.createElement('div');
-    map.id = "eam-map"
+    
+    const gridContainer = div({id: "grid-container"})
+    const appWrapper = div({id: "eam-app-wrapper"})
+    gridContainer.appendChild(appWrapper)
+    const mapWrapper = div({id: "eam-map-wrapper"})
+    appWrapper.appendChild(mapWrapper)
+    const map = div({id: "eam-map" });
 
-    const mapWrapper = document.createElement('div')
-    mapWrapper.id = "eam-map-wrapper"
     mapWrapper.appendChild(map)
-    const randomText = document.createElement('p')
-    randomText.innerText = "HANEM"
-    mapWrapper.appendChild(randomText)
-    block.append(mapWrapper);
+
+    block.append(gridContainer);
 
     loadMap();
     console.log('after loading map')
