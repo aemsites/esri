@@ -176,19 +176,6 @@ async function loadLazy(doc) {
   sampleRUM.observe(main.querySelectorAll('picture > img'));
 }
 
-async function loadGlobalNav() {
-  const head = document.querySelector('head');
-  const json = document.createElement('script');
-  json.appendChild(document.createTextNode('window.gnav_jsonPath = 20220-nav-config.25.json'));
-
-  head.appendChild(json);
-  const script = document.createElement('script');
-  script.src = 'https://webapps-cdn.esri.com/CDN/components/global-nav/js/gn.js';
-  head.appendChild(script);
-}
-
-loadGlobalNav();
-
 /**
  * Loads everything that happens a lot later,
  * without impacting the user experience.
