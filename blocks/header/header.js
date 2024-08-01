@@ -99,7 +99,7 @@ export default async function decorate(block) {
   const script = document.createElement('script');
   script.src = 'https://webapps-cdn.esri.com/CDN/components/global-nav/js/gn.js';
   block.appendChild(script);
-  
+
   // load nav as fragment
   const navMeta = getMetadata('nav');
   const navPath = navMeta ? new URL(navMeta, window.location).pathname : '/nav';
