@@ -1,5 +1,6 @@
 // eslint-disable-next-line import/no-cycle
 import { sampleRUM } from './aem.js';
+import { loadScript } from './aem.js';
 
 // Core Web Vitals RUM collection
 sampleRUM('cwv');
@@ -7,7 +8,6 @@ sampleRUM('cwv');
 // add more delayed functionality here
 
 // Launch script
-const script = document.createElement('script');
-script.src = 'https://assets.adobedtm.com/launch-ENd3e1f5f2e5b44e4f8c9e7b0c4a2f8b3.min.js';
-script.async = true;
-document.head.appendChild(script);
+loadScript('https://assets.adobedtm.com/2d251f50426c/e52f833be42a/launch-bdb68bbb4cf5-development.min.js', () => {
+    console.log('DTM loaded');
+    });
