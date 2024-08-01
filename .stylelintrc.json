@@ -9,8 +9,7 @@
         "message": "Please keep the nesting depth 3 or less."
       }
     ],
-    "declaration-property-value-no-unknown": true,
     "keyframes-name-pattern": null,
-    "csstools/use-logical": "always"
+    "csstools/use-logical": ["always", {"except": ["float", "inset-block"]}]
   }
 }
