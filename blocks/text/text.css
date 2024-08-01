@@ -142,4 +142,12 @@
             margin-block-end: var(--content-spacing); 
         }
     }
+
+    &.centered{
+        text-align: center;
+
+        li{
+            margin-inline: auto;
+        }
+    }
 }
