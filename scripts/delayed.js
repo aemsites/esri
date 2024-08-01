@@ -1,6 +1,5 @@
 // eslint-disable-next-line import/no-cycle
-import { sampleRUM } from './aem.js';
-import { loadScript } from './aem.js';
+import { sampleRUM, loadScript } from './aem.js';
 
 // Core Web Vitals RUM collection
 sampleRUM('cwv');
@@ -9,5 +8,5 @@ sampleRUM('cwv');
 
 // Launch script
 loadScript('https://assets.adobedtm.com/2d251f50426c/e52f833be42a/launch-bdb68bbb4cf5-development.min.js', () => {
-    console.log('DTM loaded');
-    });
+  console.log('DTM loaded');
+});
