@@ -35,7 +35,7 @@ main .hero-container {
 .hero.block > div > div > p:not(.button-container),
 .hero.block > div > div > p.button-container {
   display: flex;
-  margin-inline: 2vw;
+  margin-inline: 4vw;
 }
 
 .hero.block p:nth-of-type(3) > picture  {
@@ -56,8 +56,8 @@ main .hero-container {
   z-index: -2;
 }
 
-.hero.block > div > div > h1 {
-  margin-block-start: var(--space-20);
+.hero.block p:nth-of-type(4) picture img {
+  inline-size: 100%;
 }
 
 .hero.block h1 {
@@ -70,6 +70,11 @@ main .hero-container {
 .hero.block h1, .hero.large.block h1 {
   font-size: var(--font-8);
 }
+
+.hero.block > div > div > h1 {
+  margin-block-start: var(--space-20);
+}
+
 
 .hero.medium.block h1 {
   font-size: var(--font-7);
@@ -96,6 +101,13 @@ main .hero-container {
     aspect-ratio: 1 / 1;
   }
 
+  .hero.block > div > div > h1,
+  .hero.block > div > div > p:not(.button-container),
+  .hero.block > div > div > p.button-container,
+  .hero.block > div > div > p {
+    inline-size: 50%;
+  }
+
   .hero.block p:nth-of-type(3)  {
     block-size: 100%;
     position: absolute;
@@ -119,13 +131,6 @@ main .hero-container {
     flex: 1;
     display: flex;
     flex-direction: column;
-  }
-
-  .hero.block > div > div > h1,
-  .hero.block > div > div > p:not(.button-container),
-  .hero.block > div > div > p.button-container,
-  .hero.block > div > div > p {
-    inline-size: 50%;
   }
  
   .hero.large.block, .hero.block { 
