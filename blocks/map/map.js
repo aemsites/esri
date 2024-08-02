@@ -19,8 +19,6 @@ return loadScript('https://js.arcgis.com/4.9/').then((res) => {
     block.append(gridContainer);
 
     loadMap();
-    console.log('after loading map')
-
 
     var extractGeoJSON = function(dataArr){
     return new Promise(function(resolve){
@@ -85,8 +83,6 @@ return loadScript('https://js.arcgis.com/4.9/').then((res) => {
         })
         .then((res) => res.json())
         .then(function(ret){
-            console.log('this is apiData', ret)
-        
         extractGeoJSON(ret).then(function(rawGraphics){
         
         var eamRenderer = {
@@ -101,11 +97,7 @@ return loadScript('https://js.arcgis.com/4.9/').then((res) => {
             }
             }
         };
-        var basemap = new Basemap({
-            portalItem: {
-            id: "2e331e9a2c6a4b9280d10e29261ff3e0" // custome basemap
-            }
-        });
+
         var vtlLayer = new VectorTileLayer({
             // URL to the vector tile service
             style: {
@@ -157,12 +149,9 @@ return loadScript('https://js.arcgis.com/4.9/').then((res) => {
             container: "eam-map",
             center: [],
             popup: {
-            // alignment: 'top-center',
             dockEnabled: false,
             dockOptions: {
-                // Disables the dock button from the popup
                 buttonEnabled: false,
-                // Ignore the default sizes that trigger responsive docking
                 breakpoint: true
             }
             }
@@ -171,7 +160,7 @@ return loadScript('https://js.arcgis.com/4.9/').then((res) => {
             maxZoom: 5,
             minZoom: 1
         };
-        console.log('this is the view', view)
+
         eamFL.when(function() {
             view.extent = eamFL.fullExtent.expand(1.4);
         });
