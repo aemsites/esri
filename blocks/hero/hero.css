@@ -89,10 +89,7 @@ main .hero-container {
     aspect-ratio: 1 / 1;
   }
 
-  .hero.block > div > div > h1,
-  .hero.block > div > div > p:not(.button-container),
-  .hero.block > div > div > p.button-container,
-  .hero.block > div > div > p {
+  .hero.block h1, .hero.block p {
     inline-size: 50%;
   }
 
