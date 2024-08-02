@@ -1,33 +1,17 @@
-/**
- * Variant Sizes: xlarge, large (Default), medium, small
- */
-export default function decorate() {
-  const defaultSize = 'large';
-  const heroWrapper = document.querySelector('.hero-wrapper');
-  const contentContainer = heroWrapper.querySelector('.hero');
-  const picturePath = heroWrapper.querySelector('picture');
+export default function decorate(block) {
+  const heroBlock = document.querySelector('.hero');
   const videoElement = document.createElement('video');
   const videoSrc = document.createElement('source');
-  const videoAssets = heroWrapper.querySelectorAll('a');
-  const foregroundImg = heroWrapper.querySelectorAll('picture');
-  const foregroundImgContainer = document.createElement('div');
+  const videoAssets = heroBlock.querySelectorAll('a');
 
-  contentContainer.classList.add('half-container');
-  foregroundImgContainer.className = 'hero block half-container';
-  picturePath.classList.add('hero-picture');
   videoSrc.setAttribute('type', 'video/mp4');
   videoElement.setAttribute('type', 'video/mp4');
   videoElement.setAttribute('muted', '');
-  videoElement.className = 'hero-video';
-  videoSrc.setAttribute('src', videoAssets[1].getAttribute('href'));
-  heroWrapper.classList.add(defaultSize);
+  // videoSrc.setAttribute('src', videoAssets[1].getAttribute('title'));
+  videoSrc.setAttribute('src', 'https://www.esri.com/content/dam/esrisites/en-us/about/about/about-2022/updates-10/about-overview-banner.mp4');
 
-  if (foregroundImgContainer) foregroundImgContainer.append(foregroundImg[1]);
   if (videoElement) videoElement.append(videoSrc);
-  if (videoAssets) heroWrapper.prepend(videoElement);
-  if (heroWrapper) heroWrapper.prepend(picturePath);
-  videoAssets[1].parentNode.remove();
-  heroWrapper.append(foregroundImgContainer);
+  if (videoAssets) heroBlock.prepend(videoElement);
 
   videoElement.play();
 }
