@@ -69,12 +69,8 @@ main .hero-container {
 
 .hero.block h1, .hero.large.block h1 {
   font-size: var(--font-8);
-}
-
-.hero.block > div > div > h1 {
   margin-block-start: var(--space-20);
 }
-
 
 .hero.medium.block h1 {
   font-size: var(--font-7);
