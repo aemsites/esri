@@ -34,6 +34,7 @@
       font-family: var(--calcite-sans-family);
       padding: 0;
       margin: 0 auto;
+      border-bottom: 1px solid var(--calcite-ui-border-1);
 
       .tab-titles {
         padding: 0;
@@ -41,6 +42,9 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        margin-bottom: 0;
+        width: 100%;
+
       }
 
       calcite-icon {
@@ -71,10 +75,11 @@
         display: block;
         border-bottom: 1px solid var(--calcite-ui-border-2);
         padding-bottom: 2px;
+        max-width: 286px;
 
         button {
           background: none;
-          color: white;
+          color: var(--calcite-ui-text-1);
           font-size: var(--font-0);
           font-weight: 400;
           padding: 0.75rem;
@@ -185,6 +190,7 @@
         margin: 0 auto;
         box-sizing: content-box;
         z-index: 2;
+        border-bottom: none;
 
         .tab-title {
           display: block;
@@ -257,6 +263,10 @@
 
       }
     }
+  }
+
+  .tabs.tabs-cards-variant .tab-component .tab-nav {
+    border-bottom: 1px solid var(--calcite-ui-border-1);
   }
 }
 
