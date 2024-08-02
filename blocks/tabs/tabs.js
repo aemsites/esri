@@ -1,4 +1,9 @@
-import { createOptimizedPicture } from '../../scripts/aem.js';
+import {
+  createOptimizedPicture,
+  buildBlock,
+  decorateBlock,
+  loadBlock,
+} from '../../scripts/aem.js';
 import {
   calciteButton,
   div,
@@ -7,8 +12,8 @@ import {
   button,
 } from '../../scripts/dom-helpers.js';
 
-export default function decorate(block) {
-  document.querySelector('.tabs-container').classList.add('calcite-mode-dark');
+export default async function decorate(block) {
+  const isTabsCardsVariant = block.classList.contains('tabs-cards-variant');
 
   block.querySelectorAll('img').forEach((img) => img
     .closest('picture')
@@ -16,42 +21,53 @@ export default function decorate(block) {
       createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }]),
     ));
 
-  const tabTitles = [...block.children].map((child) => child.children[0].children[0].textContent);
-  const tabContents = [...block.children].map((child) => [...child.children[1].children]);
+  const loadBlocks = [];
+  let tabTitles;
+  let tabContents;
+  if (!isTabsCardsVariant) {
+    document.querySelector('.tabs-container').classList.add('calcite-mode-dark');
 
-  tabContents.forEach((content) => {
-    const text = [content[1], content[2], content[3]];
-    const textWrapper = div({ class: 'text-wrapper' }, ...text);
-    content.splice(1, 3, textWrapper);
+    tabTitles = [...block.children].map((child) => child.children[0].children[0].textContent);
+    tabContents = [...block.children].map((child) => [...child.children[1].children]);
 
-    const hrefs = [content[2].children[0].href, content[3].children[0].href];
-    const buttons = [
-      calciteButton({
-        'icon-end': 'play-f',
-        href: hrefs[0],
-        appearance: 'solid',
-        alignment: 'center',
-        scale: 'm',
-        type: 'button',
-        width: 'auto',
-        kind: 'inverse',
-        color: 'inverse',
-      }, content[2].textContent),
-      calciteButton({
-        'icon-end': 'arrowRight',
-        href: hrefs[1],
-        appearance: 'outline',
-        alignment: 'center',
-        scale: 'm',
-        type: 'button',
-        width: 'auto',
-        kind: 'inverse',
-      }, content[3].textContent),
-    ];
+    tabContents.forEach((content) => {
+      const text = [content[1], content[2], content[3]];
+      const textWrapper = div({ class: 'text-wrapper' }, ...text);
+      content.splice(1, 3, textWrapper);
 
-    const buttonsWrapper = div({ class: 'buttons-wrapper' }, ...buttons);
-    content.splice(2, 2, buttonsWrapper);
-  });
+      const hrefs = [content[2].children[0].href, content[3].children[0].href];
+      const buttons = [
+        calciteButton({
+          'icon-end': 'play-f',
+          href: hrefs[0],
+          appearance: 'solid',
+          alignment: 'center',
+          scale: 'm',
+          type: 'button',
+          width: 'auto',
+          kind: 'inverse',
+          color: 'inverse',
+        }, content[2].textContent),
+        calciteButton({
+          'icon-end': 'arrowRight',
+          href: hrefs[1],
+          appearance: 'outline',
+          alignment: 'center',
+          scale: 'm',
+          type: 'button',
+          width: 'auto',
+          kind: 'inverse',
+        }, content[3].textContent),
+      ];
+
+      const buttonsWrapper = div({ class: 'buttons-wrapper' }, ...buttons);
+      content.splice(2, 2, buttonsWrapper);
+    });
+  } else {
+    document.querySelector('.tabs-container').classList.add('calcite-mode-light');
+    tabContents = [...block.children].map((child) => [...child.children[1].children]);
+    tabTitles = [...block.children].map((child) => child.children[0].children[0].textContent);
+  }
 
   const contents = tabContents.map((content) => div({
     class: 'tab-content',
@@ -64,6 +80,17 @@ export default function decorate(block) {
     role: 'tab',
     'aria-hidden': true,
   }, button(...title)));
+
+  if (isTabsCardsVariant) {
+    contents.forEach((content) => {
+      const tabsCardsBlock = buildBlock('tabs-cards', [[content.innerHTML]]);
+      content.replaceChildren(tabsCardsBlock);
+      decorateBlock(tabsCardsBlock);
+      loadBlocks.push(loadBlock(tabsCardsBlock));
+    });
+
+    await Promise.all(loadBlocks);
+  }
 
   const arrowLeft = calciteButton(
     {
