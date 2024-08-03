@@ -2,7 +2,6 @@ import {
   sampleRUM,
   buildBlock,
   loadHeader,
-  loadFooter,
   decorateButtons,
   decorateIcons,
   decorateSections,
@@ -52,7 +51,15 @@ async function loadFonts() {
 function decorateVideoLinks(element) {
   const anchors = element.querySelectorAll('a');
   anchors.forEach((a) => {
-    if (a.href.startsWith('https://mediaspace.esri.com/')) {
+    // change urls to be allowed to be embedded
+    if (a.href.startsWith('https://youtu.be')) {
+      a.href = a.href.replace('youtu.be', 'www.youtube.com/embed');
+    }
+
+    if (
+      a.href.startsWith('https://mediaspace.esri.com/')
+   || a.href.startsWith('https://www.youtube.com/')
+    ) {
       const closeButton = div(
         {
           class: 'video-close-button',
@@ -166,7 +173,6 @@ async function loadLazy(doc) {
   if (hash && element) element.scrollIntoView();
 
   loadHeader(doc.querySelector('header'));
-  loadFooter(doc.querySelector('footer'));
 
   loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
   loadFonts();
@@ -182,7 +188,7 @@ async function loadLazy(doc) {
  */
 function loadDelayed() {
   // eslint-disable-next-line import/no-cycle
-  window.setTimeout(() => import('./delayed.js'), 3000);
+  window.setTimeout(() => import('./delayed.js'), 4000);
   // load anything that can be postponed to the latest here
 }
 
