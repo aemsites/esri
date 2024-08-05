@@ -104,7 +104,7 @@
         margin: 0 auto;
 
         li {
-            max-width: 80ch;
+            max-inline-size: 80ch;
             word-break: break-word;
             margin-block-end: var(--content-spacing);
             margin-inline: auto;
