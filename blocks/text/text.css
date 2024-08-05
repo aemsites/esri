@@ -96,6 +96,8 @@
 }
 
 .block.esri-text {
+    text-align: center;
+
     ul {
         list-style-type: none;
         padding: 0;
@@ -105,6 +107,7 @@
             max-width: 80ch;
             word-break: break-word;
             margin-bottom: var(--content-spacing);
+            margin-inline: auto;
         }
     }
 
@@ -143,11 +146,11 @@
         }
     }
 
-    &.centered{
-        text-align: center;
+    &.leftaligned{
+        text-align: left;
 
         li{
-            margin-inline: auto;
+            margin-inline: 0;
         }
     }
 }
