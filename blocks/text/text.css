@@ -147,7 +147,7 @@
     }
 
     &.leftaligned{
-        text-align: left;
+        text-align: start;
 
         li{
             margin-inline: 0;
