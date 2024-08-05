@@ -1,13 +1,36 @@
 
 .section.map-container {
     background-color: #016098;
-    background-image: url(/assets/streets-background-blue.jpg);
     background-position-x: center;
     background-position-y: center;
     padding-bottom: 3rem;
     padding-top: 3rem;
     margin-bottom: 0;
     margin-top: 0;
+
+    --bg-gradient-dir: to right;
+    --bg-gradient-start: var(--bg-color);
+    --bg-gradient-end: transparent;
+    --bg-gradient-transition: MIN(20vw, 60%);
+    --bg-gradient: linear-gradient(var(--bg-gradient-dir), var(--bg-gradient-start), var(--bg-gradient-start) var(--bg-gradient-transition), var(--bg-gradient-end));
+    --bg-img: url(/assets/streets-background-blue.jpg);
+    --posY: center;
+    --posX: right;
+    --bg-img-position: var(--posY) var(--posX);
+    --bg-img-repeat: no-repeat;
+    --bg-img-size: initial;
+    --bg-img-attachment: initial;
+    --bg-overlay-dir: to right;
+    --bg-overlay-start-color: var(--esri-ui-opacity00-inverse);
+    --bg-overlay-end-color: var(--esri-ui-opacity00-inverse);
+    --bg-overlay-transition: MIN(20vw, 50%);
+    --bg-overlay: linear-gradient(var(--bg-overlay-dir), var(--bg-overlay-start-color), var(--bg-overlay-start-color) var(--bg-overlay-transition), var(--bg-overlay-end-color));
+
+    background-image: var(--bg-overlay),var(--bg-img);
+    background-repeat: var(--bg-img-repeat);
+    background-position: var(--bg-img-position);
+    background-attachment: var(--bg-img-attachment);
+    background-size: var(--bg-img-size);
 }
 
 #grid-container {
@@ -158,13 +181,11 @@ canvas {
     -webkit-user-select: none;
 }
 
-/* .esri-display-object {
-    width: 790px;
-    height: 575px;
+.esri-display-object {
     display: block;
     opacity: 1;
-} */
-
+    transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+}
 
 .esri-popup__main-container {
     outline: none;
@@ -575,7 +596,7 @@ h1, h2, h3, h4, h5, h6 {
 #eam-app-wrapper .esri-popup__feature-buttons {
     position: relative;
     order: 4;
-}
+} 
 
 #eam-app-wrapper .esri-popup__header {
     background-color: #bcdaed
@@ -716,6 +737,10 @@ z-index:1;
     justify-content: space-between;
     align-items: center;
 }
+
+
+
+
 
 @media (width >= 1024px) {
     default-content-wrapper {

@@ -1,5 +1,6 @@
 import {
     loadScript,
+    loadCSS
   } from '../../scripts/aem.js';
 
 import { div } from '../../scripts/dom-helpers.js'
@@ -158,9 +159,7 @@ function loadMap() {
         }
                })})}
 
-export default function decorate(block) {
-return loadScript('https://js.arcgis.com/4.9/').then((res) => {
-    
+export default async function decorate(block) {
     const gridContainer = div({id: "grid-container"})
     const appWrapper = div({id: "eam-app-wrapper"})
     gridContainer.appendChild(appWrapper)
@@ -172,7 +171,9 @@ return loadScript('https://js.arcgis.com/4.9/').then((res) => {
 
     block.append(gridContainer);
 
-    loadMap()
-    
+    await loadScript('https://js.arcgis.com/4.9/')
+    await loadCSS("https://js.arcgis.com/4.30/@arcgis/core/assets/esri/themes/light/main.css")
+    await loadMap()
 
-})}
+
+}
