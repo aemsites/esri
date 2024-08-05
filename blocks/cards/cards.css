@@ -134,8 +134,8 @@
   }
 
   img{
-    height: 44px;
-    width: 44px;
+    block-size: 44px;
+    inline-size: 44px;
     margin-block-end: var(--content-spacing);
   }
 }
