@@ -49,6 +49,19 @@
     padding: 0.5rem;
     flex: 0 0 100%;
     box-sizing: border-box; 
+    animation-delay: 0.05s;
+    animation-duration: 0.55s;
+    animation-fill-mode: both;
+    animation-name: in-up;
+    animation-timing-function: ease-in-out;
+
+    & > a:hover {
+      border: solid 1px var(--calcite-ui-brand-hover);
+    }
+
+    & > a:focus {
+      box-shadow: 0 0 0 5px var(--calcite-ui-brand);
+    }
 
     & > a > p:first-child img {
       position: static;

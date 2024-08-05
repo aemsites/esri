@@ -71,6 +71,7 @@
 
       .tab-title {
         display: block;
+        transition: 0.3s ease;
       }
       
       .tab-title button {
@@ -78,9 +79,8 @@
         color: var(--calcite-ui-text-1);
         font-size: var(--font-0);
         font-weight: 400;
-        padding: 0.75rem;
+        padding: 1rem;
         margin: auto;
-        padding-block-end: 2px;
         max-inline-size: 286px;
 
         button {
@@ -210,7 +210,11 @@
       }
 
       .tab-title[aria-hidden='false'] {
-        border-block-end: none;
+        border-block-end: 3px solid transparent;
+      }
+      
+      .tab-title[aria-selected='false']:hover {
+        border-block-end: 3px solid #0079c180;
       }
         
       .tab-title[aria-selected='true'] {
