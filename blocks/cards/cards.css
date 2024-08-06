@@ -83,9 +83,14 @@
 
 /* Cards Simple */
 .cards.simple li{
-  inline-size: 33.3334%;
   position: relative;
   display: flex;
+}
+
+@media (width >= 1440px) {
+  .cards.simple li {
+    inline-size: 33.3334%;
+  }
 }
 
 .cards.simple .cards-card-body{
