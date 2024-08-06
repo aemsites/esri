@@ -22,20 +22,19 @@ export default async function decorate(block) {
     ));
 
   const loadBlocks = [];
-  let tabTitles;
-  let tabContents;
+  const tabTitles = [...block.children].map((child) => child.children[0].children[0].textContent);
+  const tabContents = [...block.children].map((child) => [...child.children[1].children]);
   if (!isTabsCardsVariant) {
     document.querySelector('.tabs-container').classList.add('calcite-mode-dark');
-
-    tabTitles = [...block.children].map((child) => child.children[0].children[0].textContent);
-    tabContents = [...block.children].map((child) => [...child.children[1].children]);
 
     tabContents.forEach((content) => {
       const text = [content[1], content[2], content[3]];
       const textWrapper = div({ class: 'text-wrapper' }, ...text);
       content.splice(1, 3, textWrapper);
 
-      const hrefs = [content[2].children[0].href, content[3].children[0].href];
+      const buttonContainers = [content[2], content[3]];
+
+      const hrefs = [buttonContainers[0].children[0].href, buttonContainers[1].children[0].href];
       const buttons = [
         calciteButton({
           'icon-end': 'play-f',
@@ -47,7 +46,7 @@ export default async function decorate(block) {
           width: 'auto',
           kind: 'inverse',
           color: 'inverse',
-        }, content[2].textContent),
+        }, buttonContainers[0].textContent),
         calciteButton({
           'icon-end': 'arrowRight',
           href: hrefs[1],
@@ -57,7 +56,7 @@ export default async function decorate(block) {
           type: 'button',
           width: 'auto',
           kind: 'inverse',
-        }, content[3].textContent),
+        }, buttonContainers[1].textContent),
       ];
 
       const buttonsWrapper = div({ class: 'buttons-wrapper' }, ...buttons);
@@ -65,8 +64,6 @@ export default async function decorate(block) {
     });
   } else {
     document.querySelector('.tabs-container').classList.add('calcite-mode-light');
-    tabContents = [...block.children].map((child) => [...child.children[1].children]);
-    tabTitles = [...block.children].map((child) => child.children[0].children[0].textContent);
   }
 
   const contents = tabContents.map((content) => div({

@@ -16,7 +16,7 @@ export default function decorate(block) {
       eventCards[i][j].parentElement.removeChild(eventCards[i][j]);
       eventCards[i][j + 1].appendChild(eventCards[i][j + 2]);
       const eventCard = div(
-        { class: 'event-card' },
+        { class: 'event-card calcite-animate calcite-animate__in-up' },
         a(
           { href: eventCards[i][j].querySelector('a').href },
           eventCards[i][j + 1],
