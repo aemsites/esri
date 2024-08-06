@@ -35,11 +35,17 @@
 
 #grid-container {
     width: 1440px;
+    /* height: 700px; */
     max-width: 96vw;
     padding-inline-end: 0;
     padding-inline-start: 0;
     margin-inline-end: auto;
     margin-inline-start: auto;
+}
+
+.map.container.default-content-wrapper {
+    background-color: red;
+    font-size: 25;
 }
 
 .default-content-wrapper {
