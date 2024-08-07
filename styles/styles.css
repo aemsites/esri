@@ -246,12 +246,8 @@ main img {
 }
 
 /* sections */
-main .section {
-  padding: var(--space-16) 0;
-
-}
-
 .section > div > div {
+  padding: var(--space-16) 0;
   background-color: var(--calcite-ui-foreground-1);
   color: var(--calcite-ui-text-1);
 }
