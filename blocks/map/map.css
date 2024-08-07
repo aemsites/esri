@@ -33,25 +33,31 @@
     background-size: var(--bg-img-size);
 }
 
-#grid-container {
+.grid-container {
     width: 1440px;
     /* height: 700px; */
     max-width: 96vw;
+    max-height: 100vw;
     padding-inline-end: 0;
     padding-inline-start: 0;
     margin-inline-end: auto;
     margin-inline-start: auto;
 }
 
-.map.container.default-content-wrapper {
-    background-color: red;
-    font-size: 25;
+.map-container > .default-content-wrapper {
+    color: #fff;
+    margin-inline-end: 20vw;
+    margin-inline-start: 20vw;
+    padding-inline-start: 0.5rem;
+    padding-inline-end: 0.5rem;
+    text-align: center;
+
 }
 
-.default-content-wrapper {
+/* .default-content-wrapper {
     text-align: center;
     color: #fff;
-}
+} */
 
 hr {
     margin: var(--space-4) 0;
@@ -71,14 +77,6 @@ hr.center, .text-center hr {
     margin-right: auto;
 }
 
-.return-btn {
-    position: fixed;
-    top: 16px;
-    left: 50%;
-    display: none;
-    z-index: 11111;
-    transform: translate(-50%);
-}
 
 .btn-white {
     background: var(--calcite-ui-foreground-1);
@@ -91,8 +89,8 @@ hr.center, .text-center hr {
     --calcite-button-padding-x: 11px;
     position: relative;
     display: inline-block;
-    background-color: var(--calcite-ui-brand);
-    color: var(--calcite-ui-text-inverse);
+    /* background-color: var(--calcite-ui-brand); */
+    /* color: var(--calcite-ui-text-inverse); */
     padding: var(--calcite-button-padding-y) var(--calcite-button-padding-x);
     width: auto;
     border: 1px solid transparent;
@@ -584,6 +582,8 @@ h1, h2, h3, h4, h5, h6 {
     height: 775px;
     padding: 0%;
     transition: all 0.25s ease-in;
+    margin-inline-start: 12vw;
+    margin-inline-end: 12vw;
 }
 
 #eam-map-wrapper {
@@ -591,7 +591,7 @@ h1, h2, h3, h4, h5, h6 {
     height: 775px;
     padding: 0;
     transition: height .25s ease-in, width .25s ease-in, top .25s ease-in, left .25s ease-in;
-    background-color: #f3f5f4;
+    /* background-color: #f3f5f4; */
 }
 
 #eam-map {
@@ -693,34 +693,34 @@ h1, h2, h3, h4, h5, h6 {
     transform: translate(-50%, -50%)
 }
 
-#eam-map-wrapper.is-fullscreen{
+#eam-map-wrapper.is-fullscreen {
 
     top: 0%;
     left: 0%;
 
     margin: 0;
-    height: 100vh;
-    width: 100vw;
+    height: 100%;
+    width: 100%;
     max-width: 100vw;
+    max-height: 100vw;
 
     position:fixed;
     padding: 0;
     z-index: 11110;
 }
-.fullscreen-btn{
-z-index:1;
-}
-.return-btn{
+
+.return-btn {
     position: fixed;
     top: 16px;
     left: 50%;
     display: none;
     z-index: 11111;
     transform: translate(-50%);
-
+    border-radius: 0%;
 }
-.btn-vis{
-    display:block;
+
+.return-btn.btn-vis{
+    display: block;
 }
 
 .esri-ui-manual-container>.esri-component {
@@ -743,9 +743,6 @@ z-index:1;
     justify-content: space-between;
     align-items: center;
 }
-
-
-
 
 
 @media (width >= 1024px) {

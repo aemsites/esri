@@ -1,47 +1,65 @@
-import {
-    loadScript,
-    loadCSS
-  } from '../../scripts/aem.js';
-
-import { div,iframe, calciteButton } from '../../scripts/dom-helpers.js'
+import { div,iframe, button, p } from '../../scripts/dom-helpers.js'
 
 
-function toggleFullscreen() {
-  let elem = document.querySelector("#map-frame");
+async function toggleFullscreen() {
+  
+  const mapFrame = document.querySelector('#eam-map-wrapper')
+  console.log("this is element by id", mapFrame)
+  const minimizeButton = document.querySelector(".return-btn")
 
-  if (!document.fullscreenElement) {
-    elem.requestFullscreen().catch((err) => {
-      alert(
-        `Error attempting to enable fullscreen mode: ${err.message} (${err.name})`,
-      );
-    });
-  } else {
-    document.exitFullscreen();
-  }
+
+if (window.screenTop && window.screenY) {
+  mapFrame.classList.toggle("is-fullscreen")
+  minimizeButton.classList.toggle("btn-vis")
+} else {
+  mapFrame.classList.toggle("is-fullscreen")
+  minimizeButton.classList.toggle("btn-vis")
+
+}
 }
 
 export default async function decorate(block) {
+  
+  const blockParams = block.querySelectorAll('p')
 
-  const fullscreenButton = calciteButton(
+  const mapLink = blockParams[0].innerText;
+  const textParameter = blockParams[1].innerText;
+  block.textContent = '';
+
+  
+  const fullscreenButton = button(
     {
-      class: 'arrow-button right',
-      label: 'Next Tab',
-      'icon-end': 'chevronRight',
-      scale: 'l',
-      kind: 'neutral',
-      round: '',
+      class: 'btn btn-white',
+      label: 'Enter full screen',
     },
   );
 
+  fullscreenButton.innerHTML = "Launch map full screen"
+
+  const returnBtn = button(
+    {
+      class: "return-btn btn",
+      label: 'Exit full screen',
+    },
+  );
+
+  returnBtn.innerHTML = "Minimize Map"
+
   const contentContainer = document.querySelector('.map-container > .default-content-wrapper');
+  const nodeTextParam = p()
+  nodeTextParam.innerHTML = textParameter
+  contentContainer.appendChild(nodeTextParam)
+  contentContainer.appendChild(returnBtn)
   contentContainer.appendChild(fullscreenButton)
+  
 
   fullscreenButton.addEventListener('click', toggleFullscreen);
+  returnBtn.addEventListener('click', toggleFullscreen);
 
   const mapFrame = iframe({
     id: "map-frame",
     role:"application",
-    src: "https://webapps-cdn.esri.com/Apps/regional-maps/europe.html",
+    src: mapLink,
     sandbox:"allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox",
     allow: "autoplay; geolocation;",
     allowfullscreen:"true",
@@ -49,15 +67,20 @@ export default async function decorate(block) {
     // border: "none",
     loading:"lazy", 
     width:"100%",
-    style:"aspect-ratio: auto 16 / 12; border: none;",
+    // innerHeight: "100%",
+    style:"aspect-ratio: auto 5 / 4; border: none;",
     title: "Experience builder application",
    })
 
-    const gridContainer = div({id: "grid-container"})
-    gridContainer.appendChild(mapFrame)
+    const gridContainer = div({class: "grid-container"})
+    const eamAppWrapper = div({id: "eam-app-wrapper"})
+  
+    const eamMapFrameWrapper = div({id: "eam-map-wrapper"})
+    eamAppWrapper.appendChild(eamMapFrameWrapper)
+    gridContainer.appendChild(eamAppWrapper)
+    eamMapFrameWrapper.appendChild(mapFrame)
 
     block.append(gridContainer);
 
-    await loadScript('https://js.arcgis.com/4.9/')
-    await loadCSS("https://js.arcgis.com/4.30/@arcgis/core/assets/esri/themes/light/main.css")
+
 }
