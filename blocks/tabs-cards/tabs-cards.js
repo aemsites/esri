@@ -12,17 +12,18 @@ export default function decorate(block) {
   const eventCards = eventCardsWrapper.map((wrapper) => [...wrapper.children]);
 
   for (let i = 0; i < eventCards.length; i += 1) {
+    const currentCard = eventCards[i];
     for (let j = 0; j < eventCards[i].length; j += 6) {
-      eventCards[i][j].parentElement.removeChild(eventCards[i][j]);
-      eventCards[i][j + 1].appendChild(eventCards[i][j + 2]);
+      currentCard[j].parentElement.removeChild(currentCard[j]);
+      currentCard[j + 1].appendChild(currentCard[j + 2]);
       const eventCard = div(
         { class: 'event-card calcite-animate calcite-animate__in-up' },
         a(
-          { href: eventCards[i][j].querySelector('a').href },
-          eventCards[i][j + 1],
+          { href: currentCard[j].querySelector('a').href },
+          currentCard[j + 1],
           div(
             { class: 'event-text-wrapper' },
-            ...eventCards[i].slice(j + 3, j + 6),
+            ...currentCard.slice(j + 3, j + 6),
           ),
         ),
       );
