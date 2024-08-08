@@ -1,7 +1,7 @@
-import { div,iframe, button, p } from '../../scripts/dom-helpers.js'
+import { div,iframe, button, p, horizontalRule } from '../../scripts/dom-helpers.js'
 
 
-async function toggleFullscreen() {
+function toggleFullscreen() {
   
   const mapFrame = document.querySelector('#eam-map-wrapper')
   console.log("this is element by id", mapFrame)
@@ -45,12 +45,15 @@ export default async function decorate(block) {
 
   returnBtn.innerHTML = "Minimize Map"
 
-  const contentContainer = document.querySelector('.map-container > .default-content-wrapper');
+  const defaultContentContainer = document.querySelector('.map-container > .default-content-wrapper');
+  
   const nodeTextParam = p()
   nodeTextParam.innerHTML = textParameter
-  contentContainer.appendChild(nodeTextParam)
-  contentContainer.appendChild(returnBtn)
-  contentContainer.appendChild(fullscreenButton)
+  
+  const hr = horizontalRule({class: "separator center"})
+  defaultContentContainer.appendChild(hr)
+  const mapContentContainer = div({class: "map-content-container"}, nodeTextParam, returnBtn, fullscreenButton)
+  defaultContentContainer.appendChild(mapContentContainer)
   
 
   fullscreenButton.addEventListener('click', toggleFullscreen);
@@ -64,11 +67,9 @@ export default async function decorate(block) {
     allow: "autoplay; geolocation;",
     allowfullscreen:"true",
     tabindex:"0",
-    // border: "none",
     loading:"lazy", 
     width:"100%",
-    // innerHeight: "100%",
-    style:"aspect-ratio: auto 5 / 4; border: none;",
+    style:"aspect-ratio: auto 9 / 16; border: none;",
     title: "Experience builder application",
    })
 

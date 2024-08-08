@@ -35,9 +35,7 @@
 
 .grid-container {
     width: 1440px;
-    /* height: 700px; */
     max-width: 96vw;
-    max-height: 100vw;
     padding-inline-end: 0;
     padding-inline-start: 0;
     margin-inline-end: auto;
@@ -48,6 +46,7 @@
     color: #fff;
     margin-inline-end: 20vw;
     margin-inline-start: 20vw;
+    max-width: 56vw;
     padding-inline-start: 0.5rem;
     padding-inline-end: 0.5rem;
     text-align: center;
@@ -69,7 +68,7 @@ hr.separator {
     border-top: none;
     width: 40px;
     height: 2px;
-    background-color: var(--theme-color);
+    background-color: #0079c1;
 }
 
 hr.center, .text-center hr {
@@ -82,6 +81,8 @@ hr.center, .text-center hr {
     background: var(--calcite-ui-foreground-1);
     border: 1px solid var(--calcite-ui-foreground-1);
     color: var(--calcite-ui-text-2);
+    margin-bottom: 24px;
+    margin-top: 0;
 }
 
 .btn {
@@ -189,6 +190,12 @@ canvas {
     display: block;
     opacity: 1;
     transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+}
+
+.btn-white:is(:hover,:focus) {
+    background: var(--calcite-ui-foreground-2);
+    border-color: var(--calcite-ui-foreground-2);
+    color: var(--calcite-ui-text-2);
 }
 
 .esri-popup__main-container {
@@ -588,7 +595,6 @@ h1, h2, h3, h4, h5, h6 {
 
 #eam-map-wrapper {
     width: 100%;
-    height: 775px;
     padding: 0;
     transition: height .25s ease-in, width .25s ease-in, top .25s ease-in, left .25s ease-in;
     /* background-color: #f3f5f4; */
@@ -702,7 +708,6 @@ h1, h2, h3, h4, h5, h6 {
     height: 100%;
     width: 100%;
     max-width: 100vw;
-    max-height: 100vw;
 
     position:fixed;
     padding: 0;
@@ -743,18 +748,3 @@ h1, h2, h3, h4, h5, h6 {
     justify-content: space-between;
     align-items: center;
 }
-
-
-@media (width >= 1024px) {
-    default-content-wrapper {
-        width: 1440px;
-        max-width: 96vw;
-    }
- }
-
-@media (width >= 480px) {
-    default-content-wrapper {
-        width: 720px;
-        max-width: 48vw;
-    }
- }
