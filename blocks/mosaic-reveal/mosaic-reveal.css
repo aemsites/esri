@@ -24,6 +24,7 @@
   --calcite-ui-text-link: var(--calcite-ui-text-1);
   --calcite-link-blue-underline: #fff6;
 
+  overflow: hidden;
   position: relative;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -82,13 +83,14 @@
   }
 
   .mosaic-reveal-content[aria-hidden='true'] {
-    transform: scaleY(0.2);
+    inset-block-start: 100%;
     opacity: 0;
     pointer-events: none;
   }
 
   & > div { /* stylelint-disable-line no-descending-specificity */
     position: relative;
+    overflow: hidden;
 
     &::after {
       position: absolute;
