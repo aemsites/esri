@@ -1,9 +1,9 @@
 .section.sidedrawer-container {
     float: unset;
-    width: unset;
+    inline-size: unset;
     clear: unset;
     padding: 0;
-    top: 150px;
+    inset-block-start: 150px;
     position: relative
 }
 
@@ -53,11 +53,11 @@ html[dir="rtl"] .sidedrawer-button {
 
 .sidedrawer-contentframe {
     padding: 54px;
-    width: 550px;
-    max-width: 95vw;
-    height: 90.25vw;
-    max-height: 300px;
-    min-height: 0;
+    inline-size: 550px;
+    max-inline-size: 95vw;
+    block-size: 90.25vw;
+    max-block-size: 300px;
+    min-block-size: 0;
     color: var(--calcite-ui-text-1);
     background-color: var(--calcite-ui-foreground-1);
 }
@@ -66,25 +66,25 @@ html[dir="rtl"] .sidedrawer-button {
     .block.sidedrawer {
         display: block;
         position: fixed;
-        right: -2px;
+        inset-inline-end: -2px;
         z-index: 999;
         margin-inline: 99% 0;
         padding: 0;
    }
 
     .sidedrawer-content[aria-expanded="false"] {
-        max-width: 0;
+        max-inline-size: 0;
         transition: all 0.6s ease-out;
    }
 
     .sidedrawer-content[aria-expanded="true"]{
         transition: all 0.6s ease-out;
-        width: 100%;
-        max-width: 700px;
+        inline-size: 100%;
+        max-inline-size: 700px;
    }
 
     html[dir="rtl"] .sidedrawer {
-        right: auto;
+        inset-inline: auto;
         left: -2px;
     }
 }
