@@ -41,13 +41,13 @@ export default async function decorate(block) {
   returnBtn.innerHTML = 'Minimize Map';
 
   const defaultContentContainer = document.querySelector('.map-container > .default-content-wrapper');
+  const defaultContentHeading = document.querySelector('.map-container > .default-content-wrapper > h2');
 
   const nodeTextParam = p();
   nodeTextParam.innerHTML = textParameter;
 
   const hr = horizontalRule({ class: 'separator center' });
-  defaultContentContainer.appendChild(hr);
-  const mapContentContainer = div({ class: 'map-content-container' }, nodeTextParam, returnBtn, fullscreenButton);
+  const mapContentContainer = div({ class: 'map-content-container' }, defaultContentHeading, hr, nodeTextParam, returnBtn, fullscreenButton);
   defaultContentContainer.appendChild(mapContentContainer);
 
   fullscreenButton.addEventListener('click', toggleFullscreen);
