@@ -80,7 +80,7 @@
       }
     }
   }
-  
+
   .mosaic-reveal-content[aria-hidden='true'] {
     transform: scaleY(0.2);
     opacity: 0;
@@ -210,8 +210,4 @@
       padding: var(--space-3) var(--space-12) var(--space-12) var(--space-12);
     }
   }
-}
-
-#globalfooter {
-  display: none;
 }
