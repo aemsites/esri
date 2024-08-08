@@ -84,7 +84,6 @@ html[dir="rtl"] .sidedrawer-button {
    }
 
     html[dir="rtl"] .sidedrawer {
-        inset-inline-start: auto;
-        inset-inline-end: -2px;
+        inset-inline: auto -2px;
     }
 }
