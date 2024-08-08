@@ -34,19 +34,21 @@ export default function decorate(block) {
     revealContent.setAttribute('aria-hidden', 'true');
   });
 
-  window.addEventListener('resize', () => {
-    if (window.innerWidth < 860) {
+  const mediaQuery = window.matchMedia('(width < 860px)');
+
+  mediaQuery.onchange = (e) => {
+    if (e.matches) {
       contents.forEach((content) => {
         content.setAttribute('aria-hidden', 'true');
       });
     } else {
       revealContent.setAttribute('aria-hidden', 'true');
     }
-  });
+  };
 
   [...block.children].forEach((child, idx) => {
     child.addEventListener('click', () => {
-      if (window.innerWidth < 860) {
+      if (mediaQuery.matches) {
         revealContent.setAttribute('aria-hidden', 'false');
         const children = [...contents[idx].children].map((el) => el.cloneNode(true));
         revealContent.replaceChildren(...children);
@@ -54,13 +56,13 @@ export default function decorate(block) {
     });
 
     child.addEventListener('mouseenter', () => {
-      if (window.innerWidth >= 860) {
+      if (!mediaQuery.matches) {
         child.querySelector('.mosaic-reveal-content').ariaHidden = false;
       }
     });
 
     child.addEventListener('mouseleave', () => {
-      if (window.innerWidth >= 860) {
+      if (!mediaQuery.matches) {
         child.querySelector('.mosaic-reveal-content').ariaHidden = true;
       }
     });
