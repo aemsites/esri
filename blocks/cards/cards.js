@@ -9,14 +9,11 @@ export default function decorate(block) {
       return;
     }
     const anchorEl = div.querySelector('a');
-    if (anchorEl) {
-      anchorEl.textContent = '';
-      div.append(anchorEl);
-      div.querySelector('.button-container').remove();
-    }
     const cardBodyContent = domEl('div', { class: 'card-body-content' });
     if (anchorEl) {
-      anchorEl.append(cardBodyContent);
+      anchorEl.replaceChildren(cardBodyContent);
+      div.append(anchorEl);
+      div.querySelector('.button-container').remove();
     } else {
       div.append(cardBodyContent);
     }
