@@ -1,8 +1,4 @@
 .cards-card-body {
-  --category-size: var(--font--2);
-  --title-size: var(--font-2);
-  --subtitle-size: var(--font--1);
-  --description-size: var(--font--1);
   --content-spacing: var(--space-2);
   --content-end-spacing: var(--space-5);
 }
