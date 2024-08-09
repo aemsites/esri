@@ -3,14 +3,18 @@ import {
 } from '../../scripts/dom-helpers.js';
 
 function toggleFullscreen() {
-  const mapFrame = document.querySelector('#eam-map-wrapper');
+  const mapWrapper = document.querySelector('#eam-map-wrapper');
+  const mapFrame = document.querySelector('#map-frame');
+
   const minimizeButton = document.querySelector('.return-btn');
 
   if (window.screenTop && window.screenY) {
-    mapFrame.classList.toggle('is-fullscreen');
+    mapWrapper.classList.toggle('is-fullscreen');
+    mapFrame.classList.toggle('map-frame-aspect-ratio')
     minimizeButton.classList.toggle('btn-vis');
   } else {
-    mapFrame.classList.toggle('is-fullscreen');
+    mapWrapper.classList.toggle('is-fullscreen');
+    mapFrame.classList.toggle('map-frame-aspect-ratio')
     minimizeButton.classList.toggle('btn-vis');
   }
 }
@@ -55,6 +59,7 @@ export default async function decorate(block) {
 
   const mapFrame = iframe({
     id: 'map-frame',
+    class: 'map-frame-aspect-ratio',
     role: 'application',
     src: mapLink,
     sandbox: 'allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox',
@@ -62,8 +67,6 @@ export default async function decorate(block) {
     allowfullscreen: 'true',
     tabindex: '0',
     loading: 'lazy',
-    width: '100%',
-    style: 'aspect-ratio: auto 9 / 16; border: none;',
     title: 'Experience builder application',
   });
 
