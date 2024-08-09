@@ -5,6 +5,7 @@
 
 .cards {
   background-color: var(--calcite-ui-foreground-1);
+  color: var(--calcite-ui-text-1);
   padding: 4rem 0;
 
   .cards-card-body {
@@ -26,7 +27,6 @@
   
     h3, p:last-child {
       padding-inline-end: var(--space-5);
-      color: var(--calcite-ui-text-1);
     }
 
     & > *:first-child {
