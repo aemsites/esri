@@ -4,21 +4,7 @@ import { domEl } from '../../scripts/dom-helpers.js';
 export default function decorate(block) {
   block.classList.add('calcite-mode-dark');
 
-  /* change to ul, li */
-  const ul = document.createElement('ul');
-  [...block.children].forEach((row) => {
-    const li = document.createElement('li');
-    while (row.firstElementChild) li.append(row.firstElementChild);
-    [...li.children].forEach((div) => {
-      if (div.children.length === 1 && div.querySelector('picture')) div.className = 'cards-card-image';
-      else { div.className = 'cards-card-body'; }
-      processSimpleCard(block, div);
-    });
-    ul.append(li);
-  });
-
-  function processSimpleCard(block, div) {
-    console.log('process simple card');
+  const processSimpleCard = function (div) {
     if (!block.classList.contains('simple')) {
       return;
     }
@@ -37,8 +23,20 @@ export default function decorate(block) {
     [...div.querySelectorAll('.cards-card-body > :not(.card-body-content, a)')].forEach((el) => {
       cardBodyContent.append(el);
     });
-  }
-  
+  };
+
+  /* change to ul, li */
+  const ul = document.createElement('ul');
+  [...block.children].forEach((row) => {
+    const li = document.createElement('li');
+    while (row.firstElementChild) li.append(row.firstElementChild);
+    [...li.children].forEach((div) => {
+      if (div.children.length === 1 && div.querySelector('picture')) div.className = 'cards-card-image';
+      else { div.className = 'cards-card-body'; }
+      processSimpleCard(div);
+    });
+    ul.append(li);
+  });  
   ul.querySelectorAll('img').forEach((img) => img.closest('picture').replaceWith(createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }])));
   block.textContent = '';
   block.append(ul);
