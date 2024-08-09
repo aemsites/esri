@@ -1,7 +1,6 @@
 import { div, button, domEl } from '../../scripts/dom-helpers.js';
 
 export default function decorate(block) {
-  block.classList.add('calcite-mode-dark');
   /* Add class names to div's in markup */
   const childDiv = block.querySelector('div');
   if (childDiv) {
