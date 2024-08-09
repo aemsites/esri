@@ -28,5 +28,9 @@
     "stylelint": "^16.6.1",
     "stylelint-config-standard": "36.0.0",
     "stylelint-use-logical": "^2.1.2"
+  },
+  "dependencies": {
+    "@babel/parser": "^7.25.3",
+    "@babel/traverse": "^7.25.3"
   }
 }

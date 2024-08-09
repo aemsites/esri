@@ -1,4 +1,6 @@
 /* global WebImporter */
+import parser from '@babel/parser';
+import traverse from '@babel/traverse';
 import urls from './urls.js';
 
 function createMetadata(main, document, pathname) {
@@ -438,6 +440,102 @@ function newsletter(main, document) {
   }
 }
 
+// Function to find function calls and access the Nth parameter
+function findFunctionCallAndParameter(ast, functionName, parameterIndex) {
+  let result = null;
+  traverse(ast, {
+    CallExpression(path) {
+      if (path.node.callee.name === functionName) {
+        const args = path.node.arguments;
+        if (args.length > parameterIndex) {
+          console.log(`The ${parameterIndex + 1}th parameter of ${functionName} is:`, args[parameterIndex]);
+          result = args[parameterIndex];
+        } else {
+          console.log(`${functionName} does not have ${parameterIndex + 1} parameters.`);
+        }
+      }
+    },
+  });
+
+  return result;
+}
+
+function form(main, document) {
+  const forms = main.querySelectorAll('.esri-one-form');
+  forms.forEach((formContainer) => {
+    const script = formContainer.querySelector('script:not([src])').textContent;
+    /* Sample script content:
+     window.__formsLoaded = window.__formsLoaded || {};
+
+     if (!window.__formsLoaded['one-form-60e31ff3\u002D9b77\u002D4df5\u002Db701\u002D36a208216c26']) {
+     window.initOneForm('one-form-60e31ff3\u002D9b77\u002D4df5\u002Db701\u002D36a208216c26', {
+     divId: 'one-form-60e31ff3\u002D9b77\u002D4df5\u002Db701\u002D36a208216c26',
+     aemFieldServiceBasePath: "\/content\/experience\u002Dfragments\/esri\u002Dsites\/en\u002Dus\/site\u002Dsettings\/one\u002Dform\u002Dadmin\/master",
+     aemEditMode: 'false',
+     mode: "basic-progressive-form",
+     formName: '2854884_Imagery Organic Traffic Campaign: Workflow to Asset LPs \u002D Contact Sales',
+     formOpensInAModal: '',
+     modalTitle: '',
+     formModalLookup: '2854884_Imagery Organic Traffic Campaign: Workflow to Asset LPs \u002D Contact Sales',
+     leftAligned: '',
+     darkMode: 'true',
+     transparentBackground: '',
+     pardotHandler: 'https:\/\/go.esri.com\/l\/82202\/2022\u002D05\u002D31\/pnykw9',
+     organicSfId: '7015x000001PKGoAAO',
+     isolation: '',
+     disablePersonalization: '' === "true",
+     inlineThankYouPage: '',
+     thankYouFormType: 'high',
+     thankYouBannerImage: '',
+     thankYouAssetTitle: '',
+     thankYouAssetType: 'Brochure',
+     thankYouAssetPath: '',
+     thankYouListName: '',
+     thankYouHeader: '',
+     thankYouMessage: '',
+     mqlComment: 'Please review the \x27What Prompted Your Interest?\x27 field for follow up.',
+     mqlBehavior: 'default',
+     mqlFormHandler: '',
+     gdprMode: '',
+     showEventConsentCheckBoxes: '' === "true",
+     marketingConsentRequired: '',
+     marketingConsentRequiredMessage: '',
+     customMarketingConsentLabel: '',
+     customMarketingConsentRequiredMessage: '',
+     customContactConsentLabel: '',
+     customContactConsentRequiredMessage: '',
+     thankyouPageUrl: '',
+     thankyouPageParams: '',
+     sendEmail: '' === "true",
+     emailTo: '',
+     emailCc: '',
+     emailBcc: '',
+     emailSubject: '',
+     emailBody: '',
+     });
+
+     window.__formsLoaded['one-form-60e31ff3\u002D9b77\u002D4df5\u002Db701\u002D36a208216c26'] = true;
+     }
+     */
+
+    const ast = parser.parse(script, {
+      sourceType: 'module',
+      plugins: ['jsx'],
+    });
+
+    const param = findFunctionCallAndParameter(ast, 'initOneForm', 1);
+
+    // get the dictionary passed to initOneForm
+    // const matches = script.match(/window.initOneForm\('one-form-[^']+', ({[^}]+})/);
+    // eslint-disable-next-line no-eval
+    // console.log(matches[1]);
+
+    console.log('test', param);
+  });
+
+  return [];
+}
+
 function transformers(main, document, html, pathname) {
   const report = {
     icons: inlineIcons(main, html),
@@ -466,6 +564,11 @@ function transformers(main, document, html, pathname) {
 }
 
 export default {
+  preprocess: ({ document, url }) => {
+    const main = document.querySelector('main');
+
+    form(main, document);
+  },
   transform: ({
     document, html, url,
   }) => {
