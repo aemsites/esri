@@ -40,7 +40,8 @@
 
 .map-container > .default-content-wrapper {
     color: #fff;
-    max-inline-size: 56vw;
+
+    /* max-inline-size: 56vw; */
     padding-inline: 0.5rem 0.5rem;
     text-align: center;
 
@@ -62,7 +63,6 @@ hr.separator {
 hr.center, .text-center hr {
     margin-inline: auto;
 }
-
 
 .btn-white {
     background: var(--calcite-ui-foreground-1);
@@ -109,26 +109,28 @@ h1, h2, h3, h4, h5, h6 {
     margin: 0 0 var(--space-4);
     line-height: 1.375;
 }
+
 .map-frame-aspect-ratio {
     aspect-ratio: auto 9 / 16;
 }
 
 #map-frame {
-    width: 100%;
-    height: 100%;
+    inline-size: 100%;
+    block-size: 100vh;
     border: none;
 }
 
 #eam-app-wrapper {
-    block-size: 775px;
+    inline-size: 1080px;
+    max-inline-size: 72vw;
+    block-size: 100vh;
     padding: 0%;
     transition: all 0.25s ease-in;
-    margin-inline: 12vw 12vw;
 }
 
 #eam-map-wrapper {
-    width: 1080px;
-    max-width: 72vw;
+    block-size: 100%;
+    inline-size: 100%;
     padding: 0;
     transition: height .25s ease-in, width .25s ease-in, top .25s ease-in, left .25s ease-in;
 
@@ -144,6 +146,7 @@ h1, h2, h3, h4, h5, h6 {
     inset-block-start: 0%;
     inset-inline-start: 0%;
     margin: 0;
+
     /* block-size: 100%; */
     inline-size: 100%;
     max-inline-size: 100vw;
@@ -167,37 +170,37 @@ h1, h2, h3, h4, h5, h6 {
     display: block;
 }
 
-@media (max-width: 480px) {
+@media (width <= 480px) {
     #eam-app-wrapper {
-        margin-inline-start: 1440vw;
-        max-width: 96vw;
+        inline-size: 1440px;
+        max-inline-size: 96vw;
     }
 
     .map-container > .default-content-wrapper {
-        margin-inline-start: 0;
-        margin-inline-end: 0;
+        margin-inline: 0 0;
+        max-inline-size: 96vw;
     }
 }
 
-@media (min-width > 480px) and (max-width < 860px)  {
+@media (width > 481px) and (width < 1024px) {
     #eam-app-wrapper {
-        margin-inline-start: 1440vw;
-        max-width: 96vw;
+        inline-size: 1440px;
+        max-inline-size: 96vw;
     }
+
     .map-container > .default-content-wrapper {
-        margin-inline-start: 8vw;
-        margin-inline-end: 8vw;
+        margin-inline: 8vw 8vw;
+        inline-size: 1440px;
+        max-inline-size: 80vw;
     }
 }
 
-@media  (min-width >= 860px) {
+@media  (width >= 1024px) {
     #eam-app-wrapper {
-        margin-inline-start: 12vw;
-        margin-inline-end: 12vw;
+        margin-inline: 12vw 12vw;
     }
 
     .map-container > .default-content-wrapper {
-        margin-inline-start: 8vw;
-        margin-inline-end: 8vw;
+        margin-inline: 8vw 8vw;
     }
 }

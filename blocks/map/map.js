@@ -10,11 +10,11 @@ function toggleFullscreen() {
 
   if (window.screenTop && window.screenY) {
     mapWrapper.classList.toggle('is-fullscreen');
-    mapFrame.classList.toggle('map-frame-aspect-ratio')
+    mapFrame.classList.toggle('map-frame-aspect-ratio');
     minimizeButton.classList.toggle('btn-vis');
   } else {
     mapWrapper.classList.toggle('is-fullscreen');
-    mapFrame.classList.toggle('map-frame-aspect-ratio')
+    mapFrame.classList.toggle('map-frame-aspect-ratio');
     minimizeButton.classList.toggle('btn-vis');
   }
 }
