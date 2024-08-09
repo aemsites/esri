@@ -1,4 +1,5 @@
 import { createOptimizedPicture } from '../../scripts/aem.js';
+import { domEl } from '../../scripts/dom-helpers.js';
 
 export default function decorate(block) {
   block.classList.add('calcite-mode-dark');
@@ -11,31 +12,33 @@ export default function decorate(block) {
     [...li.children].forEach((div) => {
       if (div.children.length === 1 && div.querySelector('picture')) div.className = 'cards-card-image';
       else { div.className = 'cards-card-body'; }
-
-      /* cards simple */
-      if (block.classList.contains('simple')) {
-        const anchorEl = div.querySelector('a');
-        if (anchorEl) {
-          anchorEl.textContent = '';
-          div.append(anchorEl);
-          div.querySelector('.button-container').remove();
-        }
-        const cardBodyContent = document.createElement('div');
-        cardBodyContent.className = 'card-body-content';
-        if (anchorEl) {
-          anchorEl.append(cardBodyContent);
-        } else {
-          div.append(cardBodyContent);
-        }
-
-        [...div.querySelectorAll('.cards-card-body > :not(.card-body-content, a)')].forEach((el) => {
-          cardBodyContent.append(el);
-        });
-      }
-      /* END of cards simple */
+      processSimpleCard(block, div);
     });
     ul.append(li);
   });
+
+  function processSimpleCard(block, div) {
+    console.log('process simple card');
+    if (!block.classList.contains('simple')) {
+      return;
+    }
+    const anchorEl = div.querySelector('a');
+    if (anchorEl) {
+      anchorEl.textContent = '';
+      div.append(anchorEl);
+      div.querySelector('.button-container').remove();
+    }
+    const cardBodyContent = domEl('div', { class: 'card-body-content' });
+    if (anchorEl) {
+      anchorEl.append(cardBodyContent);
+    } else {
+      div.append(cardBodyContent);
+    }
+    [...div.querySelectorAll('.cards-card-body > :not(.card-body-content, a)')].forEach((el) => {
+      cardBodyContent.append(el);
+    });
+  }
+  
   ul.querySelectorAll('img').forEach((img) => img.closest('picture').replaceWith(createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }])));
   block.textContent = '';
   block.append(ul);
