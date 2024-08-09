@@ -13,7 +13,7 @@ export default function decorate(block) {
       else { div.className = 'cards-card-body'; }
 
       /* cards simple */
-      if (block.classList.contains('cards') && block.classList.contains('simple')) {
+      if ( block.classList.contains('simple')) {
         const anchorEl = div.querySelector('a');
         if (anchorEl) {
           anchorEl.textContent = '';

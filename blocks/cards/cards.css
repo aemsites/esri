@@ -1,4 +1,4 @@
-:where(.cards-card-body) {
+.cards-card-body {
   --category-size: var(--font--2);
   --title-size: var(--font-2);
   --subtitle-size: var(--font--1);
