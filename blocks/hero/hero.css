@@ -1,33 +1,139 @@
-main .hero-container > div {
-  max-inline-size: unset;
-}
-
 main .hero-container {
   padding: 0;
 }
 
+.hero-wrapper {
+  overflow: hidden;
+}
+
 .hero {
+  display: flex;
+  inline-size: 100%;
+  block-size: 100%;
+  flex-direction: row;
   position: relative;
-  padding: var(--space-8);
-  min-block-size: 300px;
+  z-index: 1;
 }
 
 .hero h1 {
-  max-inline-size: 1200px;
-  margin-inline: auto;
+  margin-block: var(--space-20) .6rem;
+  display: flex;
+  margin-inline: 4vw;
+  font-size: var(--font-8)
+}
+
+.hero.medium h1 {
+  font-size: var(--font-7);
+}
+
+.hero.small h1 {
+  font-size: var(--font-6);
+}
+
+.hero > div {
+  display: flex;
+  inline-size: 100%;
+  block-size: 100%;
+  align-items: center;
   color: var(--calcite-ui-text-1);
 }
 
-.hero picture {
-  position: absolute;
-  z-index: -1;
-  inset: 0;
-  object-fit: cover;
-  box-sizing: border-box;
+.hero p {
+  display: flex;
+  margin-inline: 4vw;
 }
 
-.hero img {
-  object-fit: cover;
+.hero p:nth-of-type(3) > picture  {
+  display: flex;
+  align-items: center;
+  block-size: 100%;
+  aspect-ratio: auto;
+}
+
+.hero p:nth-of-type(4) picture {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
   inline-size: 100%;
   block-size: 100%;
+  object-fit: cover;
+  display: flex;
+  z-index: -2;
+}
+
+.hero p:nth-of-type(4) picture img {
+  inline-size: 100%;
+}
+
+.hero p:last-child > picture img {
+  object-fit: cover;
+  block-size: 100%;
+  inline-size: 100%;
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  z-index: -2;
+}
+
+.hero p:nth-of-type(4) a {
+  display: none;
+}
+
+.hero video {
+  display: none;
+}
+
+@media (width >= 768px) {
+  .hero.small p:nth-of-type(3) > picture  {
+    aspect-ratio: 1 / 1;
+  }
+
+  .hero h1, .hero p {
+    inline-size: 50%;
+  }
+
+  .hero p:nth-of-type(3)  {
+    block-size: 100%;
+    position: absolute;
+    inset-inline-end: 0;
+    inset-block-start: 0;
+    justify-content: center;
+  }
+
+  .hero video {
+    display: block;
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-start: 0;
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: cover;
+    z-index: -1;
+  }
+  
+  .hero > div > div {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+ 
+  .hero { 
+    block-size: 700px;
+    min-block-size: 35vw;
+  }
+
+  .hero.medium {
+    block-size: 576px;
+    min-block-size: 28vw;
+  }
+
+  .hero.small {
+    block-size: 360px;
+    min-block-size: 21vw;
+  }
+
+  .hero.xsmall {
+    block-size: auto;
+    min-block-size: 170px;
+  }
 }

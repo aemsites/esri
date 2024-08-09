@@ -2,15 +2,15 @@ import {
   sampleRUM,
   buildBlock,
   loadHeader,
-  loadFooter,
   decorateButtons,
   decorateIcons,
   decorateSections,
   decorateBlocks,
-  decorateTemplateAndTheme,
+  decorateTemplateAndTheme as aemDecorateTemplateAndTheme,
   waitForLCP,
   loadBlocks,
   loadCSS,
+  loadScript,
 } from './aem.js';
 
 import { div, iframe, domEl } from './dom-helpers.js';
@@ -137,11 +137,24 @@ export function decorateMain(main) {
   decorateVideoLinks(main);
 }
 
+function decorateTemplateAndTheme() {
+  aemDecorateTemplateAndTheme();
+  const { classList } = document.body;
+  if (classList.contains('light')) {
+    classList.add('calcite-mode-light');
+  } else if (classList.contains('dark')) {
+    classList.add('calcite-mode-dark');
+  }
+}
+
 /**
  * Loads everything needed to get to LCP.
  * @param {Element} doc The container element
  */
 async function loadEager(doc) {
+  loadScript('https://js.arcgis.com/calcite-components/1.8.0/calcite.esm.js', { type: 'module' });
+  loadCSS('https://js.arcgis.com/calcite-components/1.8.0/calcite.css');
+
   document.documentElement.lang = 'en';
   decorateTemplateAndTheme();
   const main = doc.querySelector('main');
@@ -174,7 +187,6 @@ async function loadLazy(doc) {
   if (hash && element) element.scrollIntoView();
 
   loadHeader(doc.querySelector('header'));
-  loadFooter(doc.querySelector('footer'));
 
   loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
   loadFonts();
@@ -190,7 +202,7 @@ async function loadLazy(doc) {
  */
 function loadDelayed() {
   // eslint-disable-next-line import/no-cycle
-  window.setTimeout(() => import('./delayed.js'), 3000);
+  window.setTimeout(() => import('./delayed.js'), 4000);
   // load anything that can be postponed to the latest here
 }
 
