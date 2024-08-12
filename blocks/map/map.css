@@ -38,13 +38,19 @@
     margin-inline: auto auto;
 }
 
-.map-container > .default-content-wrapper {
-    color: #fff;
 
-    /* max-inline-size: 56vw; */
+.map-content-container:not(.section) {
+    color: #fff;
+    background-color: transparent;
+    
     padding-inline: 0.5rem 0.5rem;
     text-align: center;
+    padding: 0
+}
 
+.map.block:not(.section) {
+    background-color: transparent;
+    padding: 0
 }
 
 hr {
