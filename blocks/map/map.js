@@ -2,7 +2,7 @@ import {
   div, iframe, button, p, horizontalRule,
 } from '../../scripts/dom-helpers.js';
 
-function embedMapFrame(block, url) {
+async function embedMapFrame(block, url) {
   if (block.classList.contains('embed-is-loaded')) {
     return;
   }
@@ -89,7 +89,7 @@ export default async function decorate(block) {
   const observer = new IntersectionObserver((entries) => {
     if (entries.some((e) => e.isIntersecting)) {
       observer.disconnect();
-      embedMapFrame(block, mapLink);
+      await embedMapFrame(block, mapLink);
     }
   });
   observer.observe(block);
