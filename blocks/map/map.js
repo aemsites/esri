@@ -86,10 +86,10 @@ export default async function decorate(block) {
   fullscreenButton.addEventListener('click', toggleFullscreen);
   returnBtn.addEventListener('click', toggleFullscreen);
 
-  const observer = new IntersectionObserver(async (entries) => {
+  const observer = new IntersectionObserver((entries) => {
     if (entries.some((e) => e.isIntersecting)) {
       observer.disconnect();
-      await embedMapFrame(block, mapLink);
+      embedMapFrame(block, mapLink);
     }
   });
   observer.observe(block);

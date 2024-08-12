@@ -40,6 +40,9 @@
 
 
 .map-content-container:not(.section) {
+    inline-size: 1440px;
+    max-inline-size: 96vw;
+    margin-inline: auto auto;
     color: #fff;
     background-color: transparent;
     padding-inline: 0.5rem 0.5rem;
@@ -50,12 +53,6 @@
 .map.block:not(.section) {
     background-color: transparent;
     padding: 0
-}
-
-hr {
-    margin: var(--space-4) 0;
-    border: none;
-    border-block-start: 1px solid var(--calcite-ui-border-1);
 }
 
 hr.separator {
@@ -100,21 +97,6 @@ hr.center, .text-center hr {
     color: var(--calcite-ui-text-2);
 }
 
-b, strong {
-    font-weight: var(--calcite-font-weight-bold);
-}
-
-p {
-    margin-block: 0 var(--space-4);
-}
-
-
-h1, h2, h3, h4, h5, h6 {
-    font-weight: var(--calcite-font-weight-normal);
-    margin: 0 0 var(--space-4);
-    line-height: 1.375;
-}
-
 .map-frame-aspect-ratio {
     aspect-ratio: auto 9 / 16;
 }
@@ -133,19 +115,6 @@ h1, h2, h3, h4, h5, h6 {
     transition: all 0.25s ease-in;
 }
 
-#frame-wrapper {
-    block-size: 100vh;
-    inline-size: 100%;
-    padding: 0;
-    transition: height .25s ease-in, width .25s ease-in, top .25s ease-in, left .25s ease-in;
-
-    /* background-color: #f3f5f4; */
-}
-
-#eam-map {
-    inline-size: 100%;
-    block-size: 100%;
-}
 
 #frame-wrapper.is-fullscreen {
     inset-block-start: 0%;
@@ -181,7 +150,7 @@ h1, h2, h3, h4, h5, h6 {
         max-inline-size: 96vw;
     }
 
-    .map-container > .default-content-wrapper {
+    .map-content-container {
         margin-inline: 0 0;
         max-inline-size: 96vw;
     }
@@ -193,7 +162,7 @@ h1, h2, h3, h4, h5, h6 {
         max-inline-size: 96vw;
     }
 
-    .map-container > .default-content-wrapper {
+    .map-content-container {
         margin-inline: 8vw 8vw;
         inline-size: 1440px;
         max-inline-size: 80vw;
@@ -205,7 +174,16 @@ h1, h2, h3, h4, h5, h6 {
         margin-inline: 12vw 12vw;
     }
 
-    .map-container > .default-content-wrapper {
+    .map-content-container {
         margin-inline: 8vw 8vw;
     }
+
 }
+
+/* @media  (width >= 1501px) {
+    .map-content-container {
+        margin-inline-start: 299px;
+        margin-inline-end: 299px;
+    }
+
+} */
