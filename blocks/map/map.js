@@ -7,11 +7,11 @@ function embedMapFrame(block, url) {
     return;
   }
   const gridContainer = div({ class: 'grid-container' });
-  const eamAppWrapper = div({ id: 'eam-app-wrapper' });
+  const iframContainer = div({ id: 'iframe-container' });
 
   const eamMapFrameWrapper = div({ id: 'frame-wrapper' });
-  eamAppWrapper.appendChild(eamMapFrameWrapper);
-  gridContainer.appendChild(eamAppWrapper);
+  iframContainer.appendChild(eamMapFrameWrapper);
+  gridContainer.appendChild(iframContainer);
 
   const mapFrame = iframe({
     id: 'map-frame',
@@ -93,6 +93,4 @@ export default async function decorate(block) {
     }
   });
   observer.observe(block);
-
-  // block.append(gridContainer);
 }
