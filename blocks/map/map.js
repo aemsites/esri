@@ -2,8 +2,37 @@ import {
   div, iframe, button, p, horizontalRule,
 } from '../../scripts/dom-helpers.js';
 
+function embedMapFrame(block, url) {
+  if (block.classList.contains('embed-is-loaded')) {
+    return;
+  }
+  const gridContainer = div({ class: 'grid-container' });
+  const eamAppWrapper = div({ id: 'eam-app-wrapper' });
+
+  const eamMapFrameWrapper = div({ id: 'frame-wrapper' });
+  eamAppWrapper.appendChild(eamMapFrameWrapper);
+  gridContainer.appendChild(eamAppWrapper);
+
+  const mapFrame = iframe({
+    id: 'map-frame',
+    class: 'map-frame-aspect-ratio',
+    role: 'application',
+    src: url,
+    sandbox: 'allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox',
+    allow: 'autoplay; geolocation;',
+    allowfullscreen: 'true',
+    tabindex: '0',
+    loading: 'lazy',
+    title: 'Esri locations map',
+  });
+
+  eamMapFrameWrapper.appendChild(mapFrame);
+  block.classList.add('embed-is-loaded');
+  block.append(gridContainer);
+}
+
 function toggleFullscreen() {
-  const mapWrapper = document.querySelector('#eam-map-wrapper');
+  const mapWrapper = document.querySelector('#frame-wrapper');
   const mapFrame = document.querySelector('#map-frame');
 
   const minimizeButton = document.querySelector('.return-btn');
@@ -57,26 +86,13 @@ export default async function decorate(block) {
   fullscreenButton.addEventListener('click', toggleFullscreen);
   returnBtn.addEventListener('click', toggleFullscreen);
 
-  const mapFrame = iframe({
-    id: 'map-frame',
-    class: 'map-frame-aspect-ratio',
-    role: 'application',
-    src: mapLink,
-    sandbox: 'allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox',
-    allow: 'autoplay; geolocation;',
-    allowfullscreen: 'true',
-    tabindex: '0',
-    loading: 'lazy',
-    title: 'Experience builder application',
+  const observer = new IntersectionObserver((entries) => {
+    if (entries.some((e) => e.isIntersecting)) {
+      observer.disconnect();
+      embedMapFrame(block, mapLink);
+    }
   });
+  observer.observe(block);
 
-  const gridContainer = div({ class: 'grid-container' });
-  const eamAppWrapper = div({ id: 'eam-app-wrapper' });
-
-  const eamMapFrameWrapper = div({ id: 'eam-map-wrapper' });
-  eamAppWrapper.appendChild(eamMapFrameWrapper);
-  gridContainer.appendChild(eamAppWrapper);
-  eamMapFrameWrapper.appendChild(mapFrame);
-
-  block.append(gridContainer);
+  // block.append(gridContainer);
 }

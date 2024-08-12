@@ -133,8 +133,8 @@ h1, h2, h3, h4, h5, h6 {
     transition: all 0.25s ease-in;
 }
 
-#eam-map-wrapper {
-    block-size: 100%;
+#frame-wrapper {
+    block-size: 100vh;
     inline-size: 100%;
     padding: 0;
     transition: height .25s ease-in, width .25s ease-in, top .25s ease-in, left .25s ease-in;
@@ -147,7 +147,7 @@ h1, h2, h3, h4, h5, h6 {
     block-size: 100%;
 }
 
-#eam-map-wrapper.is-fullscreen {
+#frame-wrapper.is-fullscreen {
     inset-block-start: 0%;
     inset-inline-start: 0%;
     margin: 0;
