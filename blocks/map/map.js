@@ -3,26 +3,23 @@ import {
 } from '../../scripts/dom-helpers.js';
 
 function getMapFrame(url) {
-
   const mapFrame = iframe({
     id: 'map-frame',
     class: 'map-frame-aspect-ratio',
     role: 'application',
     src: url,
     sandbox: 'allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox',
-    allow: 'autoplay; geolocation;',
-    allow: 'fullscreen',
+    allow: 'autoplay; geolocation; fullscreen;',
     tabindex: '0',
     loading: 'lazy',
     title: 'Esri locations map',
   });
 
-  return mapFrame
-
+  return mapFrame;
 }
 
 function toggleFullscreen() {
-  console.log('inside fullscreenstuff')
+  console.log('inside fullscreenstuff');
   const mapWrapper = document.querySelector('#frame-wrapper');
   const mapFrame = document.querySelector('#map-frame');
 
@@ -68,29 +65,30 @@ export default async function decorate(block) {
 
   const iframContainer = div({ id: 'iframe-container' });
   const frameWrapper = div({ id: 'frame-wrapper' });
-  frameWrapper.appendChild(getMapFrame(mapLink))
+  frameWrapper.appendChild(getMapFrame(mapLink));
 
   const defaultContentContainer = document.querySelector('.map-container > .default-content-wrapper');
-  const nodeTextParam = p({id: "mapTextContent"});
+  const nodeTextParam = p({ id: 'map-text-content' });
   nodeTextParam.innerHTML = textParameter;
   const hr = horizontalRule({ class: 'separator center' });
-  const contentWrapperChildren = [defaultContentContainer, hr, nodeTextParam, returnBtn, fullscreenButton]
-  const defaultContentWrapper = div({id: "map-default-content-wrapper"})
 
-  contentWrapperChildren.forEach(child => {
-    defaultContentWrapper.appendChild(child)
-  })
+  const contentWrapperChildren = [
+    defaultContentContainer, hr, nodeTextParam, returnBtn, fullscreenButton,
+  ];
+  const defaultContentWrapper = div({ id: 'map-default-content-wrapper' });
 
-  const gridContainerChildren = [defaultContentWrapper, iframContainer, frameWrapper]
+  contentWrapperChildren.forEach((child) => {
+    defaultContentWrapper.appendChild(child);
+  });
 
-  gridContainerChildren.forEach(child => {
-    gridContainer.appendChild(child)
-  })
-  
+  const gridContainerChildren = [defaultContentWrapper, iframContainer, frameWrapper];
+
+  gridContainerChildren.forEach((child) => {
+    gridContainer.appendChild(child);
+  });
 
   fullscreenButton.addEventListener('click', toggleFullscreen);
   returnBtn.addEventListener('click', toggleFullscreen);
 
-  
-  block.append(gridContainer)
+  block.append(gridContainer);
 }
