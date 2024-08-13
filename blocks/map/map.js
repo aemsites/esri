@@ -19,7 +19,6 @@ function getMapFrame(url) {
 }
 
 function toggleFullscreen() {
-  console.log('inside fullscreenstuff');
   const mapWrapper = document.querySelector('#frame-wrapper');
   const mapFrame = document.querySelector('#map-frame');
 
