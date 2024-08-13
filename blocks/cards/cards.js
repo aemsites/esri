@@ -8,6 +8,7 @@ export default function decorate(block) {
     if (!block.classList.contains('simple')) {
       return;
     }
+    block.classList.add('cardsperrow');
     const anchorEl = div.querySelector('a');
     const cardBodyContent = domEl('div', { class: 'card-body-content' });
     if (anchorEl) {
