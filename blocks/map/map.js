@@ -20,17 +20,13 @@ function getMapFrame(url) {
 
 function toggleFullscreen() {
   const mapWrapper = document.querySelector('#frame-wrapper');
-  const mapFrame = document.querySelector('#map-frame');
-
   const minimizeButton = document.querySelector('.return-btn');
 
   if (window.screenTop && window.screenY) {
     mapWrapper.classList.toggle('is-fullscreen');
-    mapFrame.classList.toggle('map-frame-aspect-ratio');
     minimizeButton.classList.toggle('btn-vis');
   } else {
     mapWrapper.classList.toggle('is-fullscreen');
-    mapFrame.classList.toggle('map-frame-aspect-ratio');
     minimizeButton.classList.toggle('btn-vis');
   }
 }
@@ -49,7 +45,7 @@ export default async function decorate(block) {
     },
   );
 
-  fullscreenButton.innerHTML = 'Launch map full screen';
+  fullscreenButton.textContent = 'Launch map full screen';
 
   const returnBtn = button(
     {
@@ -58,17 +54,15 @@ export default async function decorate(block) {
     },
   );
 
-  returnBtn.innerHTML = 'Minimize Map';
+  returnBtn.textContent = 'Minimize Map';
 
   const gridContainer = div({ class: 'grid-container' });
-
-  const iframContainer = div({ id: 'iframe-container' });
   const frameWrapper = div({ id: 'frame-wrapper' });
   frameWrapper.appendChild(getMapFrame(mapLink));
 
   const defaultContentContainer = document.querySelector('.map-container > .default-content-wrapper');
   const nodeTextParam = p({ id: 'map-text-content' });
-  nodeTextParam.innerHTML = textParameter;
+  nodeTextParam.textContent = textParameter;
   const hr = horizontalRule({ class: 'separator center' });
 
   const contentWrapperChildren = [
@@ -80,7 +74,7 @@ export default async function decorate(block) {
     defaultContentWrapper.appendChild(child);
   });
 
-  const gridContainerChildren = [defaultContentWrapper, iframContainer, frameWrapper];
+  const gridContainerChildren = [defaultContentWrapper, frameWrapper];
 
   gridContainerChildren.forEach((child) => {
     gridContainer.appendChild(child);
