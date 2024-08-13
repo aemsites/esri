@@ -2,16 +2,7 @@ import {
   div, iframe, button, p, horizontalRule,
 } from '../../scripts/dom-helpers.js';
 
-async function embedMapFrame(block, url) {
-  if (block.classList.contains('embed-is-loaded')) {
-    return;
-  }
-  const gridContainer = div({ class: 'grid-container' });
-  const iframContainer = div({ id: 'iframe-container' });
-
-  const eamMapFrameWrapper = div({ id: 'frame-wrapper' });
-  iframContainer.appendChild(eamMapFrameWrapper);
-  gridContainer.appendChild(iframContainer);
+function getMapFrame(url) {
 
   const mapFrame = iframe({
     id: 'map-frame',
@@ -26,9 +17,8 @@ async function embedMapFrame(block, url) {
     title: 'Esri locations map',
   });
 
-  eamMapFrameWrapper.appendChild(mapFrame);
-  block.classList.add('embed-is-loaded');
-  block.append(gridContainer);
+  return mapFrame
+
 }
 
 function toggleFullscreen() {
@@ -73,24 +63,28 @@ export default async function decorate(block) {
 
   returnBtn.innerHTML = 'Minimize Map';
 
+  const gridContainer = div({ class: 'grid-container' });
+
+  const iframContainer = div({ id: 'iframe-container' });
+  const frameWrapper = div({ id: 'frame-wrapper' });
+  frameWrapper.appendChild(getMapFrame(mapLink))
+
   const defaultContentContainer = document.querySelector('.map-container > .default-content-wrapper');
-  const defaultContentHeading = document.querySelector('.map-container > .default-content-wrapper > h2');
 
   const nodeTextParam = p();
   nodeTextParam.innerHTML = textParameter;
-
   const hr = horizontalRule({ class: 'separator center' });
-  const mapContentContainer = div({ class: 'map-content-container' }, defaultContentHeading, hr, nodeTextParam, returnBtn, fullscreenButton);
-  defaultContentContainer.appendChild(mapContentContainer);
+
+  const gridContainerChildren = [defaultContentContainer, hr, nodeTextParam, returnBtn, fullscreenButton, iframContainer, frameWrapper]
+
+  gridContainerChildren.forEach(child => {
+    gridContainer.appendChild(child)
+  })
+  
 
   fullscreenButton.addEventListener('click', toggleFullscreen);
   returnBtn.addEventListener('click', toggleFullscreen);
 
-  const observer = new IntersectionObserver((entries) => {
-    if (entries.some((e) => e.isIntersecting)) {
-      observer.disconnect();
-      embedMapFrame(block, mapLink);
-    }
-  });
-  observer.observe(block);
+  
+  block.append(gridContainer)
 }

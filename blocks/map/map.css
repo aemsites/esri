@@ -36,6 +36,9 @@
     max-inline-size: 96vw;
     padding-inline: 0 0;
     margin-inline: auto auto;
+    color: #fff;
+    background-color: transparent;
+    text-align: center;
 }
 
 
@@ -106,15 +109,6 @@ hr.center, .text-center hr {
     block-size: 100vh;
     border: none;
 }
-
-#iframe-container {
-    inline-size: 1080px;
-    max-inline-size: 72vw;
-    block-size: 100vh;
-    padding: 0%;
-    transition: all 0.25s ease-in;
-}
-
 
 #frame-wrapper.is-fullscreen {
     inset-block-start: 0%;
