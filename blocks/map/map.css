@@ -68,7 +68,11 @@ hr.separator {
 hr.center, .text-center hr {
     margin-inline: auto;
 }
-
+#map-default-content-wrapper > div > h2    { 
+    font-weight: var(--calcite-font-weight-normal);
+    margin: 0 0 var(--space-4);
+    line-height: 1.375;
+}
 .btn-white {
     background: var(--calcite-ui-foreground-1);
     border: 1px solid var(--calcite-ui-foreground-1);
@@ -108,6 +112,11 @@ hr.center, .text-center hr {
     inline-size: 100%;
     block-size: 100vh;
     border: none;
+}
+
+#mapTextContent {
+    margin-block-start: 0;
+    margin-block-end: var(--space-4);
 }
 
 #frame-wrapper.is-fullscreen {
@@ -163,7 +172,7 @@ hr.center, .text-center hr {
     }
 }
 
-@media  (width >= 1024px) {
+@media  (width >= 1024px) and (width < 1500px) {
     #iframe-container {
         margin-inline: 12vw 12vw;
     }
@@ -174,10 +183,10 @@ hr.center, .text-center hr {
 
 }
 
-/* @media  (width >= 1501px) {
-    .map-content-container {
+@media  (width >= 1501px) {
+    .grid-container > div {
         margin-inline-start: 299px;
-        margin-inline-end: 299px;
+        margin-inline-end: 299px
     }
 
-} */
+}

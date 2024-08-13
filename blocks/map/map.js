@@ -11,7 +11,7 @@ function getMapFrame(url) {
     src: url,
     sandbox: 'allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox',
     allow: 'autoplay; geolocation;',
-    allowfullscreen: 'true',
+    allow: 'fullscreen',
     tabindex: '0',
     loading: 'lazy',
     title: 'Esri locations map',
@@ -22,6 +22,7 @@ function getMapFrame(url) {
 }
 
 function toggleFullscreen() {
+  console.log('inside fullscreenstuff')
   const mapWrapper = document.querySelector('#frame-wrapper');
   const mapFrame = document.querySelector('#map-frame');
 
@@ -70,12 +71,17 @@ export default async function decorate(block) {
   frameWrapper.appendChild(getMapFrame(mapLink))
 
   const defaultContentContainer = document.querySelector('.map-container > .default-content-wrapper');
-
-  const nodeTextParam = p();
+  const nodeTextParam = p({id: "mapTextContent"});
   nodeTextParam.innerHTML = textParameter;
   const hr = horizontalRule({ class: 'separator center' });
+  const contentWrapperChildren = [defaultContentContainer, hr, nodeTextParam, returnBtn, fullscreenButton]
+  const defaultContentWrapper = div({id: "map-default-content-wrapper"})
 
-  const gridContainerChildren = [defaultContentContainer, hr, nodeTextParam, returnBtn, fullscreenButton, iframContainer, frameWrapper]
+  contentWrapperChildren.forEach(child => {
+    defaultContentWrapper.appendChild(child)
+  })
+
+  const gridContainerChildren = [defaultContentWrapper, iframContainer, frameWrapper]
 
   gridContainerChildren.forEach(child => {
     gridContainer.appendChild(child)
