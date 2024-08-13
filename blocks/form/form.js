@@ -1,12 +1,18 @@
 import { div } from '../../scripts/dom-helpers.js';
+import { loadScript, loadCSS } from '../../scripts/aem.js';
 
-export default function decorate(block) {
+export default async function decorate(block) {
   const divId = 'one-form-target-div';
 
   block.appendChild(div({ id: divId }));
 
   block.classList.add('calcite-mode-dark');
   document.querySelector('.form-container').classList.add('calcite-mode-dark');
+
+  await Promise.all([
+    loadCSS('https://webapps-cdn.esri.com/CDN/one-form/one-form.css'),
+    loadScript('https://webapps-cdn.esri.com/CDN/one-form/one-form.js'),
+  ]);
 
   window.initOneForm(divId, {
     divId,
