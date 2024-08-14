@@ -2,7 +2,7 @@ export default function decorate(block) {
   const pTags = block.querySelectorAll('p');
   const pictureTagLeft = pTags[0].querySelector('picture');
   const vidUrls = block.querySelectorAll('a');
-  const foregroundContentContainer = document.createElement('div')
+  const foregroundContentContainer = document.createElement('div');
   const videoTag = document.createElement('video');
   const foregroundPicture = block.querySelectorAll('picture')[1];
   const foregroundSrc = foregroundPicture.querySelector('img').src;
@@ -43,4 +43,3 @@ export default function decorate(block) {
     pTags[3].appendChild(foregroundContentContainer);
   }
 }
-  
