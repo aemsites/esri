@@ -50,6 +50,10 @@
   color: var(--calcite-ui-background);
 }
 
+.storyteller.content-left p:nth-of-type(1) {
+  inline-size: 90%;
+}
+
 .storyteller p:nth-of-type(1) {
   font-size: var(--font-2);
   color: var(--calcite-ui-text-1);
@@ -67,10 +71,6 @@
   margin-block-start: var(--space-2);
   color: var(--calcite-ui-background);
   background-color: var(--calcite-ui-text-1);
-}
-
-.storyteller.content-left p:nth-of-type(1) {
-  inline-size: 90%;
 }
 
 .storyteller.content-left .content-wrapper p {
