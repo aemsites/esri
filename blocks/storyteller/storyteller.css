@@ -21,12 +21,19 @@
   flex-direction: column-reverse;
 }
 
-.storyteller .foreground-content .content-wrapper, .storyteller.content-left .foreground-content .content-wrapper {
+.storyteller.content-left h2, .storyteller.content-left p:nth-of-type(1), .storyteller.storyteller.content-left p.button-container {
+  padding-inline-start: 0;
+}
+
+.storyteller.content-left div:nth-of-type(2) p {
+  inline-size: 75%;
+}
+
+.storyteller .foreground-content .content-wrapper, .storyteller.content-left .foreground-content .content-wrapper   {
   opacity: 0.9;
   align-self: end;
   inline-size: auto;
   position: absolute;
-  padding-inline-end: var(--space-8);
   background-color: var(--calcite-ui-text-1);
 }
 
@@ -43,18 +50,10 @@
   color: var(--calcite-ui-background);
 }
 
-.storyteller.content-left div:nth-of-type(2) p {
-  inline-size: 75%;
-}
-
 .storyteller p:nth-of-type(1) {
   font-size: var(--font-2);
   color: var(--calcite-ui-text-1);
   padding-inline: var(--space-6);
-}
-
-.storyteller.content-left h2, .storyteller.content-left p:nth-of-type(1), .storyteller.storyteller.content-left p.button-container {
-  padding-inline-start: 0;
 }
 
 .storyteller p.button-container {
@@ -128,8 +127,7 @@
 
 @media (width >= 1152px) { 
   .storyteller h2, .storyteller p:nth-of-type(1) {
-    padding-inline-end: var(--space-16);
-    padding-inline-start: var(--space-20);
+    padding-inline: var(--space-20) var(--space-16);
   }
 
   .storyteller p.button-container {
@@ -217,7 +215,11 @@
     padding: 0 ;
   }
 
-  .storyteller .foreground-content .content-wrapper, .storyteller.content-left .foreground-content .content-wrapper {
+  .storyteller .foreground-content .content-wrapper, .storyteller.content-left .foreground-content .content-wrapper   {
+    opacity: 0.9;
+    align-self: end;
     inline-size: 500px;
+    position: absolute;
+    background-color: var(--calcite-ui-text-1);
   }
 }
