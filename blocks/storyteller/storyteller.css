@@ -54,8 +54,7 @@
 .storyteller p:nth-of-type(1) {
   font-size: var(--font-2);
   color: var(--calcite-ui-text-1);
-  padding-inline-end: var(--space-6);
-  padding-inline-start: var(--space-6);
+  padding-inline-start: var(--space-6) var(--space-6);
 }
 
 .storyteller p.button-container {
@@ -129,8 +128,7 @@
 
 @media (width >= 1152px) { 
   .storyteller h2, .storyteller p:nth-of-type(1) {
-    padding-inline-end: var(--space-16);
-    padding-inline-start: var(--space-20);
+    padding-inline-start: var(--space-20) var(--space-16);
   }
 
   .storyteller p.button-container {
@@ -224,5 +222,4 @@
     inline-size: 500px;
 
   }
-  
 }
