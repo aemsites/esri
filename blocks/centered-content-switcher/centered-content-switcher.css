@@ -2,6 +2,8 @@
   padding: 0;
   block-size: 100%;
   box-sizing: border-box;
+  animation-duration: 550ms;
+  animation-timing-function: ease;
 
   & > div {
     background-position: center;
@@ -13,6 +15,9 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    transition: all linear .5s;
+    animation-duration: 550ms;
+    animation-timing-function: ease;
 
     & > div {
       inline-size: 1440px;
@@ -32,6 +37,9 @@
       justify-content: center;
       text-align: center;
       margin-block-end: 0;
+      animation-delay: 100ms;
+      animation-duration: 550ms;
+      animation-timing-function: ease;
 
       & > p {
         padding-block-start: var(--space-5);
@@ -54,7 +62,9 @@
   }
 
   & > div[aria-hidden='true'] {
-    display: none;
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
   }
 
   .mobile-nav {
@@ -64,6 +74,9 @@
     padding: var(--space-4) 0;
     border-block-start: 1px solid var(--calcite-ui-border-1);
     margin-block-start: 0;
+    animation-delay: 200ms;
+    animation-duration: 550ms;
+    animation-timing-function: ease;
 
     ul {
       list-style-type: none;
@@ -91,6 +104,9 @@
     border-block-start: 1px solid var(--calcite-ui-border-1);
     margin-block-start: 0;
     padding: 0;
+    animation-delay: 200ms;
+    animation-duration: 550ms;
+    animation-timing-function: ease;
 
     ul {
       list-style-type: none;
@@ -104,30 +120,37 @@
       li {
         flex: 0 0 calc(33.33% - 1px);
         display: flex;
-        border-block-end: 1px solid var(--calcite-ui-border-1);
-        border-inline-start: 1px solid var(--calcite-ui-border-1);
+        align-items: center;
+        justify-content: center;
+        outline: 1px solid var(--calcite-ui-border-1);
+      }
 
-        img {
-          width: 64px;
-          height: 64px;
-          margin: var(--space-2);
-        }
+      li img {
+        inline-size: 64px;
+        block-size: 64px;
+        margin: var(--space-2);
+        object-fit: cover;
+        object-position: center;
+      }
 
-        p {
-          margin: 0;
-          margin-inline-start: var(--space-4);
-          padding-inline-end: var(--space-3);
-          overflow: hidden;
-          font-size: var(--font-0);
-          padding-block: var(--space-3);
-          line-height: normal;
-        }
+      li p {
+        margin: 0;
+        margin-inline-start: var(--space-4);
+        padding-inline-end: var(--space-3);
+        overflow: hidden;
+        font-size: var(--font-0);
+        padding-block: var(--space-3);
+        line-height: normal;
+      }
+
+      li.active {
+        background: var(--calcite-ui-foreground-3);
+        outline: 1px solid var(--calcite-ui-brand);
       }
 
       li:nth-child(3n) {
         border-inline-end: 1px solid var(--calcite-ui-border-1);
         flex: 0 0 calc(33.33% - 2px);
-
       }
     }
   }

@@ -12,10 +12,10 @@ export default function decorate(block) {
   block.classList.add('calcite-mode-dark');
   document.querySelector('.centered-content-switcher-container').classList.add('calcite-mode-dark');
 
-  block.querySelectorAll('img').forEach((img) => img
+  block.querySelectorAll('img').forEach((image) => image
     .closest('picture')
     .replaceWith(
-      createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }]),
+      createOptimizedPicture(image.src, image.alt, false, [{ width: '750' }]),
     ));
 
   let selectedIdx = 0;
@@ -24,18 +24,33 @@ export default function decorate(block) {
 
   const changeSelectedTab = (index) => {
     const dots = block.querySelectorAll('.mobile-nav-dots');
+    const desktopLists = block.querySelectorAll('.desktop-nav-list');
 
-    dots.forEach((list) => list.children[selectedIdx].classList.remove('active'));
-    block.children[selectedIdx].setAttribute('aria-hidden', 'true');
+    const currentTab = block.children[selectedIdx];
+    const nextTab = block.children[index];
+
+    dots.forEach((list) => [...list.children].forEach((child) => child.classList.remove('active')));
+    desktopLists.forEach((list) => [...list.children].forEach((child) => child.classList.remove('active')));
+    currentTab.setAttribute('aria-hidden', 'true');
+    currentTab.classList.remove('calcite-animate__in');
+    currentTab.classList.add('animate-out');
+    currentTab.children[0].classList.remove('calcite-animate__in-up');
+    currentTab.children[1].classList.remove('calcite-animate__in-up');
 
     selectedIdx = index;
 
     dots.forEach((list) => list.children[selectedIdx].classList.add('active'));
-    block.children[selectedIdx].setAttribute('aria-hidden', 'false');
+    desktopLists.forEach((list) => list.children[selectedIdx].classList.add('active'));
+    nextTab.setAttribute('aria-hidden', 'false');
+    nextTab.classList.add('calcite-animate__in');
+    nextTab.classList.remove('animate-out');
+    nextTab.children[0].classList.add('calcite-animate__in-up');
+    nextTab.children[1].classList.add('calcite-animate__in-up');
   };
 
   // create mobile nav
   const previousButton = calciteButton({
+    class: 'previous-button',
     'icon-start': 'chevronLeft',
     appearance: 'transparent',
     kind: 'neutral',
@@ -43,23 +58,21 @@ export default function decorate(block) {
     round: '',
   });
   const nextButton = calciteButton({
+    class: 'next-button',
     'icon-end': 'chevronRight',
     appearance: 'transparent',
     kind: 'neutral',
     scale: 'l',
     round: '',
   });
-  previousButton.addEventListener('click', () => changeSelectedTab((selectedIdx + NUM_TABS - 1) % NUM_TABS));
-  nextButton.addEventListener('click', () => changeSelectedTab((selectedIdx + 1) % NUM_TABS));
 
   const mobileNav = div(
-    { class: 'mobile-nav' },
+    { class: 'mobile-nav calcite-animate' },
     previousButton,
     ul(
       { class: 'mobile-nav-dots' },
       ...[...block.children].map((_, idx) => {
-        const listItem = li({ class: idx === selectedIdx ? 'active' : '' });
-        listItem.addEventListener('click', () => changeSelectedTab(idx));
+        const listItem = li({ class: idx === selectedIdx ? 'active' : ' ' });
         return listItem;
       }),
     ),
@@ -68,28 +81,33 @@ export default function decorate(block) {
 
   // create desktop nav
   const desktopNav = div(
-    { class: 'desktop-nav' },
+    { class: 'desktop-nav calcite-animate' },
     ul(
+      { class: 'desktop-nav-list' },
       ...[...block.children].map((child, idx) => {
-        const imgUrl = child.children[1].querySelector('a').href;
+        const thumbnailUrl = child.children[0].children[2].querySelector('img').src;
         const headingText = child.querySelector('h2').textContent;
 
         const listItem = li(
           { class: idx === selectedIdx ? 'active' : '' },
-          img({ src: imgUrl }),
+          img({ src: thumbnailUrl }),
           p(headingText),
         );
-        listItem.addEventListener('click', () => changeSelectedTab(idx));
         return listItem;
       }),
     ),
   );
 
   [...block.children].forEach((child) => {
+    child.classList.add('calcite-animate');
+    child.classList.add('animate-out');
+
     child.setAttribute('aria-hidden', 'true');
     child.setAttribute('role', 'tabpanel');
 
-    const imgUrl = child.children[1].querySelector('a').href;
+    child.children[0].classList.add('calcite-animate');
+
+    const imgUrl = child.children[1].querySelector('img').src;
     child.removeChild(child.children[1]);
 
     child.setAttribute('style', `background-image: url(${imgUrl})`);
@@ -103,21 +121,45 @@ export default function decorate(block) {
       round: '',
       href: anchor.href,
     });
-    anchor.parentElement.appendChild(playButton);
-    anchor.parentElement.removeChild(anchor);
-
-    child.appendChild(mediaQuery.matches ? mobileNav.cloneNode(true) : desktopNav.cloneNode(true));
-    mediaQuery.onchange = (e) => {
-      console.log(mobileNav, desktopNav);
-      // child.appendChild(mobileNav);
-      if (e.matches) {
-        if (child.querySelector('.desktop-nav')) child.removeChild(desktopNav);
-        child.appendChild(mobileNav.cloneNode(true));
-      } else {
-        if (child.querySelector('.mobile-nav')) child.removeChild(mobileNav);
-        child.appendChild(desktopNav.cloneNode(true));
-      }
-    };
+    child.children[0].appendChild(playButton);
+    anchor.parentElement.parentElement.removeChild(anchor.parentElement);
   });
+
+  const mobileNavClones = [...block.children].map(() => {
+    const clone = mobileNav.cloneNode(true);
+    clone.querySelector('.previous-button').addEventListener('click', () => changeSelectedTab((selectedIdx + NUM_TABS - 1) % NUM_TABS));
+    clone.querySelector('.next-button').addEventListener('click', () => changeSelectedTab((selectedIdx + 1) % NUM_TABS));
+    const listItems = [...clone.querySelector('.mobile-nav-dots').children];
+    listItems.forEach((listItem, listItemIdx) => {
+      listItem.addEventListener('click', () => changeSelectedTab(listItemIdx));
+    });
+    return clone;
+  });
+
+  const desktopNavClones = [...block.children].map(() => {
+    const clone = desktopNav.cloneNode(true);
+    const listItems = [...clone.querySelector('.desktop-nav-list').children];
+    listItems.forEach((listItem, listItemIdx) => {
+      listItem.addEventListener('click', () => changeSelectedTab(listItemIdx));
+    });
+    return clone;
+  });
+
+  const changeNavigation = (query) => {
+    [...block.children].forEach((child, index) => {
+      if (query.matches) {
+        if (child.querySelector('.desktop-nav')) child.removeChild(desktopNavClones[index]);
+        child.appendChild(mobileNavClones[index]);
+      } else {
+        if (child.querySelector('.mobile-nav')) child.removeChild(mobileNavClones[index]);
+        child.appendChild(desktopNavClones[index]);
+      }
+    });
+    changeSelectedTab(selectedIdx);
+  };
+
+  mediaQuery.onchange = changeNavigation;
   block.children[selectedIdx].setAttribute('aria-hidden', 'false');
+
+  changeNavigation(mediaQuery);
 }
