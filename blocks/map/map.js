@@ -38,24 +38,6 @@ export default async function decorate(block) {
   const textParameter = blockParams[1].innerText;
   block.textContent = '';
 
-  const fullscreenButton = button(
-    {
-      class: 'btn btn-white',
-      label: 'Enter full screen',
-    },
-  );
-
-  fullscreenButton.textContent = 'Launch map full screen';
-
-  const returnBtn = button(
-    {
-      class: 'return-btn btn',
-      label: 'Exit full screen',
-    },
-  );
-
-  returnBtn.textContent = 'Minimize Map';
-
   const gridContainer = div({ class: 'grid-container' });
   const frameWrapper = div({ id: 'frame-wrapper' });
   frameWrapper.appendChild(getMapFrame(mapLink));
@@ -65,9 +47,7 @@ export default async function decorate(block) {
   nodeTextParam.textContent = textParameter;
   const hr = horizontalRule({ class: 'separator center' });
 
-  const contentWrapperChildren = [
-    defaultContentContainer, hr, nodeTextParam, returnBtn, fullscreenButton,
-  ];
+  const contentWrapperChildren = [ defaultContentContainer, hr, nodeTextParam ];
   const defaultContentWrapper = div({ id: 'map-default-content-wrapper' });
 
   contentWrapperChildren.forEach((child) => {
@@ -79,9 +59,6 @@ export default async function decorate(block) {
   gridContainerChildren.forEach((child) => {
     gridContainer.appendChild(child);
   });
-
-  fullscreenButton.addEventListener('click', toggleFullscreen);
-  returnBtn.addEventListener('click', toggleFullscreen);
 
   block.append(gridContainer);
 }
