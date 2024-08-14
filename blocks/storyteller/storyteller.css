@@ -37,10 +37,6 @@
   inline-size: 90%;
 }
 
-.storyteller.content-left .content-wrapper p {
-  padding-inline-start: var(--space-6);
-}
-
 .storyteller .foreground-content .content-wrapper, .storyteller.content-left .foreground-content .content-wrapper   {
   opacity: 0.9;
   align-self: end;
@@ -110,7 +106,7 @@
   padding-inline-start: var(--space-6);
 }
 
-.storyteller.content-left div p:nth-of-type(2) video, .storyteller div p:nth-of-type(2) video {
+.storyteller div p:nth-of-type(2) video {
   inline-size: 500px;
   position: relative;
 }
