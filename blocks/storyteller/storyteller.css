@@ -37,6 +37,10 @@
   inline-size: 90%;
 }
 
+.storyteller.content-left .content-wrapper p {
+  padding-inline-start: var(--space-6);
+}
+
 .storyteller.content-left div:nth-of-type(2) p {
   inline-size: 75%;
 }
@@ -49,13 +53,6 @@
   background-color: var(--calcite-ui-text-1);
 }
 
-.storyteller .foreground-content .content-wrapper h2 {
-  margin-block-end: 0;
-  font-size: var(--font-2);
-  padding-inline-start: var(--space-6);
-  color: var(--calcite-ui-background);
-}
-
 .storyteller p.button-container {
   padding-inline-start: var(--space-6);
 }
@@ -64,6 +61,14 @@
   padding-inline-start: 0;
 }
 
+.storyteller .foreground-content .content-wrapper h2 {
+  margin-block-end: 0;
+  font-size: var(--font-2);
+  padding-inline-start: var(--space-6);
+  color: var(--calcite-ui-background);
+}
+
+
 .storyteller p.button-container a.button {
   text-decoration: none;
   padding: var(--space-4);
@@ -71,10 +76,6 @@
   margin-block-start: var(--space-2);
   color: var(--calcite-ui-background);
   background-color: var(--calcite-ui-text-1);
-}
-
-.storyteller.content-left .content-wrapper p {
-  padding-inline-start: var(--space-6);
 }
 
 .storyteller.content-left div:nth-of-type(1) p:nth-of-type(1) picture img {
