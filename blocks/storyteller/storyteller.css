@@ -21,10 +21,6 @@
   flex-direction: column-reverse;
 }
 
-.storyteller.content-left h2, .storyteller.content-left p:nth-of-type(1), .storyteller.storyteller.content-left p.button-container {
-  padding-inline-start: 0;
-}
-
 .storyteller .foreground-content .content-wrapper, .storyteller.content-left .foreground-content .content-wrapper {
   opacity: 0.9;
   align-self: end;
@@ -54,7 +50,11 @@
 .storyteller p:nth-of-type(1) {
   font-size: var(--font-2);
   color: var(--calcite-ui-text-1);
-  padding-inline-start: var(--space-6) var(--space-6);
+  padding-inline: var(--space-6);
+}
+
+.storyteller.content-left h2, .storyteller.content-left p:nth-of-type(1), .storyteller.storyteller.content-left p.button-container {
+  padding-inline-start: 0;
 }
 
 .storyteller p.button-container {
@@ -128,7 +128,8 @@
 
 @media (width >= 1152px) { 
   .storyteller h2, .storyteller p:nth-of-type(1) {
-    padding-inline-start: var(--space-20) var(--space-16);
+    padding-inline-end: var(--space-16);
+    padding-inline-start: var(--space-20);
   }
 
   .storyteller p.button-container {
@@ -179,10 +180,8 @@
   
   .storyteller .foreground-container {
     position: absolute;
-    inset-block-end: 0;
-    inset-inline-end: 0;
-    inset-block-start: 50%;
-    inset-inline-start: 50%;
+    inset-block: 50% 0;
+    inset-inline: 50% 0;
     transform: translateY(-50%);
   }
 
@@ -220,6 +219,5 @@
 
   .storyteller .foreground-content .content-wrapper, .storyteller.content-left .foreground-content .content-wrapper {
     inline-size: 500px;
-
   }
 }
