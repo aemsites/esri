@@ -52,6 +52,7 @@ export default function decorate(block) {
   const previousButton = calciteButton({
     class: 'previous-button',
     'icon-start': 'chevronLeft',
+    label: 'Previous',
     appearance: 'transparent',
     kind: 'neutral',
     scale: 'l',
@@ -60,6 +61,7 @@ export default function decorate(block) {
   const nextButton = calciteButton({
     class: 'next-button',
     'icon-end': 'chevronRight',
+    label: 'Next',
     appearance: 'transparent',
     kind: 'neutral',
     scale: 'l',
@@ -115,6 +117,7 @@ export default function decorate(block) {
     const anchor = child.querySelector('a');
     const playButton = calciteButton({
       'icon-start': 'play-f',
+      label: 'Play',
       appearance: 'solid',
       kind: 'inverse',
       scale: 'l',
