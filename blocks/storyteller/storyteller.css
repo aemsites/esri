@@ -78,6 +78,12 @@
   background-color: var(--calcite-ui-text-1);
 }
 
+.storyteller div div:nth-of-type(2) p:nth-of-type(1) picture img {
+  block-size: 100%;
+  object-fit: cover;
+  aspect-ratio: 1 / 1;
+}
+
 .storyteller.content-left div:nth-of-type(1) p:nth-of-type(1) picture img {
   object-fit: cover;
   aspect-ratio: 1 / 1;
@@ -109,21 +115,12 @@
 .storyteller div p:nth-of-type(2) video {
   inline-size: 500px;
   position: relative;
-}
-
-.storyteller div p:nth-of-type(2) video {
   inset-block-end: 0;
 }
 
 .storyteller div div:nth-of-type(2) p:nth-of-type(1) picture {
   block-size: 100%;
   position: absolute;
-}
-
-.storyteller div div:nth-of-type(2) p:nth-of-type(1) picture img {
-  block-size: 100%;
-  object-fit: cover;
-  aspect-ratio: 1 / 1;
 } 
 
 @media (width >= 1152px) { 
@@ -143,20 +140,20 @@
     display: block;
   }
 
-  .storyteller div div:nth-of-type(1), .storyteller div div:nth-of-type(2) {
-    inline-size: 50%;
-  }
-  
-  .storyteller div div:nth-of-type(2) {
-    block-size: 100%;
-  }
-
   .storyteller > div {
     display: flex;
     block-size: 100%;
     inline-size: 100%;
     align-items: center;
     flex-direction: row;
+  }
+  
+  .storyteller div div:nth-of-type(1), .storyteller div div:nth-of-type(2) {
+    inline-size: 50%;
+  }
+  
+  .storyteller div div:nth-of-type(2) {
+    block-size: 100%;
   }
 
   .storyteller.content-left div {
