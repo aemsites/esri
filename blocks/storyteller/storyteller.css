@@ -30,18 +30,12 @@
   inline-size: 75%;
 }
 
-.storyteller .foreground-content .content-wrapper  {
-  opacity: 0.9;
-  position: absolute;
-  inline-size: 500px;
-  background-color: var(--calcite-ui-background-1);
-}
-
-.storyteller .foreground-content .content-wrapper, .storyteller.content-left .foreground-content .content-wrapper   {
+.storyteller .foreground-content .content-wrapper, .storyteller.content-left .foreground-content .content-wrapper {
   opacity: 0.9;
   align-self: end;
-  inline-size: 500px;
+  inline-size: auto;
   position: absolute;
+  padding-inline-end: var(--space-8);
   background-color: var(--calcite-ui-text-1);
 }
 
@@ -226,4 +220,10 @@
   .storyteller {
     padding: 0 ;
   }
+
+  .storyteller .foreground-content .content-wrapper, .storyteller.content-left .foreground-content .content-wrapper {
+    inline-size: 500px;
+
+  }
+  
 }
