@@ -4,6 +4,8 @@ import {
   ul,
   li,
   div,
+  img,
+  p,
 } from '../../scripts/dom-helpers.js';
 
 export default function decorate(block) {
@@ -18,6 +20,7 @@ export default function decorate(block) {
 
   let selectedIdx = 0;
   const NUM_TABS = block.children.length;
+  const mediaQuery = window.matchMedia('(width <= 1024px)');
 
   const changeSelectedTab = (index) => {
     const dots = block.querySelectorAll('.mobile-nav-dots');
@@ -31,11 +34,60 @@ export default function decorate(block) {
     block.children[selectedIdx].setAttribute('aria-hidden', 'false');
   };
 
+  // create mobile nav
+  const previousButton = calciteButton({
+    'icon-start': 'chevronLeft',
+    appearance: 'transparent',
+    kind: 'neutral',
+    scale: 'l',
+    round: '',
+  });
+  const nextButton = calciteButton({
+    'icon-end': 'chevronRight',
+    appearance: 'transparent',
+    kind: 'neutral',
+    scale: 'l',
+    round: '',
+  });
+  previousButton.addEventListener('click', () => changeSelectedTab((selectedIdx + NUM_TABS - 1) % NUM_TABS));
+  nextButton.addEventListener('click', () => changeSelectedTab((selectedIdx + 1) % NUM_TABS));
+
+  const mobileNav = div(
+    { class: 'mobile-nav' },
+    previousButton,
+    ul(
+      { class: 'mobile-nav-dots' },
+      ...[...block.children].map((_, idx) => {
+        const listItem = li({ class: idx === selectedIdx ? 'active' : '' });
+        listItem.addEventListener('click', () => changeSelectedTab(idx));
+        return listItem;
+      }),
+    ),
+    nextButton,
+  );
+
+  // create desktop nav
+  const desktopNav = div(
+    { class: 'desktop-nav' },
+    ul(
+      ...[...block.children].map((child, idx) => {
+        const imgUrl = child.children[1].querySelector('a').href;
+        const headingText = child.querySelector('h2').textContent;
+
+        const listItem = li(
+          { class: idx === selectedIdx ? 'active' : '' },
+          img({ src: imgUrl }),
+          p(headingText),
+        );
+        listItem.addEventListener('click', () => changeSelectedTab(idx));
+        return listItem;
+      }),
+    ),
+  );
+
   [...block.children].forEach((child) => {
     child.setAttribute('aria-hidden', 'true');
     child.setAttribute('role', 'tabpanel');
-
-    // child.addEventListener('click', () => changeSelectedTab(idx));
 
     const imgUrl = child.children[1].querySelector('a').href;
     child.removeChild(child.children[1]);
@@ -54,39 +106,18 @@ export default function decorate(block) {
     anchor.parentElement.appendChild(playButton);
     anchor.parentElement.removeChild(anchor);
 
-    // add mobile navigation
-    const previousButton = calciteButton({
-      'icon-start': 'chevronLeft',
-      appearance: 'transparent',
-      kind: 'neutral',
-      scale: 'l',
-      round: '',
-    });
-    const nextButton = calciteButton({
-      'icon-end': 'chevronRight',
-      appearance: 'transparent',
-      kind: 'neutral',
-      scale: 'l',
-      round: '',
-    });
-    previousButton.addEventListener('click', () => changeSelectedTab((selectedIdx + NUM_TABS - 1) % NUM_TABS));
-    nextButton.addEventListener('click', () => changeSelectedTab((selectedIdx + 1) % NUM_TABS));
-
-    const mobileNav = div(
-      { class: 'mobile-nav' },
-      previousButton,
-      ul(
-        { class: 'mobile-nav-dots' },
-        ...[...block.children].map((_, idx) => {
-          const listItem = li({ class: idx === selectedIdx ? 'active' : '' });
-          listItem.addEventListener('click', () => changeSelectedTab(idx));
-          return listItem;
-        }),
-      ),
-      nextButton,
-    );
-
-    child.appendChild(mobileNav);
+    child.appendChild(mediaQuery.matches ? mobileNav.cloneNode(true) : desktopNav.cloneNode(true));
+    mediaQuery.onchange = (e) => {
+      console.log(mobileNav, desktopNav);
+      // child.appendChild(mobileNav);
+      if (e.matches) {
+        if (child.querySelector('.desktop-nav')) child.removeChild(desktopNav);
+        child.appendChild(mobileNav.cloneNode(true));
+      } else {
+        if (child.querySelector('.mobile-nav')) child.removeChild(mobileNav);
+        child.appendChild(desktopNav.cloneNode(true));
+      }
+    };
   });
   block.children[selectedIdx].setAttribute('aria-hidden', 'false');
 }
