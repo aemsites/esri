@@ -1,5 +1,5 @@
 import {
-  div, iframe, button, p, horizontalRule,
+  div, iframe, p, horizontalRule,
 } from '../../scripts/dom-helpers.js';
 
 function getMapFrame(url) {
@@ -18,19 +18,6 @@ function getMapFrame(url) {
   return mapFrame;
 }
 
-function toggleFullscreen() {
-  const mapWrapper = document.querySelector('#frame-wrapper');
-  const minimizeButton = document.querySelector('.return-btn');
-
-  if (window.screenTop && window.screenY) {
-    mapWrapper.classList.toggle('is-fullscreen');
-    minimizeButton.classList.toggle('btn-vis');
-  } else {
-    mapWrapper.classList.toggle('is-fullscreen');
-    minimizeButton.classList.toggle('btn-vis');
-  }
-}
-
 export default async function decorate(block) {
   const blockParams = block.querySelectorAll('p');
 
@@ -47,7 +34,7 @@ export default async function decorate(block) {
   nodeTextParam.textContent = textParameter;
   const hr = horizontalRule({ class: 'separator center' });
 
-  const contentWrapperChildren = [ defaultContentContainer, hr, nodeTextParam ];
+  const contentWrapperChildren = [defaultContentContainer, hr, nodeTextParam];
   const defaultContentWrapper = div({ id: 'map-default-content-wrapper' });
 
   contentWrapperChildren.forEach((child) => {
