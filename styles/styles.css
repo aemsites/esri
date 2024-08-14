@@ -280,7 +280,7 @@ main img {
       justify-content: center;
       align-items: center;
       transition: .15s ease-in-out;
-      background-color: var(--calcite-ui-inverse-press);
+      background-color: var(--calcite-ui-text-inverse);
       border-radius: 50%;
     }
 

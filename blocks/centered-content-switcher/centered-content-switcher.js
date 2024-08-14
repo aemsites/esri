@@ -124,8 +124,10 @@ export default function decorate(block) {
       round: '',
       href: anchor.href,
     });
-    child.children[0].appendChild(playButton);
+    anchor.textContent = '';
+    anchor.appendChild(playButton);
     anchor.parentElement.parentElement.removeChild(anchor.parentElement);
+    child.children[0].appendChild(anchor);
   });
 
   const mobileNavClones = [...block.children].map(() => {
