@@ -4,7 +4,7 @@ import { domEl } from '../../scripts/dom-helpers.js';
 export default function decorate(block) {
   block.classList.add('calcite-mode-dark');
 
-  const processSimpleCard = function (div) {
+  const processSimpleCard = (div) => {
     if (!block.classList.contains('simple')) {
       return;
     }
