@@ -45,8 +45,6 @@ export default async function decorate(block) {
 
   const gridContainer = div({ class: 'grid-container' });
   const frameWrapper = div({ id: 'frame-wrapper' });
-  frameWrapper.appendChild(getMapPlaceholder());
-  frameWrapper.appendChild(getMapFrame(mapLink));
 
   const defaultContentContainer = document.querySelector('.map-container > .default-content-wrapper');
   const nodeTextParam = p({ id: 'map-text-content' });
@@ -65,6 +63,23 @@ export default async function decorate(block) {
   gridContainerChildren.forEach((child) => {
     gridContainer.appendChild(child);
   });
+
+  const observer = new IntersectionObserver((entries) => {
+    const frameContainer = entries[0]
+
+    if (!frameContainer.isIntersecting) return
+
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        frameWrapper.appendChild(getMapPlaceholder());
+        frameWrapper.appendChild(getMapFrame(mapLink)); 
+        observer.unobserve(e.target)
+      }
+    })
+      observer.disconnect();
+  }, {rootMargin: '100px'});
+
+  observer.observe(frameWrapper);
 
   block.append(gridContainer);
 }
