@@ -1,18 +1,17 @@
 /**
- * Determine if mp4 resource is available. Also add class 'foreground-container' to foreground content (
- * mp4, subtitle, description)
- * @param {string} vidUrls array with href property 
+ * Determine if mp4 resource is available. Add selector 'foreground-container' to p tag.
+ * @param {string} vidUrls array with href property
  * @returns {string} true/false
  */
 function isMP4(vidUrls) {
 	const mp4Regex = /\.mp4$/;
-  let mp4Video = false;
+	let mp4Video = false;
 
 	vidUrls.forEach((url) => {
 		if (mp4Regex.test(url)) {
-			url.parentNode.classList.add('foreground-container')
+			url.parentNode.classList.add('foreground-container');
 			mp4Video = true;
-		} 
+		}
 	});
 
 	return mp4Video;
@@ -21,7 +20,6 @@ function isMP4(vidUrls) {
 /**
  * Toggle playhead to play or pause mp4 video.
  * @param {element} videoBtn The playhead control element for mp4 video
-
  */
 function toggleVideo(videoBtn) {
 	const foregroundWrapper = videoBtn.closest('.foreground-container');
@@ -60,7 +58,6 @@ export default function decorate(block) {
   const foregroundContent = document.createElement('div');
   const source = document.createElement('source');
 	const videoBtn = getVideoBtn();
-	
   videoTag.muted = true;
   videoTag.toggleAttribute('autoplay', 'true');
   videoTag.toggleAttribute('loop', true);
@@ -90,7 +87,7 @@ export default function decorate(block) {
   if ((pictureTagLeft === null) && (vidUrls.length >= 1)) {
 		const foregroundWrapper = block.querySelector('.foreground-container');
     const h2Tags = block.querySelectorAll('h2');
-	
+
     source.setAttribute('src', vidUrls[1].href);
     videoTag.appendChild(source);
     foregroundContentContainer.classList.add('foreground-content');
@@ -101,11 +98,10 @@ export default function decorate(block) {
 
 		foregroundContentContainer.appendChild(foregroundContent);
     foregroundWrapper.appendChild(foregroundContentContainer);
-		foregroundWrapper.appendChild(videoBtn); 
+		foregroundWrapper.appendChild(videoBtn);
 	}
-	
+
 	videoBtn.addEventListener('click', () => {
 		toggleVideo(videoBtn);
 	});
 }
-
