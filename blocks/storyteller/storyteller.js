@@ -25,11 +25,11 @@ function toggleVideo(videoBtn) {
   const foregroundWrapper = videoBtn.closest('.foreground-container');
   const videoWrapper = foregroundWrapper.querySelector('.foreground-content');
   const vidSrc = videoWrapper.querySelector('video');
-  if (vidSrc.paused === true) { 
-		vidSrc.play() 
-	} else 
-	{ 
-		vidSrc.pause(); 
+  if (vidSrc.paused === true) {
+    vidSrc.play();
+	} else
+	{
+    vidSrc.pause();
   }
 }
 
