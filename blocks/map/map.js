@@ -1,6 +1,23 @@
 import {
-  div, iframe, p, horizontalRule,
+  div, iframe, p, horizontalRule, domEl
 } from '../../scripts/dom-helpers.js';
+
+
+
+function getMapPlaceholder() {
+  const mapPlaceholder = domEl('calcite-loader', {
+    label: "Loading Map",
+    class: "iframe-map-placeholder"
+  })
+
+  return mapPlaceholder
+}
+
+
+const handleLoadFrame = () => {
+  const mapPlaceholder = document.querySelector(".iframe-map-placeholder")
+  mapPlaceholder.style.display = "none"
+};
 
 function getMapFrame(url) {
   const mapFrame = iframe({
@@ -13,6 +30,7 @@ function getMapFrame(url) {
     tabindex: '0',
     loading: 'lazy',
     title: 'Esri locations map',
+    onload: handleLoadFrame,
   });
 
   return mapFrame;
@@ -27,6 +45,7 @@ export default async function decorate(block) {
 
   const gridContainer = div({ class: 'grid-container' });
   const frameWrapper = div({ id: 'frame-wrapper' });
+  frameWrapper.appendChild(getMapPlaceholder());
   frameWrapper.appendChild(getMapFrame(mapLink));
 
   const defaultContentContainer = document.querySelector('.map-container > .default-content-wrapper');
