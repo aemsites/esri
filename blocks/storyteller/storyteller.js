@@ -36,7 +36,7 @@ function toggleVideo(videoBtn) {
  * Produce a calcite play button icon with appropriate attributes.
  * @returns {element} play pause button
  */
-function getVideoBtn () {
+function getVideoBtn() {
   const videoButton = document.createElement('button');
   videoButton.classList.add('video-playbutton');
   videoButton.setAttribute('aria-label', 'play or pause video');
@@ -72,7 +72,7 @@ export default function decorate(block) {
 
   if (isMP4(vidUrls) === true) {
     foregroundPicture.classList.add('hide-poster');
-  } 
+  }
 
   if ((pictureTagLeft !== null) && (vidUrls.length >= 1)) {
     const foregroundWrapper = block.querySelector('.foreground-container');
@@ -102,9 +102,9 @@ export default function decorate(block) {
 
     if (pTags.length > 5) {
       foregroundContent.appendChild(pTags[pTags.length - 1]);
-		} else {
+    } else {
       foregroundContent.appendChild(pTags[4]);
-		}
+    }
 
     foregroundContentContainer.appendChild(foregroundContent);
     foregroundWrapper.appendChild(foregroundContentContainer);
