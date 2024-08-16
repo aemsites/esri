@@ -3,7 +3,7 @@
  * @param {string} vidUrls array with href property
  * @returns {string} true/false
  */
-function isMP4(vidUrls) {
+function isMP4(vidUrls){
   const mp4Regex = /\.mp4$/;
   let mp4Video = false;
 
@@ -21,23 +21,22 @@ function isMP4(vidUrls) {
  * Toggle playhead to play or pause mp4 video.
  * @param {element} videoBtn The playhead control element for mp4 video
  */
-function toggleVideo(videoBtn) {
+function toggleVideo(videoBtn){
   const foregroundWrapper = videoBtn.closest('.foreground-container');
   const videoWrapper = foregroundWrapper.querySelector('.foreground-content');
   const vidSrc = videoWrapper.querySelector('video');
   if (vidSrc.paused === true) {
     vidSrc.play();
-	} else
-	{
+	} else {
     vidSrc.pause();
   }
 }
-
+ 
 /**
  * Produce a calcite play button icon with appropriate attributes.
  * @returns {element} play pause button
  */
-function getVideoBtn () {
+function getVideoBtn (){
   const videoButton = document.createElement('button');
   videoButton.classList.add('video-playbutton');
   videoButton.setAttribute('aria-label', 'play or pause video');
@@ -71,7 +70,9 @@ export default function decorate(block) {
   videoTag.setAttribute('poster', foregroundSrc);
   foregroundContent.classList.add('content-wrapper');
 
-  isMP4(vidUrls) ? foregroundPicture.classList.add('hide-poster') : '';
+  if (isMP4(vidUrls) === true) {
+    foregroundPicture.classList.add('hide-poster');
+  } 
 
   if ((pictureTagLeft !== null) && (vidUrls.length >= 1)) {
     const foregroundWrapper = block.querySelector('.foreground-container');
@@ -106,7 +107,7 @@ export default function decorate(block) {
     foregroundWrapper.appendChild(videoBtn);
 	}
 
-	videoBtn.addEventListener('click', () => {
-	  toggleVideo(videoBtn);
-	});
+  videoBtn.addEventListener('click', () => {
+    toggleVideo(videoBtn);
+  });
 }
