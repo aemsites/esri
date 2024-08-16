@@ -272,6 +272,8 @@
 
   picture {
     position: relative;
+    inline-size: 100%;
+    block-size: auto;
 
     img {
       padding-block-end: var(--space-4);
