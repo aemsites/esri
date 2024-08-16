@@ -4,17 +4,17 @@
  * @returns {string} true/false
  */
 function isMP4(vidUrls) {
-	const mp4Regex = /\.mp4$/;
-	let mp4Video = false;
+  const mp4Regex = /\.mp4$/;
+  let mp4Video = false;
 
-	vidUrls.forEach((url) => {
-		if (mp4Regex.test(url)) {
-			url.parentNode.classList.add('foreground-container');
-			mp4Video = true;
-		}
-	});
+  vidUrls.forEach((url) => {
+    if (mp4Regex.test(url)) {
+      url.parentNode.classList.add('foreground-container');
+      mp4Video = true;
+    }
+  });
 
-	return mp4Video;
+  return mp4Video;
 }
 
 /**
@@ -22,10 +22,10 @@ function isMP4(vidUrls) {
  * @param {element} videoBtn The playhead control element for mp4 video
  */
 function toggleVideo(videoBtn) {
-	const foregroundWrapper = videoBtn.closest('.foreground-container');
-	const videoWrapper = foregroundWrapper.querySelector('.foreground-content');
-	const vidSrc = videoWrapper.querySelector('video');
-	(vidSrc.paused) ? vidSrc.play() : vidSrc.pause();
+  const foregroundWrapper = videoBtn.closest('.foreground-container');
+  const videoWrapper = foregroundWrapper.querySelector('.foreground-content');
+  const vidSrc = videoWrapper.querySelector('video');
+  (vidSrc.paused) ? vidSrc.play() : vidSrc.pause();
 }
 
 /**
@@ -33,18 +33,18 @@ function toggleVideo(videoBtn) {
  * @returns {element} play pause button
  */
 function getVideoBtn () {
-	const videoButton = document.createElement('button');
-	videoButton.classList.add('video-playbutton');
-	videoButton.setAttribute('aria-label','play or pause video');
+  const videoButton = document.createElement('button');
+  videoButton.classList.add('video-playbutton');
+  videoButton.setAttribute('aria-label','play or pause video');
 
-	const calciteIconPlayBtn = document.createElement('calcite-icon');
-	calciteIconPlayBtn.setAttribute('scale','s');
-	calciteIconPlayBtn.setAttribute('appearance','solid');
-	calciteIconPlayBtn.setAttribute('icon','play-f');
-	calciteIconPlayBtn.setAttribute('aria-hidden','true');
-	videoButton.appendChild(calciteIconPlayBtn);
+  const calciteIconPlayBtn = document.createElement('calcite-icon');
+  calciteIconPlayBtn.setAttribute('scale','s');
+  calciteIconPlayBtn.setAttribute('appearance','solid');
+  calciteIconPlayBtn.setAttribute('icon','play-f');
+  calciteIconPlayBtn.setAttribute('aria-hidden','true');
+  videoButton.appendChild(calciteIconPlayBtn);
 
-	return videoButton;
+  return videoButton;
 }
 
 export default function decorate(block) {
@@ -57,7 +57,7 @@ export default function decorate(block) {
   const foregroundSrc = foregroundPicture.querySelector('img').src;
   const foregroundContent = document.createElement('div');
   const source = document.createElement('source');
-	const videoBtn = getVideoBtn();
+  const videoBtn = getVideoBtn();
   videoTag.muted = true;
   videoTag.toggleAttribute('autoplay', 'true');
   videoTag.toggleAttribute('loop', true);
@@ -66,10 +66,10 @@ export default function decorate(block) {
   videoTag.setAttribute('poster', foregroundSrc);
   foregroundContent.classList.add('content-wrapper');
 
-	isMP4(vidUrls) ? foregroundPicture.classList.add('hide-poster') : '';
+  isMP4(vidUrls) ? foregroundPicture.classList.add('hide-poster') : '';
 
   if ((pictureTagLeft !== null) && (vidUrls.length >= 1)) {
-		const foregroundWrapper = block.querySelector('.foreground-container');
+    const foregroundWrapper = block.querySelector('.foreground-container');
     const h2Tag = block.querySelector('h2');
 
     source.setAttribute('src', vidUrls[0].href);
@@ -80,12 +80,12 @@ export default function decorate(block) {
     foregroundContent.appendChild(h2Tag);
     foregroundContent.appendChild(pTags[2]);
     foregroundContentContainer.appendChild(foregroundContent);
-		foregroundWrapper.appendChild(foregroundContentContainer)
+    foregroundWrapper.appendChild(foregroundContentContainer)
     foregroundWrapper.appendChild(videoBtn);
   }
 
   if ((pictureTagLeft === null) && (vidUrls.length >= 1)) {
-		const foregroundWrapper = block.querySelector('.foreground-container');
+    const foregroundWrapper = block.querySelector('.foreground-container');
     const h2Tags = block.querySelectorAll('h2');
 
     source.setAttribute('src', vidUrls[1].href);
@@ -94,14 +94,14 @@ export default function decorate(block) {
     foregroundContentContainer.appendChild(videoTag);
     foregroundContent.appendChild(h2Tags[1]);
 
-		(pTags.length > 5) ? foregroundContent.appendChild(pTags[pTags.length-1]) : foregroundContent.appendChild(pTags[4]);
+    (pTags.length > 5) ? foregroundContent.appendChild(pTags[pTags.length-1]) : foregroundContent.appendChild(pTags[4]);
 
-		foregroundContentContainer.appendChild(foregroundContent);
+    foregroundContentContainer.appendChild(foregroundContent);
     foregroundWrapper.appendChild(foregroundContentContainer);
-		foregroundWrapper.appendChild(videoBtn);
+    foregroundWrapper.appendChild(videoBtn);
 	}
 
 	videoBtn.addEventListener('click', () => {
-		toggleVideo(videoBtn);
+	  toggleVideo(videoBtn);
 	});
 }
