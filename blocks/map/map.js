@@ -74,7 +74,7 @@ export default async function decorate(block) {
       }
     });
     observer.disconnect();
-  }, { rootMargin: '100px' });
+  }, { threshold: 0.5 });
 
   observer.observe(frameWrapper);
 
