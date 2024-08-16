@@ -275,8 +275,8 @@
 
     img {
       padding-block-end: var(--space-4);
-      width: 100%;
-      height: auto;
+      inline-size: 100%;
+      block-size: auto;
     }
   }
 }
