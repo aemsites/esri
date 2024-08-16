@@ -25,7 +25,12 @@ function toggleVideo(videoBtn) {
   const foregroundWrapper = videoBtn.closest('.foreground-container');
   const videoWrapper = foregroundWrapper.querySelector('.foreground-content');
   const vidSrc = videoWrapper.querySelector('video');
-  (vidSrc.paused) ? vidSrc.play() : vidSrc.pause();
+  if (vidSrc.paused === true) { 
+		vidSrc.play() 
+	} else 
+	{ 
+		vidSrc.pause(); 
+  }
 }
 
 /**
@@ -35,13 +40,13 @@ function toggleVideo(videoBtn) {
 function getVideoBtn () {
   const videoButton = document.createElement('button');
   videoButton.classList.add('video-playbutton');
-  videoButton.setAttribute('aria-label','play or pause video');
+  videoButton.setAttribute('aria-label', 'play or pause video');
 
   const calciteIconPlayBtn = document.createElement('calcite-icon');
-  calciteIconPlayBtn.setAttribute('scale','s');
-  calciteIconPlayBtn.setAttribute('appearance','solid');
-  calciteIconPlayBtn.setAttribute('icon','play-f');
-  calciteIconPlayBtn.setAttribute('aria-hidden','true');
+  calciteIconPlayBtn.setAttribute('scale', 's');
+  calciteIconPlayBtn.setAttribute('appearance', 'solid');
+  calciteIconPlayBtn.setAttribute('icon', 'play-f');
+  calciteIconPlayBtn.setAttribute('aria-hidden', 'true');
   videoButton.appendChild(calciteIconPlayBtn);
 
   return videoButton;
@@ -80,7 +85,7 @@ export default function decorate(block) {
     foregroundContent.appendChild(h2Tag);
     foregroundContent.appendChild(pTags[2]);
     foregroundContentContainer.appendChild(foregroundContent);
-    foregroundWrapper.appendChild(foregroundContentContainer)
+    foregroundWrapper.appendChild(foregroundContentContainer);
     foregroundWrapper.appendChild(videoBtn);
   }
 
@@ -94,7 +99,7 @@ export default function decorate(block) {
     foregroundContentContainer.appendChild(videoTag);
     foregroundContent.appendChild(h2Tags[1]);
 
-    (pTags.length > 5) ? foregroundContent.appendChild(pTags[pTags.length-1]) : foregroundContent.appendChild(pTags[4]);
+    (pTags.length > 5) ? foregroundContent.appendChild(pTags[pTags.length - 1]) : foregroundContent.appendChild(pTags[4]);
 
     foregroundContentContainer.appendChild(foregroundContent);
     foregroundWrapper.appendChild(foregroundContentContainer);
