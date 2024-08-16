@@ -1,22 +1,19 @@
 import {
-  div, iframe, p, horizontalRule, domEl
+  div, iframe, p, horizontalRule, domEl,
 } from '../../scripts/dom-helpers.js';
-
-
 
 function getMapPlaceholder() {
   const mapPlaceholder = domEl('calcite-loader', {
-    label: "Loading Map",
-    class: "iframe-map-placeholder"
-  })
+    label: 'Loading Map',
+    class: 'iframe-map-placeholder',
+  });
 
-  return mapPlaceholder
+  return mapPlaceholder;
 }
 
-
 const handleLoadFrame = () => {
-  const mapPlaceholder = document.querySelector(".iframe-map-placeholder")
-  mapPlaceholder.style.display = "none"
+  const mapPlaceholder = document.querySelector('.iframe-map-placeholder');
+  mapPlaceholder.style.display = 'none';
 };
 
 function getMapFrame(url) {
@@ -65,19 +62,19 @@ export default async function decorate(block) {
   });
 
   const observer = new IntersectionObserver((entries) => {
-    const frameContainer = entries[0]
+    const frameContainer = entries[0];
 
-    if (!frameContainer.isIntersecting) return
+    if (!frameContainer.isIntersecting) return;
 
-    entries.forEach(e => {
+    entries.forEach((e) => {
       if (e.isIntersecting) {
         frameWrapper.appendChild(getMapPlaceholder());
-        frameWrapper.appendChild(getMapFrame(mapLink)); 
-        observer.unobserve(e.target)
+        frameWrapper.appendChild(getMapFrame(mapLink));
+        observer.unobserve(e.target);
       }
-    })
-      observer.disconnect();
-  }, {rootMargin: '100px'});
+    });
+    observer.disconnect();
+  }, { rootMargin: '100px' });
 
   observer.observe(frameWrapper);
 
