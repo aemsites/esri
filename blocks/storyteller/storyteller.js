@@ -109,7 +109,7 @@ export default function decorate(block) {
     foregroundContentContainer.appendChild(foregroundContent);
     foregroundWrapper.appendChild(foregroundContentContainer);
     foregroundWrapper.appendChild(videoBtn);
-	}
+  }
 
   videoBtn.addEventListener('click', () => {
     toggleVideo(videoBtn);
