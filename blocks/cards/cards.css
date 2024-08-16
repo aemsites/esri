@@ -222,7 +222,7 @@
 
     &.overlay-text {
       padding: var(--space-2) var(--space-5);
-      width: 100%;
+      inline-size: 100%;
       letter-spacing: .2rem;
       background-color: var(--esri-ui-opacity85-inverse);
       margin-block-end: 0;
@@ -232,7 +232,7 @@
       font-size: var(--category-size);
       position: absolute;
       box-sizing: border-box;
-      bottom: 21px;
+      inset-block-end: 21px;
     }
   }
 
@@ -242,7 +242,7 @@
   }
 
   h3 {
-    margin-bottom: var(--space-3);
+    margin-block-end: var(--space-3);
     display: -webkit-box;
     -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
