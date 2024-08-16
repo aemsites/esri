@@ -3,7 +3,7 @@
  * @param {string} vidUrls array with href property
  * @returns {string} true/false
  */
-function isMP4(vidUrls){
+function isMP4(vidUrls) {
   const mp4Regex = /\.mp4$/;
   let mp4Video = false;
 
@@ -21,22 +21,22 @@ function isMP4(vidUrls){
  * Toggle playhead to play or pause mp4 video.
  * @param {element} videoBtn The playhead control element for mp4 video
  */
-function toggleVideo(videoBtn){
+function toggleVideo(videoBtn) {
   const foregroundWrapper = videoBtn.closest('.foreground-container');
   const videoWrapper = foregroundWrapper.querySelector('.foreground-content');
   const vidSrc = videoWrapper.querySelector('video');
   if (vidSrc.paused === true) {
     vidSrc.play();
-	} else {
+  } else {
     vidSrc.pause();
   }
 }
- 
+
 /**
  * Produce a calcite play button icon with appropriate attributes.
  * @returns {element} play pause button
  */
-function getVideoBtn (){
+function getVideoBtn () {
   const videoButton = document.createElement('button');
   videoButton.classList.add('video-playbutton');
   videoButton.setAttribute('aria-label', 'play or pause video');
@@ -100,7 +100,11 @@ export default function decorate(block) {
     foregroundContentContainer.appendChild(videoTag);
     foregroundContent.appendChild(h2Tags[1]);
 
-    (pTags.length > 5) ? foregroundContent.appendChild(pTags[pTags.length - 1]) : foregroundContent.appendChild(pTags[4]);
+    if (pTags.length > 5) {
+      foregroundContent.appendChild(pTags[pTags.length - 1]);
+		} else {
+      foregroundContent.appendChild(pTags[4]);
+		}
 
     foregroundContentContainer.appendChild(foregroundContent);
     foregroundWrapper.appendChild(foregroundContentContainer);
