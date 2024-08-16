@@ -2,21 +2,21 @@ import {
   div, iframe, p, horizontalRule, domEl,
 } from '../../scripts/dom-helpers.js';
 
-const getMapPlaceholder = function() {
+const getMapPlaceholder = function () {
   const mapPlaceholder = domEl('calcite-loader', {
     label: 'Loading Map',
     class: 'iframe-map-placeholder',
   });
 
   return mapPlaceholder;
-}
+};
 
 const handleLoadFrame = () => {
   const mapPlaceholder = document.querySelector('.iframe-map-placeholder');
   mapPlaceholder.style.display = 'none';
 };
 
-const getMapFrame  = function(url) {
+const getMapFrame = function (url) {
   const mapFrame = iframe({
     id: 'map-frame',
     class: 'map-frame-aspect-ratio',
@@ -31,7 +31,7 @@ const getMapFrame  = function(url) {
   });
 
   return mapFrame;
-}
+};
 
 export default async function decorate(block) {
   const blockParams = block.querySelectorAll('p');
