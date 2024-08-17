@@ -51,23 +51,30 @@ function getVideoBtn() {
   return videoButton;
 }
 
-export default function decorate(block) {
-  const pTags = block.querySelectorAll('p');
-  const pictureTagLeft = pTags[0].querySelector('picture');
-  const vidUrls = block.querySelectorAll('a');
-  const foregroundContentContainer = document.createElement('div');
+function setVideoTag(foregroundSrc) {
   const videoTag = document.createElement('video');
-  const foregroundPicture = block.querySelectorAll('picture')[1];
-  const foregroundSrc = foregroundPicture.querySelector('img').src;
-  const foregroundContent = document.createElement('div');
-  const source = document.createElement('source');
-  const videoBtn = getVideoBtn();
+
   videoTag.muted = true;
   videoTag.toggleAttribute('autoplay', 'true');
   videoTag.toggleAttribute('loop', true);
   videoTag.toggleAttribute('playsinline', true);
   videoTag.setAttribute('type', 'video/mp4');
   videoTag.setAttribute('poster', foregroundSrc);
+  return videoTag;
+}
+
+export default function decorate(block) {
+  const pTags = block.querySelectorAll('p');
+  const pictureTagLeft = pTags[0].querySelector('picture');
+  const vidUrls = block.querySelectorAll('a');
+  const foregroundContentContainer = document.createElement('div');
+  const foregroundPicture = block.querySelectorAll('picture')[1];
+  const foregroundSrc = foregroundPicture.querySelector('img').src;
+  const foregroundContent = document.createElement('div');
+  const source = document.createElement('source');
+  const videoBtn = getVideoBtn();
+	const videoTag = setVideoTag(foregroundSrc);
+ 
   foregroundContent.classList.add('content-wrapper');
 
   if (isMP4(vidUrls) === true) {
