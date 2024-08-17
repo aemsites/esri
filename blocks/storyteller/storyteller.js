@@ -36,7 +36,7 @@ function toggleVideo(videoBtn) {
  * Produce a calcite play button icon with appropriate attributes.
  * @returns {element} play pause button
  */
-function getVideoBtn() {
+async function getVideoBtn() {
   const videoButton = document.createElement('button');
   videoButton.classList.add('video-playbutton');
   videoButton.setAttribute('aria-label', 'play or pause video');
@@ -51,7 +51,7 @@ function getVideoBtn() {
   return videoButton;
 }
 
-function setVideoTag(foregroundSrc) {
+async function setVideoTag(foregroundSrc) {
   const videoTag = document.createElement('video');
 
   videoTag.muted = true;
@@ -72,8 +72,8 @@ export default async function decorate(block) {
   const foregroundSrc = foregroundPicture.querySelector('img').src;
   const foregroundContent = document.createElement('div');
   const source = document.createElement('source');
-  const videoBtn = getVideoBtn();
-  const videoTag = setVideoTag(foregroundSrc);
+  const videoBtn = await getVideoBtn();
+  const videoTag = await setVideoTag(foregroundSrc);
 
   foregroundContent.classList.add('content-wrapper');
 
