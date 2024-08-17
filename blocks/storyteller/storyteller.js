@@ -3,7 +3,7 @@
  * @param {string} vidUrls array with href property
  * @returns {string} true/false
  */
-async function isMP4(vidUrls) {
+function isMP4(vidUrls) {
   const mp4Regex = /\.mp4$/;
   let mp4Video = false;
 
@@ -21,7 +21,7 @@ async function isMP4(vidUrls) {
  * Toggle playhead to play or pause mp4 video.
  * @param {element} videoBtn The playhead control element for mp4 video
  */
-async function toggleVideo(videoBtn) {
+function toggleVideo(videoBtn) {
   const foregroundWrapper = videoBtn.closest('.foreground-container');
   const videoWrapper = foregroundWrapper.querySelector('.foreground-content');
   const vidSrc = videoWrapper.querySelector('video');
@@ -63,7 +63,7 @@ function setVideoTag(foregroundSrc) {
   return videoTag;
 }
 
-export default function decorate(block) {
+export default async function decorate(block) {
   const pTags = block.querySelectorAll('p');
   const pictureTagLeft = pTags[0].querySelector('picture');
   const vidUrls = block.querySelectorAll('a');
