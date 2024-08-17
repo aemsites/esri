@@ -211,8 +211,7 @@
 
   .storyteller.content-right .foreground-container {
     position: absolute;
-    overflow-x: visible;
-    overflow-y: clip;
+    overflow: visible clip;
     inset-inline: 50% 0;
   }
 
