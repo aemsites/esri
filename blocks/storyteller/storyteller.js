@@ -73,8 +73,8 @@ export default function decorate(block) {
   const foregroundContent = document.createElement('div');
   const source = document.createElement('source');
   const videoBtn = getVideoBtn();
-	const videoTag = setVideoTag(foregroundSrc);
- 
+  const videoTag = setVideoTag(foregroundSrc);
+
   foregroundContent.classList.add('content-wrapper');
 
   if (isMP4(vidUrls) === true) {
