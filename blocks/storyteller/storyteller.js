@@ -3,7 +3,7 @@
  * @param {string} vidUrls array with href property
  * @returns {string} true/false
  */
-function isMP4(vidUrls) {
+async function isMP4(vidUrls) {
   const mp4Regex = /\.mp4$/;
   let mp4Video = false;
 
@@ -21,7 +21,7 @@ function isMP4(vidUrls) {
  * Toggle playhead to play or pause mp4 video.
  * @param {element} videoBtn The playhead control element for mp4 video
  */
-function toggleVideo(videoBtn) {
+async function toggleVideo(videoBtn) {
   const foregroundWrapper = videoBtn.closest('.foreground-container');
   const videoWrapper = foregroundWrapper.querySelector('.foreground-content');
   const vidSrc = videoWrapper.querySelector('video');
