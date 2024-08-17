@@ -32,10 +32,6 @@
   padding: var(--space-2) var(--space-3);
 }
 
-.storyteller div div:nth-of-type(2) .foreground-content {
-  inline-size: 500px;
-}
-
 .storyteller.content-right > div {
   display: flex;
   flex-direction: column-reverse;
@@ -85,7 +81,6 @@
   font-size: var(--font-2);
   padding-inline-start: var(--space-6);
 }
-
 
 .storyteller p.button-container a.button {
   text-decoration: none;
@@ -224,6 +219,11 @@
   .storyteller .foreground-content {
     padding-inline-start: 0;    
   }
+
+  .storyteller div div:nth-of-type(2) .foreground-content {
+    inline-size: 500px;
+  }
+  
 
   .storyteller.content-right .foreground-content {
     display: flex;
