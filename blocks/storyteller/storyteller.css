@@ -1,11 +1,11 @@
 .storyteller-wrapper {
   display: flex;
+  margin-block-end: var(--space-20);
 }
 
 .storyteller {
   overflow: hidden;
   min-block-size: 1100px;
-  padding: var(--space-20) 0;
 }
 
 .storyteller h2 {
@@ -134,6 +134,7 @@
 
 @media (width >= 1152px) { 
   .storyteller {
+    padding: 0 ;
     position: relative;
   }
   
@@ -244,10 +245,6 @@
     position: absolute;
   }
   
-  .storyteller {
-    padding: 0 ;
-  }
-
   .storyteller .foreground-content .content-wrapper, .storyteller.content-right .foreground-content .content-wrapper   {
     inline-size: 500px;
     position: absolute;
