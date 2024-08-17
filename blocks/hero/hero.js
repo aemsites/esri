@@ -14,7 +14,7 @@ export default function decorate(block) {
   if (videoAssets.length === 2) {
     videoSrc.setAttribute('src', videoAssets[1].getAttribute('title'));
     videoAssets[1].classList.add('video-src');
-  } else  {
+  } else {
     videoSrc.setAttribute('src', videoAssets[0].getAttribute('title'));
     videoAssets[0].classList.add('video-src');
   }
