@@ -18,14 +18,41 @@ function getContactOfficeButton(textContent) {
   return contactOfficeButton;
 }
 
-function getContactOfficeDomElements(heading, buttonTextContent, media) {
+function getVideoInteractionElement(videoAnchor) {
+    if (!videoAnchor || !videoAnchor.href) {
+        // variant without video
+        return div()
+    }
+    
+    const playButton = calciteButton({
+        href: videoAnchor.href,
+        kind: "neutral",
+        color: "neutral",
+        appearance: "solid",
+        label: "Play this video",
+        alignment: "center",
+        width: "auto",
+        type: "button",
+        scale: 'l',
+        round: "",
+        'icon-end': "play-f",
+    })
+    const videoButtonWrapper = div({class: "calcite-button-wrapper calcite-button-wrapper--nomargin videoPlayButton"}, playButton)
+    return videoButtonWrapper
+
+}
+
+function getContactOfficeDomElements(heading, buttonTextContent, ...media) {
   const contentWrapper = div({ class: 'about-content-wrapper calcite-theme-light calcite-mode-light' });
   const headingWrapper = div({ class: 'about-heading-wrapper' });
   headingWrapper.appendChild(heading);
   const buttonWrapper = div({ class: 'about-button-wrapper calcite-button-wrapper calcite-animate calcite-animate__in-up' });
   buttonWrapper.appendChild(getContactOfficeButton(buttonTextContent));
   const mediaWrapper = div({ class: 'about-media-wrapper' });
-  mediaWrapper.appendChild(media);
+  for (const m of media) {
+    mediaWrapper.appendChild(m);
+  }
+  
 
   const contentChildren = [headingWrapper, buttonWrapper, mediaWrapper];
 
@@ -41,11 +68,17 @@ export default async function decorate() {
   const aboutMainHeading = aboutMainContent.children[0];
   aboutMainHeading.classList.add('about-main-heading');
   const aboutContactButton = aboutMainContent.children[1];
+//   console.log('this is contact button', aboutContactButton)
+//   const videoLink =  aboutMainContent.children[]
+  const videoAnchor = document.querySelector('.contact-local-office > div > div > p:last-child > a')
+
+  const videoElement = getVideoInteractionElement(videoAnchor)
   const mediaContent = aboutMainContent.children[2].children[0];
+  console.log('this si mediacontent children', mediaContent, aboutMainContent.children)
 
   const buttonTextContent = aboutContactButton.children[0].textContent;
 
-  const elems = getContactOfficeDomElements(aboutMainHeading, buttonTextContent, mediaContent);
+  const elems = getContactOfficeDomElements(aboutMainHeading, buttonTextContent, mediaContent, videoElement);
 
   const contentParent = aboutMainContent.parentNode;
   contentParent.removeChild(aboutMainContent);
