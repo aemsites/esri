@@ -2,7 +2,7 @@ import {
   div, iframe, p, horizontalRule, domEl,
 } from '../../scripts/dom-helpers.js';
 
-const getMapPlaceholder = function () {
+const getMapPlaceholder = () => {
   const mapPlaceholder = domEl('calcite-loader', {
     label: 'Loading Map',
     class: 'iframe-map-placeholder',
@@ -16,7 +16,7 @@ const handleLoadFrame = () => {
   mapPlaceholder.style.display = 'none';
 };
 
-const getMapFrame = function (url) {
+const getMapFrame = (url) => {
   const mapFrame = iframe({
     id: 'map-frame',
     class: 'map-frame-aspect-ratio',
