@@ -6,32 +6,43 @@ export default async function decorate(block) {
 
   block.appendChild(div({ id: divId }));
 
-  block.classList.add('calcite-mode-dark');
-  document.querySelector('.form-container').classList.add('calcite-mode-dark');
+  const section = document.querySelector('.form-container');
+  const metadata = {
+    mode: section.getAttribute('data-mode'),
+    formName: section.getAttribute('data-form-name'),
+    thankYouFormType: section.getAttribute('data-thank-you-form-type'),
+    customFormConfig: section.getAttribute('data-custom-form-config'),
+    mqlBehavior: section.getAttribute('data-mql-behavior'),
+    gdprMode: section.getAttribute('data-gdpr-mode'),
+  };
+
+  const calciteModeClassName = metadata.mode === 'dark' ? 'calcite-mode-dark' : 'calcite-mode-light';
+  block.classList.add(calciteModeClassName);
+  section.classList.add(calciteModeClassName);
 
   await Promise.all([
     loadCSS('https://webapps-cdn.esri.com/CDN/one-form/one-form.css'),
     loadScript('https://webapps-cdn.esri.com/CDN/one-form/one-form.js'),
   ]);
 
-  window.initOneForm(divId, {
+  const formProps = {
     divId,
     aemFieldServiceBasePath: '/content/experience\u002Dfragments/esri\u002Dsites/en\u002Dus/site\u002Dsettings/one\u002Dform\u002Dadmin/master',
     aemEditMode: 'false',
     mode: 'basic-progressive-form',
-    formName: '2854884_Imagery Organic Traffic Campaign: Workflow to Asset LPs \u002D Contact Sales',
+    formName: metadata.formName,
     formOpensInAModal: '',
     modalTitle: '',
-    formModalLookup: '2854884_Imagery Organic Traffic Campaign: Workflow to Asset LPs \u002D Contact Sales',
+    formModalLookup: metadata.formName,
     leftAligned: '',
-    darkMode: 'true',
+    darkMode: metadata.mode === 'dark',
     transparentBackground: '',
     pardotHandler: 'https://go.esri.com/l/82202/2022\u002D05\u002D31/pnykw9',
     organicSfId: '7015x000001PKGoAAO',
     isolation: '',
     disablePersonalization: '' === 'true',
     inlineThankYouPage: '',
-    thankYouFormType: 'high',
+    thankYouFormType: metadata.thankYouFormType,
     thankYouBannerImage: '',
     thankYouAssetTitle: '',
     thankYouAssetType: 'Brochure',
@@ -40,9 +51,9 @@ export default async function decorate(block) {
     thankYouHeader: '',
     thankYouMessage: '',
     mqlComment: 'Please review the \x27What Prompted Your Interest?\x27 field for follow up.',
-    mqlBehavior: 'default',
+    mqlBehavior: metadata.mqlBehavior,
     mqlFormHandler: '',
-    gdprMode: '',
+    gdprMode: metadata.gdprMode,
     showEventConsentCheckBoxes: '' === 'true',
     marketingConsentRequired: '',
     marketingConsentRequiredMessage: '',
@@ -50,6 +61,7 @@ export default async function decorate(block) {
     customMarketingConsentRequiredMessage: '',
     customContactConsentLabel: '',
     customContactConsentRequiredMessage: '',
+    customFormConfig: metadata.customFormConfig,
     thankyouPageUrl: '',
     thankyouPageParams: '',
     sendEmail: '' === 'true',
@@ -58,5 +70,7 @@ export default async function decorate(block) {
     emailBcc: '',
     emailSubject: '',
     emailBody: '',
-  });
+  };
+
+  window.initOneForm(divId, formProps);
 }
