@@ -20,33 +20,6 @@ export default function decorate(block) {
 
   let selectedIdx = 0;
   const NUM_TABS = block.children.length;
-  const mediaQuery = window.matchMedia('(width <= 1024px)');
-
-  const changeSelectedTab = (index) => {
-    const dots = block.querySelectorAll('.mobile-nav-dots');
-    const desktopLists = block.querySelectorAll('.desktop-nav-list');
-
-    const currentTab = block.children[selectedIdx];
-    const nextTab = block.children[index];
-
-    dots.forEach((list) => [...list.children].forEach((child) => child.classList.remove('active')));
-    desktopLists.forEach((list) => [...list.children].forEach((child) => child.classList.remove('active')));
-    currentTab.setAttribute('aria-hidden', 'true');
-    currentTab.classList.remove('calcite-animate__in');
-    currentTab.classList.add('animate-out');
-    currentTab.children[0].classList.remove('calcite-animate__in-up');
-    currentTab.children[1].classList.remove('calcite-animate__in-up');
-
-    selectedIdx = index;
-
-    dots.forEach((list) => list.children[selectedIdx].classList.add('active'));
-    desktopLists.forEach((list) => list.children[selectedIdx].classList.add('active'));
-    nextTab.setAttribute('aria-hidden', 'false');
-    nextTab.classList.add('calcite-animate__in');
-    nextTab.classList.remove('animate-out');
-    nextTab.children[0].classList.add('calcite-animate__in-up');
-    nextTab.children[1].classList.add('calcite-animate__in-up');
-  };
 
   // create mobile nav
   const previousButton = calciteButton({
@@ -69,7 +42,7 @@ export default function decorate(block) {
   });
 
   const mobileNav = div(
-    { class: 'mobile-nav calcite-animate' },
+    { class: 'mobile-nav calcite-animate calcite-animate__in-up' },
     previousButton,
     ul(
       { class: 'mobile-nav-dots' },
@@ -83,7 +56,7 @@ export default function decorate(block) {
 
   // create desktop nav
   const desktopNav = div(
-    { class: 'desktop-nav calcite-animate' },
+    { class: 'desktop-nav calcite-animate calcite-animate__in-up' },
     ul(
       { class: 'desktop-nav-list' },
       ...[...block.children].map((child, idx) => {
@@ -100,21 +73,63 @@ export default function decorate(block) {
     ),
   );
 
-  [...block.children].forEach((child) => {
-    child.classList.add('calcite-animate');
-    child.classList.add('animate-out');
+  const changeSelectedTab = (index) => {
+    mobileNav.parentElement?.removeChild(mobileNav);
+    desktopNav.parentElement?.removeChild(desktopNav);
 
-    child.setAttribute('aria-hidden', 'true');
-    child.setAttribute('role', 'tabpanel');
+    const dots = mobileNav.querySelector('.mobile-nav-dots');
+    const desktopList = desktopNav.querySelector('.desktop-nav-list');
 
-    child.children[0].classList.add('calcite-animate');
+    const currentTab = block.children[selectedIdx];
+    const nextTab = block.children[index];
 
-    const imgUrl = child.children[1].querySelector('img').src;
-    child.removeChild(child.children[1]);
+    desktopList.children[selectedIdx].classList.remove('active');
+    dots.children[selectedIdx].classList.remove('active');
+    currentTab.setAttribute('aria-hidden', 'true');
+    currentTab.classList.remove('calcite-animate__in');
+    currentTab.classList.add('animate-out');
+    currentTab.children[0].classList.remove('calcite-animate__in-up');
 
-    child.setAttribute('style', `background-image: url(${imgUrl})`);
+    selectedIdx = index;
 
-    const anchor = child.querySelector('a');
+    nextTab.appendChild(mobileNav);
+    nextTab.appendChild(desktopNav);
+
+    dots.children[selectedIdx].classList.add('active');
+    desktopList.children[selectedIdx].classList.add('active');
+    nextTab.setAttribute('aria-hidden', 'false');
+    nextTab.classList.add('calcite-animate__in');
+    nextTab.classList.remove('animate-out');
+    nextTab.children[0].classList.add('calcite-animate__in-up');
+  };
+
+  previousButton.addEventListener('click', () => changeSelectedTab((selectedIdx + NUM_TABS - 1) % NUM_TABS));
+  nextButton.addEventListener('click', () => changeSelectedTab((selectedIdx + 1) % NUM_TABS));
+  const listItems = [...mobileNav.querySelector('.mobile-nav-dots').children];
+  listItems.forEach((listItem, listItemIdx) => {
+    listItem.addEventListener('click', () => changeSelectedTab(listItemIdx));
+  });
+
+  const desktopListItems = [...desktopNav.querySelector('.desktop-nav-list').children];
+  desktopListItems.forEach((listItem, listItemIdx) => {
+    listItem.addEventListener('click', () => changeSelectedTab(listItemIdx));
+  });
+
+  [...block.children].forEach((tab) => {
+    tab.classList.add('calcite-animate');
+    tab.classList.add('animate-out');
+
+    tab.setAttribute('aria-hidden', 'true');
+    tab.setAttribute('role', 'tabpanel');
+
+    tab.children[0].classList.add('calcite-animate');
+
+    const imgUrl = tab.children[1].querySelector('img').src;
+    tab.removeChild(tab.children[1]);
+
+    tab.setAttribute('style', `background-image: url(${imgUrl})`);
+
+    const anchor = tab.querySelector('a');
     const playButton = calciteButton({
       'icon-start': 'play-f',
       label: 'Play',
@@ -127,44 +142,9 @@ export default function decorate(block) {
     anchor.textContent = '';
     anchor.appendChild(playButton);
     anchor.parentElement.parentElement.removeChild(anchor.parentElement);
-    child.children[0].appendChild(anchor);
+    tab.children[0].appendChild(anchor);
   });
 
-  const mobileNavClones = [...block.children].map(() => {
-    const clone = mobileNav.cloneNode(true);
-    clone.querySelector('.previous-button').addEventListener('click', () => changeSelectedTab((selectedIdx + NUM_TABS - 1) % NUM_TABS));
-    clone.querySelector('.next-button').addEventListener('click', () => changeSelectedTab((selectedIdx + 1) % NUM_TABS));
-    const listItems = [...clone.querySelector('.mobile-nav-dots').children];
-    listItems.forEach((listItem, listItemIdx) => {
-      listItem.addEventListener('click', () => changeSelectedTab(listItemIdx));
-    });
-    return clone;
-  });
-
-  const desktopNavClones = [...block.children].map(() => {
-    const clone = desktopNav.cloneNode(true);
-    const listItems = [...clone.querySelector('.desktop-nav-list').children];
-    listItems.forEach((listItem, listItemIdx) => {
-      listItem.addEventListener('click', () => changeSelectedTab(listItemIdx));
-    });
-    return clone;
-  });
-
-  const changeNavigation = (query) => {
-    [...block.children].forEach((child, index) => {
-      if (query.matches) {
-        if (child.querySelector('.desktop-nav')) child.removeChild(desktopNavClones[index]);
-        child.appendChild(mobileNavClones[index]);
-      } else {
-        if (child.querySelector('.mobile-nav')) child.removeChild(mobileNavClones[index]);
-        child.appendChild(desktopNavClones[index]);
-      }
-    });
-    changeSelectedTab(selectedIdx);
-  };
-
-  mediaQuery.onchange = changeNavigation;
   block.children[selectedIdx].setAttribute('aria-hidden', 'false');
-
-  changeNavigation(mediaQuery);
+  changeSelectedTab(selectedIdx);
 }

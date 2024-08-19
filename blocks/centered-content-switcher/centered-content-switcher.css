@@ -105,6 +105,7 @@
   }
 
   .desktop-nav {
+    display: none;
     border-block-start: 1px solid var(--calcite-ui-border-1);
     margin-block-start: 0;
     padding: 0;
@@ -176,7 +177,17 @@
 }
 
 @media (width >= 1024px) {
-  .centered-content-switcher > div {
-    aspect-ratio: 16 / 9;
+  .centered-content-switcher {
+    & > div {
+      aspect-ratio: 16 / 9;
+    }
+
+    .mobile-nav {
+      display: none;
+    }
+    
+    .desktop-nav {
+      display: block;
+    }
   }
 }
