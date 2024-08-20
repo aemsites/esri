@@ -24,7 +24,7 @@
     position: relative;
 }
 
-.about-media-wrapper .videoPlayButton {
+.about-media-wrapper .video-play-button {
     position: absolute;
     inset-block-start: 50%;
     inset-inline-start: 50%;

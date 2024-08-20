@@ -1,6 +1,7 @@
 import {
   calciteButton,
   div,
+  a,
 } from '../../scripts/dom-helpers.js';
 
 function getContactOfficeButton(textContent) {
@@ -25,7 +26,7 @@ function getVideoInteractionElement(videoAnchor) {
   }
 
   const playButton = calciteButton({
-    href: videoAnchor.href,
+    // href: videoAnchor.href,
     kind: 'neutral',
     color: 'neutral',
     appearance: 'solid',
@@ -37,7 +38,11 @@ function getVideoInteractionElement(videoAnchor) {
     round: '',
     'icon-end': 'play-f',
   });
-  const videoButtonWrapper = div({ class: 'calcite-button-wrapper calcite-button-wrapper--nomargin videoPlayButton' }, playButton);
+  const buttonAnchorWrapper = a({
+    href: videoAnchor.href,
+    title: videoAnchor.href,
+  }, playButton);
+  const videoButtonWrapper = div({ class: 'calcite-button-wrapper calcite-button-wrapper--nomargin video-play-button' }, buttonAnchorWrapper);
   return videoButtonWrapper;
 }
 
@@ -48,9 +53,9 @@ function getContactOfficeDomElements(heading, buttonTextContent, ...media) {
   const buttonWrapper = div({ class: 'about-button-wrapper calcite-button-wrapper calcite-animate calcite-animate__in-up' });
   buttonWrapper.appendChild(getContactOfficeButton(buttonTextContent));
   const mediaWrapper = div({ class: 'about-media-wrapper' });
-  media.forEach(m => {
+  media.forEach((m) => {
     mediaWrapper.appendChild(m);
-  })
+  });
 
   const contentChildren = [headingWrapper, buttonWrapper, mediaWrapper];
 
@@ -81,7 +86,7 @@ export default async function decorate() {
     buttonTextContent,
     mediaContent,
     videoElement,
-    );
+  );
 
   const contentParent = aboutMainContent.parentNode;
   contentParent.removeChild(aboutMainContent);

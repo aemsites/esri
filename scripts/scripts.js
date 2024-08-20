@@ -52,6 +52,7 @@ async function loadFonts() {
 function decorateVideoLinks(element) {
   const anchors = element.querySelectorAll('a');
   anchors.forEach((a) => {
+    console.log('these are anchors', a);
     // change urls to be allowed to be embedded
     if (a.href.startsWith('https://youtu.be')) {
       a.href = a.href.replace('youtu.be', 'www.youtube.com/embed');
@@ -89,12 +90,15 @@ function decorateVideoLinks(element) {
           closeButton,
         ),
       );
+      console.log('this is iframe and div', a);
 
       a.addEventListener('click', (event) => {
         event.preventDefault();
         document.body.append(ifr);
+        console.log('should get in here', event);
         document.body.style.overflow = 'hidden';
       });
+      console.log('mouseover doesnt work');
 
       const closeIframe = (event) => {
         event.preventDefault();
