@@ -14,17 +14,25 @@ import {
 
 export default async function decorate(block) {
   const isTabsCardsVariant = block.classList.contains('tabs-cards-variant');
+  const isTabsIconsVariant = block.classList.contains('tabs-icons-variant');
 
   block.querySelectorAll('img').forEach((img) => img
-    .closest('picture')
-    .replaceWith(
+    .closest('picture')?.replaceWith(
       createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }]),
     ));
 
   const loadBlocks = [];
-  const tabTitles = [...block.children].map((child) => child.children[0].children[0].textContent);
-  const tabContents = [...block.children].map((child) => [...child.children[1].children]);
-  if (!isTabsCardsVariant) {
+
+  let tabTitles, tabContents;
+
+  if(isTabsIconsVariant) {
+    tabTitles = [...block.children].map((child) => child.children[0].children[0].innerHTML);
+  } else {
+    tabTitles = [...block.children].map((child) => child.children[0].children[0].textContent);
+  }
+  tabContents = [...block.children].map((child) => [...child.children[1].children]);
+
+  if (!isTabsCardsVariant && !isTabsIconsVariant) {
     document.querySelector('.tabs-container').classList.add('calcite-mode-dark');
 
     tabContents.forEach((content) => {
@@ -66,17 +74,34 @@ export default async function decorate(block) {
     document.querySelector('.tabs-container').classList.add('calcite-mode-light');
   }
 
-  const contents = tabContents.map((content) => div({
+  let contents, titles;
+  contents = tabContents.map((content) => div({
     class: 'tab-content',
     role: 'tabpanel',
     'aria-hidden': true,
   }, ...content));
-  const titles = tabTitles.map((title) => li({
-    class: 'tab-title',
-    id: title.toLowerCase().replace(' ', '-'),
-    role: 'tab',
-    'aria-hidden': true,
-  }, button(...title)));
+
+
+  if(isTabsIconsVariant) {
+    titles = tabTitles.map((title) => {
+      const tempDiv = div();
+      tempDiv.innerHTML = title;
+
+      return li({
+        class: 'tab-title',
+        id: title.toLowerCase().replace(' ', '-'),
+        role: 'tab',
+        'aria-hidden': true,
+      }, button(...tempDiv.children, tempDiv.textContent))
+    });
+  } else {
+    titles = tabTitles.map((title) => li({
+      class: 'tab-title',
+      id: title.toLowerCase().replace(' ', '-'),
+      role: 'tab',
+      'aria-hidden': true,
+    }, button(...title)));
+  }
 
   if (isTabsCardsVariant) {
     contents.forEach((content) => {
@@ -84,6 +109,17 @@ export default async function decorate(block) {
       content.replaceChildren(tabsCardsBlock);
       decorateBlock(tabsCardsBlock);
       loadBlocks.push(loadBlock(tabsCardsBlock));
+    });
+
+    await Promise.all(loadBlocks);
+  }
+
+  if (isTabsIconsVariant) {
+    contents.forEach((content) => {
+      const tabsIconsBlock = buildBlock('tabs-icons', [[content.innerHTML]]);
+      content.replaceChildren(tabsIconsBlock);
+      decorateBlock(tabsIconsBlock);
+      loadBlocks.push(loadBlock(tabsIconsBlock));
     });
 
     await Promise.all(loadBlocks);
