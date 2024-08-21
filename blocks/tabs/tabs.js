@@ -23,14 +23,14 @@ export default async function decorate(block) {
 
   const loadBlocks = [];
 
-  let tabTitles, tabContents;
+  let tabTitles;
+  const tabContents = [...block.children].map((child) => [...child.children[1].children]);
 
-  if(isTabsIconsVariant) {
+  if (isTabsIconsVariant) {
     tabTitles = [...block.children].map((child) => child.children[0].children[0].innerHTML);
   } else {
     tabTitles = [...block.children].map((child) => child.children[0].children[0].textContent);
   }
-  tabContents = [...block.children].map((child) => [...child.children[1].children]);
 
   if (!isTabsCardsVariant && !isTabsIconsVariant) {
     document.querySelector('.tabs-container').classList.add('calcite-mode-dark');
@@ -74,15 +74,14 @@ export default async function decorate(block) {
     document.querySelector('.tabs-container').classList.add('calcite-mode-light');
   }
 
-  let contents, titles;
-  contents = tabContents.map((content) => div({
+  let titles;
+  const contents = tabContents.map((content) => div({
     class: 'tab-content',
     role: 'tabpanel',
     'aria-hidden': true,
   }, ...content));
 
-
-  if(isTabsIconsVariant) {
+  if (isTabsIconsVariant) {
     titles = tabTitles.map((title) => {
       const tempDiv = div();
       tempDiv.innerHTML = title;
@@ -92,7 +91,7 @@ export default async function decorate(block) {
         id: title.toLowerCase().replace(' ', '-'),
         role: 'tab',
         'aria-hidden': true,
-      }, button(...tempDiv.children, tempDiv.textContent))
+      }, button(...tempDiv.children, tempDiv.textContent));
     });
   } else {
     titles = tabTitles.map((title) => li({
