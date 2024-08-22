@@ -221,8 +221,9 @@ export default async function decorate(block) {
     });
   });
 
+  const widthBreakpoint = (isTabsIconsVariant ? 1250 : 1024);
   const addAccessiblityAttributes = () => {
-    if (window.innerWidth >= 1024) {
+    if (window.innerWidth >= widthBreakpoint) {
       titles.forEach((title, index) => {
         title.setAttribute('aria-hidden', 'false');
         title.setAttribute('aria-selected', 'false');
@@ -248,8 +249,16 @@ export default async function decorate(block) {
     }
   };
 
-  addAccessiblityAttributes();
-  window.addEventListener('resize', () => addAccessiblityAttributes());
+  const resizeBlock = () => {
+    addAccessiblityAttributes();
+    if (window.innerWidth >= widthBreakpoint) {
+      block.querySelector('.tab-nav')?.classList.add('expanded');
+    } else {
+      block.querySelector('.tab-nav')?.classList.remove('expanded');
+    }
+  };
 
   block.replaceChildren(tabComponent);
+  resizeBlock();
+  window.addEventListener('resize', () => resizeBlock());
 }
