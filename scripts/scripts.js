@@ -89,6 +89,7 @@ function decorateVideoLinks(element) {
             scrolling: 'no',
             sandbox: 'allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation',
             allow: 'autoplay *; fullscreen *; encrypted-media *',
+            loading:"lazy",
           }),
           closeButton,
         ),
