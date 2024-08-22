@@ -1,7 +1,6 @@
 import {
   calciteButton,
   div,
-  a,
 } from '../../scripts/dom-helpers.js';
 
 function getContactOfficeButton(textContent) {
@@ -26,7 +25,6 @@ function getVideoInteractionElement(videoAnchor) {
   }
 
   const playButton = calciteButton({
-    // href: videoAnchor.href,
     kind: 'neutral',
     color: 'neutral',
     appearance: 'solid',
@@ -38,11 +36,12 @@ function getVideoInteractionElement(videoAnchor) {
     round: '',
     'icon-end': 'play-f',
   });
-  const buttonAnchorWrapper = a({
-    href: videoAnchor.href,
-    title: videoAnchor.href,
-  }, playButton);
-  const videoButtonWrapper = div({ class: 'calcite-button-wrapper calcite-button-wrapper--nomargin video-play-button' }, buttonAnchorWrapper);
+
+  videoAnchor.classList.add('video-play-anchor');
+  videoAnchor.innerText = '';
+  videoAnchor.appendChild(playButton);
+
+  const videoButtonWrapper = div({ class: 'calcite-button-wrapper calcite-button-wrapper--nomargin video-play-button' }, videoAnchor);
   return videoButtonWrapper;
 }
 
@@ -65,19 +64,16 @@ function getContactOfficeDomElements(heading, buttonTextContent, ...media) {
 
   return contentWrapper;
 }
-export default async function decorate() {
+export default function decorate() {
   const aboutMainContent = document.querySelector('.contact-local-office > div > div');
 
   const aboutMainHeading = aboutMainContent.children[0];
   aboutMainHeading.classList.add('about-main-heading');
   const aboutContactButton = aboutMainContent.children[1];
-  //   console.log('this is contact button', aboutContactButton)
-  //   const videoLink =  aboutMainContent.children[]
   const videoAnchor = document.querySelector('.contact-local-office > div > div > p:last-child > a');
 
   const videoElement = getVideoInteractionElement(videoAnchor);
   const mediaContent = aboutMainContent.children[2].children[0];
-  console.log('this si mediacontent children', mediaContent, aboutMainContent.children);
 
   const buttonTextContent = aboutContactButton.children[0].textContent;
 
