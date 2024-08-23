@@ -54,15 +54,14 @@ function initNavWrapper(block) {
   const htmlNavTag = document.createElement('nav');
   const navTitle = domEl('div', { class: 'nav-title' });
   const ul = document.createElement('ul');
-  const mobileButton = domEl
-  ('calcite-icon',
-    { class: 'btn-mobile',
-      scale: 'm',
-      icon: 'caret-down',
-      dir: 'ltr',
-      'calcite-hydrated': ''
-    }
-  );
+  const mobileButton = domEl('calcite-icon', {
+    class: 'btn-mobile',
+    scale: 'm',
+    icon: 'caret-down',
+    dir: 'ltr',
+    'calcite-hydrated': '',
+    'aria-hidden': 'true',
+  });
   const btnWrapper = block.querySelector('div');
   const trialBtn = btnWrapper.lastElementChild;
   mobileButton.setAttribute('aria-label', 'menu');
