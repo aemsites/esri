@@ -54,8 +54,14 @@ function initNavWrapper(block) {
   const htmlNavTag = document.createElement('nav');
   const navTitle = domEl('div', { class: 'nav-title' });
   const ul = document.createElement('ul');
-  const mobileButton = domEl('calcite-icon', 
-    { class: 'btn-mobile', scale: 'm', icon: 'caret-down', dir: 'ltr', 'calcite-hydrated': '' });
+  const mobileButton = domEl
+  ('calcite-icon',
+    { class: 'btn-mobile',
+      scale: 'm',
+      icon: 'caret-down',
+      dir: 'ltr',
+      'calcite-hydrated': ''
+    });
   const btnWrapper = block.querySelector('div');
   const trialBtn = btnWrapper.lastElementChild;
   mobileButton.setAttribute('aria-label', 'menu');
@@ -69,7 +75,7 @@ function initNavWrapper(block) {
   htmlNavTag.appendChild(ul);
   htmlNavTag.appendChild(mobileButton);
   htmlNavTag.appendChild(trialBtn);
-	block.appendChild(htmlNavTag);
+  block.appendChild(htmlNavTag);
 }
 
 function btnEventListener(block) {
@@ -89,17 +95,17 @@ function btnEventListener(block) {
 
 export default async function decorate(block) {
   const ISLOCAL = /localhost/gm;
-  const PROXY = ISLOCAL.test(location.href) ? 'https://cors-anywhere.herokuapp.com/' : '';
+  const PROXY = ISLOCAL.test(window.location.href) ? 'https://cors-anywhere.herokuapp.com/' : '';
   const NAVAPI = 'https://www.esri.com/bin/esri/localnavigation';
   const requestURL = `${PROXY}${NAVAPI}?path=/content/esri-sites${window.location.pathname}`;
 
   await fetch(requestURL)
-  .then(response => response.json())
-  .then(data => {
-    initNavWrapper(block);
-    parseXML(data);
-    btnEventListener(block);
-    console.log('json: ', data);
-  })
-  .catch(error => error);
+    .then(response => response.json())
+    .then(data => {
+      initNavWrapper(block);
+      parseXML(data);
+      btnEventListener(block);
+      console.log('json: ', data);
+    })
+    .catch(error => error);
 }
