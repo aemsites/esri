@@ -18,36 +18,36 @@ function appendNode(value) {
 function currPg(href) {
   const cleanUrl = href.split(/[?#]/)[0];
   const parts = cleanUrl.split('/');
-  const lastFolder = parts.filter(part => part !== '').pop();
+  const lastFolder = parts.filter((part) => part !== '').pop();
   return lastFolder;
 }
 
 function appendPageTitle(pgObj) {
   const updatedUrl = updateURL(pgObj.pageLink);
-	const navTagUL = document.querySelector('.local-navigation ul');
-	const li = domEl('li', { class: 'page-title', id: pgObj.pageTitle });
+  const navTagUL = document.querySelector('.local-navigation ul');
+  const li = domEl('li', { class: 'page-title', id: pgObj.pageTitle });
   const aHref = domEl('a', { href: updatedUrl });
-  const currPageTitle = currPg(location.href);
-	aHref.innerHTML = `${pgObj.pageTitle}`;
+  const currPageTitle = currPg(window.location.href);
+  aHref.innerHTML = `${pgObj.pageTitle}`;
   aHref.setAttribute('aria-current', 'false');
   if (currPageTitle === pgObj.pageTitle.toLowerCase()) {
     aHref.setAttribute('aria-current', 'true');
   }
-	li.appendChild(aHref);
-	navTagUL.appendChild(li);
+  li.appendChild(aHref);
+  navTagUL.appendChild(li);
 }
 
 function parseXML(xmlData) {
-	for (let i = 0; i < xmlData.length; i++) {
-		for (const [key, value] of Object.entries(xmlData[i])) {
-			if (`${key}` === 'main') {
-				appendNode(value);
-			}
-			if (`${key}` === 'pageTitle') {
+	for (let i = 0; i < xmlData.length; i += 1) {
+    for (const [key, value] of Object.entries(xmlData[i])) {
+      if (`${key}` === 'main') {
+        appendNode(value);
+      }
+      if (`${key}` === 'pageTitle') {
         appendPageTitle(xmlData[i]);
-			}
-		}
-	}
+      }
+    }
+  }
 }
 
 function initNavWrapper(block) {
