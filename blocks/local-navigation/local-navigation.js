@@ -39,14 +39,14 @@ function appendPageTitle(pgObj) {
 
 function parseXML(xmlData) {
   for (let i = 0; i < xmlData.length; i += 1) {
-    for (const [key, value] of Object.entries(xmlData[i])) {
-      if (`${key}` === 'main') {
+    Object.entries(xmlData[i]).forEach(([key, value]) => {
+      if (key === 'main') {
         appendNode(value);
       }
-      if (`${key}` === 'pageTitle') {
+      if (key === 'pageTitle') {
         appendPageTitle(xmlData[i]);
       }
-    }
+    });
   }
 }
 
@@ -61,7 +61,8 @@ function initNavWrapper(block) {
       icon: 'caret-down',
       dir: 'ltr',
       'calcite-hydrated': ''
-    });
+    }
+  );
   const btnWrapper = block.querySelector('div');
   const trialBtn = btnWrapper.lastElementChild;
   mobileButton.setAttribute('aria-label', 'menu');
@@ -100,12 +101,11 @@ export default async function decorate(block) {
   const requestURL = `${PROXY}${NAVAPI}?path=/content/esri-sites${window.location.pathname}`;
 
   await fetch(requestURL)
-    .then(response => response.json())
-    .then(data => {
+    .then((response) => response.json())
+    .then((data) => {
       initNavWrapper(block);
       parseXML(data);
       btnEventListener(block);
-      console.log('json: ', data);
     })
-    .catch(error => error);
+    .catch((error) => error);
 }
