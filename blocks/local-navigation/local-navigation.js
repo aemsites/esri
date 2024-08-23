@@ -2,18 +2,17 @@ import { domEl } from '../../scripts/dom-helpers.js';
 
 function updateURL(url) {
   const ISLOCAL = /localhost/gm;
-  const currDomain = ISLOCAL.test(location.href) ? 'http://localhost:3000' : '';
-  return url.replace(/^https?:\/\/[^\/]+/, currDomain);
+  const currDomain = ISLOCAL.test(window.location.href) ? 'http://localhost:3000' : '';
+  return url.replace(/^https?:\/\/[^/]+/, currDomain);
 }
 
 function appendNode(value) {
   const updatedUrl = updateURL(value.titlelink);
-	const navTitle = document.querySelector('.local-navigation .nav-title');
-	const aHref = domEl('a', { href: updatedUrl });
-
-	aHref.innerHTML = `${value.title}`;
+  const navTitle = document.querySelector('.local-navigation .nav-title');
+  const aHref = domEl('a', { href: updatedUrl });
+  aHref.innerHTML = `${value.title}`;
   aHref.setAttribute('aria-current', 'false');
-	navTitle.appendChild(aHref);
+  navTitle.appendChild(aHref);
 }
 
 function currPg(href) {
