@@ -38,7 +38,7 @@ function appendPageTitle(pgObj) {
 }
 
 function parseXML(xmlData) {
-	for (let i = 0; i < xmlData.length; i += 1) {
+  for (let i = 0; i < xmlData.length; i += 1) {
     for (const [key, value] of Object.entries(xmlData[i])) {
       if (`${key}` === 'main') {
         appendNode(value);
@@ -51,21 +51,22 @@ function parseXML(xmlData) {
 }
 
 function initNavWrapper(block) {
-	const htmlNavTag = document.createElement('nav');  
+  const htmlNavTag = document.createElement('nav');
   const navTitle = domEl('div', { class: 'nav-title' });
-	const ul = document.createElement('ul');
-  const mobileButton = domEl('calcite-icon', { class: 'btn-mobile', scale: 'm', icon: 'caret-down', dir: 'ltr', 'calcite-hydrated': ''});
+  const ul = document.createElement('ul');
+  const mobileButton = domEl('calcite-icon', 
+    { class: 'btn-mobile', scale: 'm', icon: 'caret-down', dir: 'ltr', 'calcite-hydrated': '' });
   const btnWrapper = block.querySelector('div');
   const trialBtn = btnWrapper.lastElementChild;
-  mobileButton.setAttribute('aria-label','menu')
-	htmlNavTag.setAttribute('aria-label', 'main');
-	htmlNavTag.setAttribute('aria-expanded', 'false');
-	htmlNavTag.id = 'main';
+  mobileButton.setAttribute('aria-label', 'menu');
+  htmlNavTag.setAttribute('aria-label', 'main');
+  htmlNavTag.setAttribute('aria-expanded', 'false');
+  htmlNavTag.id = 'main';
   ul.classList.add('mobile-menu');
-	ul.setAttribute('aria-labelledby', 'nav-title');
-	ul.setAttribute('aria-expanded', 'false');
+  ul.setAttribute('aria-labelledby', 'nav-title');
+  ul.setAttribute('aria-expanded', 'false');
   htmlNavTag.appendChild(navTitle);
-	htmlNavTag.appendChild(ul);
+  htmlNavTag.appendChild(ul);
   htmlNavTag.appendChild(mobileButton);
   htmlNavTag.appendChild(trialBtn);
 	block.appendChild(htmlNavTag);
@@ -74,7 +75,7 @@ function initNavWrapper(block) {
 function btnEventListener(block) {
   const mobileBtn = block.querySelector('calcite-icon.btn-mobile');
   const mobileMenu = block.querySelector('ul.mobile-menu');
-  
+
   mobileBtn.addEventListener('click', () => {
     if (mobileBtn.getAttribute('icon') === 'caret-down') {
       mobileBtn.setAttribute('icon', 'caret-up');
@@ -88,17 +89,17 @@ function btnEventListener(block) {
 
 export default async function decorate(block) {
   const ISLOCAL = /localhost/gm;
-	const PROXY = ISLOCAL.test(location.href) ? 'https://cors-anywhere.herokuapp.com/' : '';
-	const NAVAPI = 'https://www.esri.com/bin/esri/localnavigation'
-	const requestURL = `${PROXY}${NAVAPI}?path=/content/esri-sites${location.pathname}`;
+  const PROXY = ISLOCAL.test(location.href) ? 'https://cors-anywhere.herokuapp.com/' : '';
+  const NAVAPI = 'https://www.esri.com/bin/esri/localnavigation';
+  const requestURL = `${PROXY}${NAVAPI}?path=/content/esri-sites${window.location.pathname}`;
 
-	await fetch(requestURL)
-	.then(response => response.json())
-	.then(data => {
-		initNavWrapper(block);
-		parseXML(data);
-		btnEventListener(block);
+  await fetch(requestURL)
+  .then(response => response.json())
+  .then(data => {
+    initNavWrapper(block);
+    parseXML(data);
+    btnEventListener(block);
     console.log('json: ', data);
   })
-	.catch(error => console.warn('Local Navigation: Invalid Navigation Path', error));
+  .catch(error => error);
 }
