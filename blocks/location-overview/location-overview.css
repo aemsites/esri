@@ -1,0 +1,73 @@
+.location-overview-container-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    overflow: hidden;
+    position: relative;
+    inline-size: 100%;
+    cursor: default;        
+}
+
+
+.location-overview-link-wrapper {
+    overflow: hidden;
+    margin-block-end: 0;
+    text-decoration: none;
+    color: var(--calcite-ui-text-1);
+    padding-block: var(--space-20);
+    padding-inline: var(--space-5);
+    inline-size: 100%;
+}
+
+.location-overview-card-text {
+    color: var(--calcite-ui-text-1);
+    font-size: var(--description-size);
+    margin-block-end: var(--content-end-spacing);
+    padding-bottom: var(--space-4);
+}
+
+.location-overview-card-container {
+    background-image: url("/assets/location-overview-programs-background.jpeg");
+    background-size: cover;
+    flex: 0 0 33.33%;
+    max-inline-size: 33.33%;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    display: flex;
+    background-position: center;
+    transition: all .25s ease-in-out;
+    color: var(--calcite-ui-text-1);
+    --bg-color: var(--calcite-ui-foreground-1);
+    --shadow-color: var(--esri-ui-opacity80);
+}
+
+.location-overview-card-link {
+    overflow: hidden;
+    margin-block-end: 0;
+    text-decoration: none;
+    color: var(--calcite-ui-text-1);
+    padding-block: var(--space-20);
+    padding-inline: var(--space-5);
+    inline-size: 100%;
+}
+
+.location-overview-content-wrapper {
+    inline-size: 85%;
+    position: relative;
+    z-index: 3;
+    margin: auto;
+    animation-delay: calc(var(--calcite-animation-delay)*1);
+}
+
+.location-overview-card-header {
+    margin-block: var(--space-8);
+    color: var(--calcite-ui-text-1);
+    font-size: var(--title-size);
+}
+
+.location-overview-card-text {
+    color: var(--calcite-ui-text-1);
+    font-size: var(--description-size);
+    margin-block-end: var(--content-end-spacing);
+    padding-bottom: var(--space-4);
+}
