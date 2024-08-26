@@ -28,20 +28,20 @@
   color: var(--calcite-ui-text-1, #fff);
 }
 
-.local-navigation .nav-title a {
+.local-navigation .navigation-title a {
   font-size: var(--font-2);
   color: var(--calcite-ui-text-1);
   text-decoration: none;
 }
 
-.local-navigation .nav-title a.button {
+.local-navigation .navigation-title a.button {
   padding: 0;
   margin-inline-end: 0;
   margin-block-start: 0;
   background-color: transparent
 }
 
-.local-navigation .nav-title p {
+.local-navigation .navigation-title p {
   margin: 0;
 }
 
@@ -49,7 +49,7 @@
   display: none;
 }
 
-.local-navigation .nav-title {
+.local-navigation .navigation-title {
   flex: 1;
   z-index: 3001;
   white-space: nowrap;
@@ -69,7 +69,7 @@
   color: var(--calcite-ui-text-1, #fff);
 }
 
-.local-navigation .nav-title a:hover {
+.local-navigation .navigation-title a:hover {
   background-color: var(--calcite-ui-foreground-1, #2b2b2b);
   box-shadow: inset 0 -3px 0 0 var(--calcite-ui-foreground-1, #2b2b2b);
 }

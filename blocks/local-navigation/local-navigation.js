@@ -27,7 +27,7 @@ function currPg(href) {
  */
 function navigationTitle(value, block) {
   const updatedUrl = updateURL(value.titlelink);
-  const navTitle = block.querySelector('.nav-title');
+  const navTitle = block.querySelector('.navigation-title');
   const aHref = domEl('a', { href: updatedUrl });
   aHref.innerHTML = `${value.title}`;
   navTitle.appendChild(aHref);
@@ -84,9 +84,8 @@ function normalizeUrlPath(urlPath) {
       return url.href.replace(url.origin, currentOrigin);
     }
     return url.href;
-  } else {
-    return `${currentOrigin}${urlPath.startsWith('/') ? '' : '/'}${urlPath}`;
-  }
+  } 
+  return `${currentOrigin}${urlPath.startsWith('/') ? '' : '/'}${urlPath}`;
 }
 
 /**
@@ -94,11 +93,11 @@ function normalizeUrlPath(urlPath) {
  * @param {Element} block The header block element
  */
 function docAuthPageTitle(block) {
-  const xmlPgTitle = block.querySelector('.nav-title a');
-  const navTitle = block.querySelector('.nav-title');
+  const xmlPgTitle = block.querySelector('.navigation-title a');
+  const navTitle = block.querySelector('.navigation-title');
   const urlDocPgUrl = block.querySelector('div a');
   const aHref = document.createElement('a');
-  if ((xmlPgTitle === null) && (urlDocPgUrl.href !== null)) {
+  if (((xmlPgTitle.innerHTML).length === 0) && (urlDocPgUrl.href !== null)) {
     aHref.href = normalizeUrlPath(urlDocPgUrl.href);
     aHref.innerHTML = `${urlDocPgUrl.innerHTML}`;
     navTitle.appendChild(aHref);
@@ -111,7 +110,7 @@ function docAuthPageTitle(block) {
  */
 function initNavWrapper(block) {
   const htmlNavTag = document.createElement('nav');
-  const navTitle = domEl('div', { class: 'nav-title' });
+  const navTitle = domEl('div', { class: 'navigation-title' });
   const ul = document.createElement('ul');
   const mobileButton = domEl('calcite-icon', {
     class: 'btn-mobile',
@@ -174,5 +173,5 @@ export default async function decorate(block) {
       docAuthPageTitle(block);
       btnEventListener(block);
     })
-    .catch((error) => console.warn(`CORS or server may be down ${error}`));
+    .catch((error) => error);
 }
