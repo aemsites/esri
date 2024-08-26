@@ -22,22 +22,6 @@ function currPg(href) {
 }
 
 /**
- * Create a new anchor tag for navigation title and append to the nav if authored via document
- * @param {Element} block The header block element
- */
-function docAuthPageTitle(block) {
-  const xmlPgTitle = block.querySelector('.nav-title a');
-  const navTitle = block.querySelector('.nav-title');
-  const urlDocPgUrl = block.querySelector('div a');
-  const aHref = document.createElement('a');
-  if ((xmlPgTitle === null) && (urlDocPgUrl.href !== null)) {
-    aHref.href = normalizeUrlPath(urlDocPgUrl.href);
-    aHref.innerHTML = `${urlDocPgUrl.innerHTML}`;
-    navTitle.appendChild(aHref);
-  }
-}
-
-/**
  * Create a new anchor tag for navigation title and append to the nav if json data provided
  * @param {Object, Element} value The navigation title and url, block The header block element
  */
@@ -51,7 +35,8 @@ function navigationTitle(value, block) {
 
 /**
  * Create a new list item for page title and append to the nav tag ul
- * @param {Object, Element} pgObj The page title and page url, block The header block element
+ * @param {Object, Element} pgObj The page title and page url.
+ * Block The header block element
  */
 function appendPageTitle(pgObj, block) {
   const updatedUrl = updateURL(pgObj.pageLink);
@@ -69,8 +54,10 @@ function appendPageTitle(pgObj, block) {
 }
 
 /**
- * For document authored paged title only 'function docAuthPageTitle()'. Normalize url path, replace origin if different current origin
- * @param {JSON, Element} xmlData The api returned xmlData page folder json schema, block The header block element
+ * For document authored paged title only 'function docAuthPageTitle()'. 
+ * Normalize url path, replace origin if different current origin.
+ * @param {JSON, Element} xmlData The api returned xmlData page folder json schema.
+ * block The header block element.
  */
 function parseXML(xmlData, block) {
   for (let i = 0; i < xmlData.length; i += 1) {
@@ -86,7 +73,8 @@ function parseXML(xmlData, block) {
 }
 
 /**
- * For document authored paged title only 'function docAuthPageTitle()'. Normalize url path, replace origin if different current origin
+ * For document authored paged title only 'function docAuthPageTitle()'. 
+ * Normalize url path, replace origin if different current origin.
  * @param {Element} block The header block element
  */
 function normalizeUrlPath(urlPath) {
@@ -100,6 +88,22 @@ function normalizeUrlPath(urlPath) {
       return url.href;
     } else {
       return `${currentOrigin}${urlPath.startsWith('/') ? '' : '/'}${urlPath}`;
+  }
+}
+
+/**
+ * Create a new anchor tag for navigation title and append to the nav if authored via document
+ * @param {Element} block The header block element
+ */
+function docAuthPageTitle(block) {
+  const xmlPgTitle = block.querySelector('.nav-title a');
+  const navTitle = block.querySelector('.nav-title');
+  const urlDocPgUrl = block.querySelector('div a');
+  const aHref = document.createElement('a');
+  if ((xmlPgTitle === null) && (urlDocPgUrl.href !== null)) {
+    aHref.href = normalizeUrlPath(urlDocPgUrl.href);
+    aHref.innerHTML = `${urlDocPgUrl.innerHTML}`;
+    navTitle.appendChild(aHref);
   }
 }
 
@@ -173,6 +177,6 @@ export default async function decorate(block) {
       btnEventListener(block);
     })
     .catch((error) => { 
-      console.log(`CORS or the server may be down. https://rb.gy/y78pd6 ${error}`);
+      console.warn(`CORS or the server may be down. https://rb.gy/y78pd6 ${error}`);
     });
 }
