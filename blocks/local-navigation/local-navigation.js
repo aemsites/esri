@@ -84,7 +84,7 @@ function normalizeUrlPath(urlPath) {
       return url.href.replace(url.origin, currentOrigin);
     }
     return url.href;
-  } 
+  }
   return `${currentOrigin}${urlPath.startsWith('/') ? '' : '/'}${urlPath}`;
 }
 
