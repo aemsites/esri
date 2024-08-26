@@ -34,10 +34,24 @@
   text-decoration: none;
 }
 
+.local-navigation .nav-title a.button {
+  padding: 0;
+  margin-inline-end: 0;
+  margin-block-start: 0;
+  background-color: transparent
+}
+
+.local-navigation .nav-title p {
+  margin: 0;
+}
+
+.local-navigation div div.button-container {
+  display: none;
+}
+
 .local-navigation .nav-title {
-  z-index: 3001;
   flex: 1;
-  cursor: pointer;
+  z-index: 3001;
   white-space: nowrap;
   padding: 14px 14px 14px 0;
 }
