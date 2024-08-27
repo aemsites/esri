@@ -71,9 +71,8 @@ export default function decorate() {
   const cardGenericText = [];
   const overviewCardLinks = [];
   const overviewCards = locationOverviewCards.children.length;
-  console.log('locationoverview', locationOverviewCards);
-  locationOverviewCards.children.forEach((card) => {
-    card.children.forEach((c) => {
+  [...locationOverviewCards.children].forEach((card) => {
+    Array.from(card.children).forEach((c) => {
       cardHeadingTexts.push(c.children[0].innerText);
       overviewCardLinks.push(c.children[0].children[0].href);
       cardGenericText.push(c.children[1].innerText);

@@ -28,6 +28,7 @@
     background-repeat: no-repeat;
     background-size: 0% 1px,100% 1px;
     transition: all .3s ease-in-out;
+    color: var(--calcite-ui-text-1);
 }
 
 .location-overview-link-wrapper:is(:focus-within,:focus,:hover) .learn-more-icon-container {
