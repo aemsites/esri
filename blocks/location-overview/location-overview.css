@@ -18,18 +18,33 @@
     inline-size: 100%;
 }
 
+.learn-more-icon-container {
+    display: flex;
+    align-items: center;
+    inline-size: fit-content;
+    margin: auto;
+    background-image: linear-gradient(to right, currentcolor 0, currentcolor 100%);
+    background-position: 0% 100%,100% 100%;
+    background-repeat: no-repeat;
+    background-size: 0% 1px,100% 1px;
+    transition: all .3s ease-in-out;
+}
+
+.location-overview-link-wrapper:is(:focus-within,:focus,:hover) .learn-more-icon-container {
+    background-size: 100% 1px,100% 1px;    
+}
+
 .location-overview-card-text {
     color: var(--calcite-ui-text-1);
     font-size: var(--description-size);
     margin-block-end: var(--content-end-spacing);
-    padding-bottom: var(--space-4);
+    padding-block-end: var(--space-4);
 }
 
 .location-overview-card-container {
     background-image: url("/assets/location-overview-programs-background.jpeg");
     background-size: cover;
-    flex: 0 0 33.33%;
-    max-inline-size: 33.33%;
+    flex: 1 0 100%;
     position: relative;
     overflow: hidden;
     text-align: center;
@@ -37,8 +52,17 @@
     background-position: center;
     transition: all .25s ease-in-out;
     color: var(--calcite-ui-text-1);
+
     --bg-color: var(--calcite-ui-foreground-1);
     --shadow-color: var(--esri-ui-opacity80);
+}
+
+.location-overview-card-container:hover {
+    box-shadow: 0 0 0 10px inset var(--shadow-color);
+}
+
+.location-overview-card-container *:is(:focus,:focus-visible) {
+    outline: none;
 }
 
 .location-overview-card-link {
@@ -49,6 +73,10 @@
     padding-block: var(--space-20);
     padding-inline: var(--space-5);
     inline-size: 100%;
+}
+
+.location-overview-link-wrapper:hover {
+    text-decoration: none;
 }
 
 .location-overview-content-wrapper {
@@ -65,9 +93,27 @@
     font-size: var(--title-size);
 }
 
-.location-overview-card-text {
-    color: var(--calcite-ui-text-1);
-    font-size: var(--description-size);
-    margin-block-end: var(--content-end-spacing);
-    padding-bottom: var(--space-4);
+@media (width > 480px)  {
+    .location-overview-card-container {
+        flex: 0 0 50%;
+        max-inline-size: 50%;
+    }
+
+    .location-overview-card-container:nth-last-child(3) {
+        flex: 0 0 100%;
+        max-inline-size: 100%;
+    }
+}
+
+@media  (width > 860px) {
+    .location-overview-card-container {
+        flex: 0 0 33.33%;
+        max-inline-size: 33.33%;
+    }
+
+    .location-overview-card-container:nth-last-child(3) {
+        flex: 0 0 33.33%;
+        max-inline-size: 33.33%;
+    }
+
 }
