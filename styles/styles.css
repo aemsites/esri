@@ -286,6 +286,7 @@ main img {
 
     .video-close-button:hover {
       background-color: var(--calcite-ui-brand);
+      color: var(--calcite-ui-text-inverse);
       
     }
   }

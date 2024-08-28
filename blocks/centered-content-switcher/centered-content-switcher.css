@@ -157,6 +157,10 @@
         border-inline-end: 1px solid var(--calcite-ui-border-1);
         flex: 0 0 calc(33.33% - 2px);
       }
+
+      li:hover {
+        cursor: pointer;
+      }
     }
   }
 }
@@ -185,7 +189,7 @@
     .mobile-nav {
       display: none;
     }
-    
+
     .desktop-nav {
       display: block;
     }
