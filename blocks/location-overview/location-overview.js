@@ -7,6 +7,10 @@ import {
   p,
 } from '../../scripts/dom-helpers.js';
 
+import {
+    decorateIcons
+} from "../../scripts/aem.js"
+
 function getLearnMoreIcon() {
   const learnMoreIcon = domEl('calcite-icon', {
     icon: 'arrowRight',
@@ -18,9 +22,8 @@ function getLearnMoreIcon() {
 }
 
 function getPanelIcon(iconPath = '') {
-  // TODO, use iconPath
   const panelIcon = span({
-    class: iconPath || 'location-overview-panel-icon icon icon-building-classical-32',
+    class: iconPath || 'location-overview-panel-icon icon icon-2-5d-mesh-48',
   });
 
   return panelIcon;
@@ -86,5 +89,6 @@ export default function decorate() {
     overviewCardLinks,
   );
   locationOverviewCards.innerHTML = '';
+  decorateIcons(locationOverviewDOMElements)
   locationOverviewCards.appendChild(locationOverviewDOMElements);
 }

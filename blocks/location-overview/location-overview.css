@@ -7,6 +7,11 @@
     cursor: default;        
 }
 
+.location-overview.block {
+    padding: 0;
+    color: var(--calcite-ui-text-1);
+}
+
 
 .location-overview-link-wrapper {
     overflow: hidden;
@@ -31,6 +36,11 @@
     color: var(--calcite-ui-text-1);
 }
 
+.location-overview-content-wrapper > span > img {
+    max-block-size: 48px;
+    max-inline-size: 48px;
+    fill: var(--calcite-ui-text-1);
+}
 .location-overview-link-wrapper:is(:focus-within,:focus,:hover) .learn-more-icon-container {
     background-size: 100% 1px,100% 1px;    
 }
@@ -66,16 +76,6 @@
     outline: none;
 }
 
-.location-overview-card-link {
-    overflow: hidden;
-    margin-block-end: 0;
-    text-decoration: none;
-    color: var(--calcite-ui-text-1);
-    padding-block: var(--space-20);
-    padding-inline: var(--space-5);
-    inline-size: 100%;
-}
-
 .location-overview-link-wrapper:hover {
     text-decoration: none;
 }
@@ -91,7 +91,9 @@
 .location-overview-card-header {
     margin-block: var(--space-8);
     color: var(--calcite-ui-text-1);
+    --title-size: var(--font-3);
     font-size: var(--title-size);
+    font-weight: var(--calcite-font-weight-normal);
 }
 
 @media (width > 480px)  {
