@@ -41,6 +41,7 @@
     max-inline-size: 48px;
     fill: var(--calcite-ui-text-1);
 }
+
 .location-overview-link-wrapper:is(:focus-within,:focus,:hover) .learn-more-icon-container {
     background-size: 100% 1px,100% 1px;    
 }
@@ -91,7 +92,9 @@
 .location-overview-card-header {
     margin-block: var(--space-8);
     color: var(--calcite-ui-text-1);
+
     --title-size: var(--font-3);
+
     font-size: var(--title-size);
     font-weight: var(--calcite-font-weight-normal);
 }

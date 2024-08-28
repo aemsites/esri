@@ -8,8 +8,8 @@ import {
 } from '../../scripts/dom-helpers.js';
 
 import {
-    decorateIcons
-} from "../../scripts/aem.js"
+  decorateIcons,
+} from '../../scripts/aem.js';
 
 function getLearnMoreIcon() {
   const learnMoreIcon = domEl('calcite-icon', {
@@ -89,6 +89,6 @@ export default function decorate() {
     overviewCardLinks,
   );
   locationOverviewCards.innerHTML = '';
-  decorateIcons(locationOverviewDOMElements)
+  decorateIcons(locationOverviewDOMElements);
   locationOverviewCards.appendChild(locationOverviewDOMElements);
 }
