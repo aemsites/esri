@@ -82,8 +82,8 @@
 
 .location-overview-content-wrapper > span > img {
     filter: var(--image-white-filter);
-    width: 48px;
-    height: 48px;
+    inline-size: 48px;
+    block-size: 48px;
 }
 
 .location-overview-content-wrapper {
