@@ -36,12 +36,6 @@
     color: var(--calcite-ui-text-1);
 }
 
-.location-overview-content-wrapper > span > img {
-    max-block-size: 48px;
-    max-inline-size: 48px;
-    fill: var(--calcite-ui-text-1);
-}
-
 .location-overview-link-wrapper:is(:focus-within,:focus,:hover) .learn-more-icon-container {
     background-size: 100% 1px,100% 1px;    
 }
@@ -79,6 +73,17 @@
 
 .location-overview-link-wrapper:hover {
     text-decoration: none;
+}
+
+.location-overview-panel-icon {
+    block-size: 48px;
+    inline-size: 48px;
+}
+
+.location-overview-content-wrapper > span > img {
+    filter: var(--image-white-filter);
+    width: 48px;
+    height: 48px;
 }
 
 .location-overview-content-wrapper {
