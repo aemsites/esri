@@ -26,13 +26,21 @@
       }
     }
 
+    p:first-child img {
+      position: absolute;
+      object-fit: cover;
+      inset-block-start: 0;
+      inline-size: 100%;
+      block-size: 100%;
+    }
+
     .tab-nav {
       position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
       inline-size: 96vw;
-      padding: 0;
+      padding: 0; 
       margin: 0 auto;
       border-block-end: 1px solid var(--calcite-ui-border-1);
 
@@ -83,6 +91,11 @@
         padding: 1rem;
         margin: auto;
         max-inline-size: 286px;
+        line-height: 24px;
+
+        & > span > img {
+          filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(228deg) brightness(104%) contrast(102%);
+        }
 
         button {
           background: none;
@@ -92,6 +105,10 @@
           padding: 0.75rem;
           margin: auto;
         }
+      }
+
+      .tab-title button:hover > span > img {
+        filter: brightness(0) saturate(100%) invert(50%) sepia(52%) saturate(4357%) hue-rotate(175deg) brightness(96%) contrast(102%);
       }
 
       .tab-title[aria-hidden='true'] {
@@ -148,14 +165,6 @@
 
     .tab-content[aria-hidden='true'] {
       display: none;
-    }
-
-    p:first-child img {
-      position: absolute;
-      object-fit: cover;
-      inset-block-start: 0;
-      inline-size: 100%;
-      block-size: 100%;
     }
 
     .buttons-wrapper {
