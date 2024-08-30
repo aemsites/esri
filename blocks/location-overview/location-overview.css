@@ -43,9 +43,8 @@
 .location-overview-card-text {
     color: var(--calcite-ui-text-1);
     font-size: var(--description-size);
-    margin-block-end: var(--content-end-spacing);
     padding-block-end: var(--space-4);
-    margin-bottom: var(--space-6);
+    margin-block-end: var(--space-6);
 }
 
 .location-overview-card-container {
