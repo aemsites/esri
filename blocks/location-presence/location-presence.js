@@ -5,33 +5,30 @@ import {
     span,
     h2,
     p,
+    calciteButton
   } from '../../scripts/dom-helpers.js';
   
 
-
+function getDOMElements(hText, pText, buttonText, buttonHref) {
+  
+  const heading = h2({class: "location-presence-heading"}, hText)
+  const text = p({class: "location-presence-text"}, pText)
+  const findYourEsriOfficeButton = calciteButton({class: "location-presence-button", href: buttonHref}, buttonText)
+  const contentWrapper = div({class: "location-content-container"}, heading, text, findYourEsriOfficeButton)
+  return contentWrapper
+}
 export default function decorate() {
     const locationPresenceBlock = document.querySelector('.location-presence-wrapper > div > div > div');
     
     const [ heading, text, button ] = locationPresenceBlock.children
-    console.log('these are the elements, ', heading, text, button)
 
-    
-    // const overviewCards = locationOverviewCards.children.length;
-    // [...locationOverviewCards.children].forEach((card) => {
-    //   Array.from(card.children).forEach((c) => {
-    //     cardHeadingTexts.push(c.children[0].innerText);
-    //     overviewCardLinks.push(c.children[0].children[0].href);
-    //     cardGenericText.push(c.children[1].innerText);
-    //   });
-    // });
-  
-    // const locationOverviewDOMElements = getLocationOverviewDomElements(
-    //   overviewCards,
-    //   cardHeadingTexts,
-    //   cardGenericText,
-    //   overviewCardLinks,
-    // );
-    // locationOverviewCards.innerHTML = '';
-    // decorateIcons(locationOverviewDOMElements);
-    // locationOverviewCards.appendChild(locationOverviewDOMElements);
+    const elements = getDOMElements(heading.textContent, text.textContent, button.children[0].textContent, button.children[0].href)
+
+    console.log('these are the elements, ', heading, text, button)
+    console.log('these are computed elements', elements)
+
+    locationPresenceBlock.innerHTML = ""
+    // locationPresenceBlock.classList.add("")
+
+    locationPresenceBlock.appendChild(elements)
   }
