@@ -45,6 +45,7 @@
     font-size: var(--description-size);
     margin-block-end: var(--content-end-spacing);
     padding-block-end: var(--space-4);
+    margin-bottom: var(--space-6);
 }
 
 .location-overview-card-container {
@@ -60,7 +61,7 @@
     color: var(--calcite-ui-text-1);
 
     --bg-color: var(--calcite-ui-foreground-1);
-    --shadow-color: var(--esri-ui-opacity80);
+    --shadow-color: var(--esri-ui-opacity80-inverse);
 }
 
 .location-overview-card-container:hover {
