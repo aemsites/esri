@@ -73,11 +73,12 @@ export default function decorate() {
   const cardHeadingTexts = [];
   const cardGenericText = [];
   const overviewCardLinks = [];
+
   const overviewCards = locationOverviewCards.children.length;
   [...locationOverviewCards.children].forEach((card) => {
     [...card.children].forEach((c) => {
       cardHeadingTexts.push(c.children[0].innerText);
-      overviewCardLinks.push(c.children[0].children[0].href);
+      overviewCardLinks.push(c.children[2].children[0].href);
       cardGenericText.push(c.children[1].innerText);
     });
   });
