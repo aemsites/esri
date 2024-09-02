@@ -110,6 +110,10 @@
   padding-inline: 0;
 }
 
+.storyteller:not(.content-right) div:nth-of-type(1) div:nth-of-type(2) p:nth-of-type(2), .storyteller div div p:nth-of-type(2).foreground-container, .storyteller.content-right div div p:nth-of-type(2).foreground-container {
+  margin-inline: var(--space-6);
+}
+
 .storyteller div div:nth-of-type(2) p:nth-of-type(1) picture {
   block-size: 100%;
   position: absolute;
@@ -172,19 +176,26 @@
     margin-inline-end: var(--space-20);
   }
 
+  .storyteller .foreground-content, .storyteller p picture, .storyteller div:nth-of-type(2) .content-wrapper p {
+    padding-inline-start: 0;
+  } 
+
   .storyteller:not(.content-right) div:nth-of-type(1) div:nth-child(1) h2, .storyteller:not(.content-right) div:nth-of-type(1) div:nth-child(1) p {
     margin-inline-start: auto;
     max-inline-size: 660px
   }
   
+  .storyteller div div p:nth-of-type(2).foreground-container, .storyteller.content-right div div p:nth-of-type(2).foreground-container {
+    margin-inline: 0;
+  }
+
   .storyteller:not(.content-right) div:nth-of-type(1) div:nth-of-type(2) p:nth-of-type(2), .storyteller div div p:nth-of-type(2).foreground-container, .storyteller.content-right div div p:nth-of-type(2).foreground-container {
     margin-inline: var(--space-6);
   }
 
-  .storyteller.content-right div div p:nth-of-type(2).foreground-container,  .storyteller div div p:nth-of-type(2).foreground-container {
-    margin-inline: 0;
+  .storyteller .foreground-content .content-wrapper, .storyteller.content-right div div.foreground-content .content-wrapper p, .storyteller div div p:not(.button-container), .storyteller:not(.content-right) div:nth-of-type(1) div:nth-of-type(1), .storyteller:not(.content-right) div div:nth-of-type(2) .foreground-container .foreground-content h2, .storyteller:not(.content-right) div div:nth-of-type(2) p.foreground-container .foreground-content p {
+    padding-inline: 0;
   }
-
   .storyteller div p:nth-of-type(2) video, .storyteller.content-right div p:nth-of-type(2) video, .storyteller .foreground-content .content-wrapper, .storyteller.content-right .foreground-content .content-wrapper {
     position: absolute;
   }
@@ -212,8 +223,11 @@
     inline-size: 50%;
   }
 
-  .storyteller .foreground-content .content-wrapper, .storyteller.content-right div div.foreground-content .content-wrapper p, .storyteller div div p:not(.button-container), .storyteller:not(.content-right) div:nth-of-type(1) div:nth-of-type(1), .storyteller:not(.content-right) div div:nth-of-type(2) .foreground-container .foreground-content h2, .storyteller:not(.content-right) div div:nth-of-type(2) p.foreground-container .foreground-content p {
-    padding-inline: 0;
+  .storyteller.content-right div div:nth-of-type(2) {
+    display: block;
+    block-size: auto;
+    inline-size: 50%;
+    padding: var(--space-20) 0 var(--space-20) var(--space-16) ;
   }
 
   .storyteller button.video-playbutton {
@@ -232,10 +246,6 @@
     inline-size: 75%;
     max-inline-size: 575px;
   }
-  
-  .storyteller .foreground-content, .storyteller p picture, .storyteller div:nth-of-type(2) .content-wrapper p {
-    padding-inline-start: 0;
-  } 
     
   .storyteller p:nth-of-type(1) picture {
     display: block;
@@ -253,13 +263,6 @@
     position: absolute;
     inset-block-start: 50%;
     transform: translateY(-50%);
-  }
-
-  .storyteller.content-right div div:nth-of-type(2) {
-    display: block;
-    block-size: auto;
-    inline-size: 50%;
-    padding: var(--space-20) 0 var(--space-20) var(--space-10) ;
   }
 
   .storyteller.content-right .foreground-container {
