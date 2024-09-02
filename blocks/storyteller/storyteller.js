@@ -30,10 +30,9 @@ function setforegroundContainers(block) {
     if (picTags.length > 1) {
       const picTag = picTags[1];
       picTag.parentNode.classList.add('foreground-container');
-    } 
+    }
   }
 }
-
 
 /**
  * Toggle playhead to play or pause mp4 video.
@@ -101,7 +100,7 @@ function getMP4(block) {
     }
   });
   return mp4Urls;
-} 
+}
 
 export default async function decorate(block) {
   const pTags = block.querySelectorAll('p');
@@ -138,12 +137,14 @@ export default async function decorate(block) {
       foregroundWrapper.appendChild(videoBtn);
     }
   }
-  
+
   if ((pictureTagLeft === null) && (vidUrls.length >= 1)) {
     const foregroundWrapper = block.querySelector('.foreground-container');
     const h2Tags = block.querySelectorAll('h2');
-    source.setAttribute('src', vidUrls[0].href);
-    videoTag.appendChild(source);
+    if (vidUrls.length >= 1) {
+      source.setAttribute('src', vidUrls[0].href);
+      videoTag.appendChild(source);
+    }
     foregroundContentContainer.classList.add('foreground-content');
     foregroundContentContainer.appendChild(videoTag);
     foregroundContent.appendChild(h2Tags[1]);
@@ -156,7 +157,7 @@ export default async function decorate(block) {
     foregroundWrapper.appendChild(foregroundContentContainer);
     foregroundWrapper.appendChild(videoBtn);
   }
-  
+
   videoBtn.addEventListener('click', () => {
     toggleVideo(videoBtn);
   });
