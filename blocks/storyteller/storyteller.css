@@ -202,7 +202,6 @@
     padding-inline: var(--space-32) var(--space-8);
   }
 
-  ---
   .storyteller:not(.content-right) div:nth-of-type(1) div:nth-of-type(2) p:nth-of-type(2), .storyteller.content-right div div p:nth-of-type(2).foreground-container {
     margin-inline: var(--space-6);
   }
