@@ -26,6 +26,7 @@
     font-size: var(--title-size);
     margin-block: 3rem 0.5rem;
     font-weight: var(--calcite-font-weight-normal);
+    text-align: center;
 }
 
 .location-presence-subtitle {
