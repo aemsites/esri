@@ -202,6 +202,10 @@
     padding-inline: var(--space-32) var(--space-8);
   }
 
+  .storyteller.content-right div .foreground-content .content-wrapper p {
+    padding-inline: 0;
+  }
+
   .storyteller:not(.content-right) div:nth-of-type(1) div:nth-of-type(2) p:nth-of-type(2), .storyteller.content-right div div p:nth-of-type(2).foreground-container {
     margin-inline: var(--space-6);
   }
@@ -234,7 +238,7 @@
     inline-size: 50%;
   }
   
-  .storyteller .foreground-content .content-wrapper, .storyteller.content-right div div.foreground-content .content-wrapper p, .storyteller div div p:not(.button-container), .storyteller:not(.content-right) div:nth-of-type(1) div:nth-of-type(1), .storyteller:not(.content-right) div div:nth-of-type(2) .foreground-container .foreground-content h2, .storyteller:not(.content-right) div div:nth-of-type(2) p.foreground-container .foreground-content p {
+  .storyteller .foreground-content .content-wrapper, .storyteller div div p:not(.button-container), .storyteller:not(.content-right) div:nth-of-type(1) div:nth-of-type(1), .storyteller:not(.content-right) div div:nth-of-type(2) .foreground-container .foreground-content h2, .storyteller:not(.content-right) div div:nth-of-type(2) p.foreground-container .foreground-content p {
     padding-inline: 0;
   }
 
