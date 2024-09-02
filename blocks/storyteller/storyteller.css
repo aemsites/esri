@@ -93,7 +93,7 @@
 
 .storyteller.content-right div div:nth-of-type(2) {
   block-size: auto;
-  padding-inline-start: var(--space-6);
+  padding-inline: var(--space-6);
 }
 
 .storyteller:not(.content-right) div:nth-of-type(1) > div:nth-of-type(1) {
@@ -190,6 +190,10 @@
     max-inline-size: 660px
   }
   
+  .storyteller div div p:nth-of-type(2).foreground-container {
+    margin-inline: var(--space-6);
+  }
+
   .storyteller div div p:nth-of-type(2).foreground-container, .storyteller.content-right div div p:nth-of-type(2).foreground-container {
     margin-inline: 0;
   }
@@ -198,7 +202,7 @@
     padding-inline: var(--space-32) var(--space-8);
   }
 
-  .storyteller:not(.content-right) div:nth-of-type(1) div:nth-of-type(2) p:nth-of-type(2), .storyteller div div p:nth-of-type(2).foreground-container, .storyteller.content-right div div p:nth-of-type(2).foreground-container {
+  .storyteller:not(.content-right) div:nth-of-type(1) div:nth-of-type(2) p:nth-of-type(2), .storyteller.content-right div div p:nth-of-type(2).foreground-container {
     margin-inline: var(--space-6);
   }
 
@@ -225,7 +229,7 @@
     inset-block: 50% 0;
     transform: translateY(-50%);
   }
-  
+
   .storyteller div div:nth-of-type(1), .storyteller div div:nth-of-type(2), .storyteller.content-right .foreground-container {
     inline-size: 50%;
   }
