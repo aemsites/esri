@@ -194,10 +194,6 @@
     margin-inline: 0;
   }
 
-  .storyteller.content-right div div:nth-of-type(1) {
-    position: relative;
-  }
-
   .storyteller:not(.content-right) div:nth-of-type(1) div:nth-of-type(1) h2, .storyteller:not(.content-right) div:nth-of-type(1) div:nth-of-type(1) p {
     padding-inline: var(--space-32) var(--space-8);
   }
@@ -218,6 +214,7 @@
     flex-direction: row;
   }
     
+
   .storyteller div div:nth-of-type(2) {
     block-size: 100%;
   }
@@ -225,7 +222,7 @@
   .storyteller div div:nth-of-type(1), .storyteller div div:nth-of-type(2), .storyteller.content-right .foreground-container {
     inline-size: 50%;
   }
-
+  
   .storyteller .foreground-content .content-wrapper, .storyteller.content-right div div.foreground-content .content-wrapper p, .storyteller div div p:not(.button-container), .storyteller:not(.content-right) div:nth-of-type(1) div:nth-of-type(1), .storyteller:not(.content-right) div div:nth-of-type(2) .foreground-container .foreground-content h2, .storyteller:not(.content-right) div div:nth-of-type(2) p.foreground-container .foreground-content p {
     padding-inline: 0;
   }
@@ -256,6 +253,10 @@
     margin-inline-end: var(--space-4); 
   }
   
+  .storyteller.content-right div div:nth-of-type(1) {
+    position: relative;
+  }
+
   .storyteller p:nth-of-type(1) picture {
     display: block;
   }
