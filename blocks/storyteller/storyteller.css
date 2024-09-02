@@ -180,6 +180,11 @@
     padding-inline-start: 0;
   } 
 
+  .storyteller.content-right div:nth-of-type(2) p {
+    inline-size: 75%;
+    max-inline-size: 575px;
+  }
+
   .storyteller:not(.content-right) div:nth-of-type(1) div:nth-child(1) h2, .storyteller:not(.content-right) div:nth-of-type(1) div:nth-child(1) p {
     margin-inline-start: auto;
     max-inline-size: 660px
@@ -189,12 +194,12 @@
     margin-inline: 0;
   }
 
+  .storyteller:not(.content-right) div:nth-of-type(1) div:nth-of-type(1) h2, .storyteller:not(.content-right) div:nth-of-type(1) div:nth-of-type(1) p {
+    padding-inline: var(--space-32) var(--space-8);
+  }
+  
   .storyteller:not(.content-right) div:nth-of-type(1) div:nth-of-type(2) p:nth-of-type(2), .storyteller div div p:nth-of-type(2).foreground-container, .storyteller.content-right div div p:nth-of-type(2).foreground-container {
     margin-inline: var(--space-6);
-  }
-
-  .storyteller div div:nth-of-type(2) {
-    block-size: 100%;
   }
 
   .storyteller > div {
@@ -203,6 +208,10 @@
     inline-size: 100%;
     align-items: center;
     flex-direction: row;
+  }
+
+  .storyteller div div:nth-of-type(2) {
+    block-size: 100%;
   }
 
   .storyteller .foreground-content .content-wrapper, .storyteller.content-right div div.foreground-content .content-wrapper p, .storyteller div div p:not(.button-container), .storyteller:not(.content-right) div:nth-of-type(1) div:nth-of-type(1), .storyteller:not(.content-right) div div:nth-of-type(2) .foreground-container .foreground-content h2, .storyteller:not(.content-right) div div:nth-of-type(2) p.foreground-container .foreground-content p {
@@ -245,15 +254,6 @@
 
   .storyteller.content-right div {
     flex-direction: row;
-  }
-  
-  .storyteller:not(.content-right) div:nth-of-type(1) div:nth-of-type(1) h2, .storyteller:not(.content-right) div:nth-of-type(1) div:nth-of-type(1) p {
-    padding-inline: var(--space-32) var(--space-8);
-  }
-
-  .storyteller.content-right div:nth-of-type(2) p {
-    inline-size: 75%;
-    max-inline-size: 575px;
   }
     
   .storyteller p:nth-of-type(1) picture {
