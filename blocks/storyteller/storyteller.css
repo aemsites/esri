@@ -110,7 +110,7 @@
   margin-inline: var(--space-6);
 }
 
-.storyteller.content-right .foreground-content, .storyteller div div p:nth-of-type(2).foreground-container, .storyteller.content-right div div p:nth-of-type(2).foreground-container {
+.storyteller.content-right .foreground-content, .storyteller.content-right div div p:nth-of-type(2).foreground-container {
   padding-inline: 0;
 }
 
@@ -213,6 +213,7 @@
   .storyteller.content-right div {
     flex-direction: row;
   }
+    
 
   .storyteller div div:nth-of-type(2) {
     block-size: 100%;
