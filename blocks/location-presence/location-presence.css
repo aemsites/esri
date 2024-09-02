@@ -19,6 +19,7 @@
     max-inline-size: 96vw;
     padding-inline: 0 0;
     margin-inline: auto auto;
+    text-align: center;
 }
 
 .location-presence-heading {
@@ -26,12 +27,10 @@
     font-size: var(--title-size);
     margin-block: 3rem 0.5rem;
     font-weight: var(--calcite-font-weight-normal);
-    text-align: center;
 }
 
 .location-presence-subtitle {
     margin-block: 0 var(--space-2);
-    text-align: center;
     max-inline-size: 700px;
     color: var(--calcite-ui-text-2);
     font-size: var(--subtitle-size);
