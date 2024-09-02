@@ -219,6 +219,13 @@
     block-size: 100%;
   }
 
+  .storyteller .foreground-container {
+    position: absolute;
+    overflow: hidden;
+    inset-block: 50% 0;
+    transform: translateY(-50%);
+  }
+  
   .storyteller div div:nth-of-type(1), .storyteller div div:nth-of-type(2), .storyteller.content-right .foreground-container {
     inline-size: 50%;
   }
@@ -233,13 +240,6 @@
   
   .storyteller:not(.content-right) div div:nth-of-type(2) .foreground-container .content-wrapper {
     padding-inline: var(--space-6);
-  }
-
-  .storyteller .foreground-container {
-    position: absolute;
-    overflow: hidden;
-    inset-block: 50% 0;
-    transform: translateY(-50%);
   }
 
   .storyteller.content-right div div:nth-of-type(2) {
