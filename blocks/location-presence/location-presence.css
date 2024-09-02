@@ -24,8 +24,6 @@
 .location-presence-heading {
     color: var(--calcite-ui-text-1);
     font-size: var(--title-size);
-
-    /* margin-block-end: var(--content-spacing); */
     margin-block: 3rem 0.5rem;
     font-weight: var(--calcite-font-weight-normal);
 }
@@ -36,8 +34,6 @@
     max-inline-size: 700px;
     color: var(--calcite-ui-text-2);
     font-size: var(--subtitle-size);
-
-    /* margin-block-end: var(--content-spacing); */
 }
 
 .location-presence-button {
