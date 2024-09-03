@@ -2,10 +2,6 @@ import { createOptimizedPicture } from '../../scripts/aem.js';
 import { div } from '../../scripts/dom-helpers.js';
 
 export default function decorate(block) {
-  block.classList.add('calcite-mode-dark');
-  document.querySelector('.tabs-container').classList.add('calcite-mode-dark');
-  document.querySelector('.tabs-container').classList.remove('calcite-mode-light');
-
   block.querySelectorAll('img').forEach((img) => img
     .closest('picture')?.replaceWith(
       createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }]),

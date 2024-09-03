@@ -1,4 +1,4 @@
-.tabs-icons-variant {
+.tabs.with-icons {
   .tab-nav.expanded {
     position: relative;
     border-block-end: 1px solid var(--calcite-ui-border-1);
@@ -98,7 +98,7 @@
 }
 
 @media (width >= 1024px) {
-  .tabs.tabs-icons-variant {
+  .tabs.with-icons {
     .tab-content[aria-hidden='false'] {
       display: flex;
       align-items: center;

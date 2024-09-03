@@ -14,7 +14,7 @@ import {
 
 export default async function decorate(block) {
   const isTabsCardsVariant = block.classList.contains('tabs-cards-variant');
-  const isTabsIconsVariant = block.classList.contains('tabs-icons-variant');
+  const isTabsIconsVariant = block.classList.contains('with-icons');
 
   block.querySelectorAll('img').forEach((img) => img
     .closest('picture')?.replaceWith(
@@ -70,7 +70,7 @@ export default async function decorate(block) {
       const buttonsWrapper = div({ class: 'buttons-wrapper' }, ...buttons);
       content.splice(2, 2, buttonsWrapper);
     });
-  } else {
+  } else if (isTabsCardsVariant) {
     document.querySelector('.tabs-container').classList.add('calcite-mode-light');
   }
 
