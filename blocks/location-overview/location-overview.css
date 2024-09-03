@@ -104,7 +104,7 @@
     font-weight: var(--calcite-font-weight-normal);
 }
 
-@media (width > 480px)  {
+@media (width > 640px)  {
     .location-overview-card-container {
         flex: 0 0 50%;
         max-inline-size: 50%;
@@ -116,7 +116,7 @@
     }
 }
 
-@media  (width > 860px) {
+@media  (width > 900px) {
     .location-overview-card-container {
         flex: 0 0 33.33%;
         max-inline-size: 33.33%;
