@@ -57,17 +57,17 @@ function getLinkWrapper(hText, pText, cardLinkTo) {
 }
 
 function getLocationOverviewDomElements(cardCount, headingTexts, genericTexts, cardLinks) {
-  // overviewWrapper wraps around all our containers
   const overviewWrapper = div({ class: 'location-overview-container-wrapper' });
 
   for (let i = 0; i < cardCount; i += 1) {
-    const card = div({ class: 'location-overview-card-container calcite-mode-dark' }, getLinkWrapper(headingTexts[i], genericTexts[i], cardLinks[i]));
+    const card = div({ class: 'location-overview-card-container' }, getLinkWrapper(headingTexts[i], genericTexts[i], cardLinks[i]));
     overviewWrapper.appendChild(card);
   }
 
   return overviewWrapper;
 }
-export default function decorate() {
+export default function decorate(block) {
+  block.classList.add('calcite-mode-dark')
   const locationOverviewCards = document.querySelector('.location-overview-wrapper > div');
 
   const cardHeadingTexts = [];
