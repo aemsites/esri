@@ -39,26 +39,17 @@ function getVideoInteractionElement(videoAnchor) {
 }
 
 function getContactOfficeDomElements(heading, button, ...media) {
-  const contentWrapper = div({ class: 'about-content-wrapper' });
-  const headingWrapper = div({ class: 'about-heading-wrapper' });
-  headingWrapper.appendChild(heading);
-  const buttonWrapper = div(
-    { class: 'about-button-wrapper calcite-button-wrapper calcite-animate calcite-animate__in-up' },
-    convertToCalciteButton(button),
+  return div(
+    { class: 'about-content-wrapper' },
+    div({ class: 'about-heading-wrapper' }, heading),
+    div(
+      { class: 'about-button-wrapper calcite-button-wrapper calcite-animate calcite-animate__in-up' },
+      convertToCalciteButton(button),
+    ),
+    div({ class: 'about-media-wrapper' }, ...media),
   );
-  const mediaWrapper = div({ class: 'about-media-wrapper' });
-  media.forEach((m) => {
-    mediaWrapper.appendChild(m);
-  });
-
-  const contentChildren = [headingWrapper, buttonWrapper, mediaWrapper];
-
-  contentChildren.forEach((child) => {
-    contentWrapper.appendChild(child);
-  });
-
-  return contentWrapper;
 }
+
 export default function decorate(block) {
   const mainCell = block.querySelector(':scope > div > div');
 
@@ -72,6 +63,7 @@ export default function decorate(block) {
 
   const button = aboutContactButton.children[0];
 
+  // TODO background picture quality is low, fix it
   const backgroundPicture = mainCell.querySelector(':scope > p:last-child > picture');
 
   const elems = getContactOfficeDomElements(
@@ -81,8 +73,8 @@ export default function decorate(block) {
     videoElement,
   );
 
-  const backgorundPictureSrc = backgroundPicture.querySelector('source').srcset;
-  elems.style.backgroundImage = `url(${backgorundPictureSrc})`;
+  const backgroundPictureSrc = backgroundPicture.querySelector('source').srcset;
+  elems.style.backgroundImage = `url(${backgroundPictureSrc})`;
 
   block.replaceChildren(elems);
 }
