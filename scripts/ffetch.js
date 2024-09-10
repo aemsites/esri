@@ -147,7 +147,7 @@ function assignOperations(generator, context) {
     follow: createOperation(follow),
   };
 
-// functions that either return the upstream generator or no generator at all
+  // functions that either return the upstream generator or no generator at all
   const functions = {
     chunks: chunks.bind(null, generator, context),
     all: all.bind(null, generator, context),
