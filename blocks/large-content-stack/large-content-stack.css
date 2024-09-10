@@ -1,13 +1,13 @@
 
 .about-content-wrapper {
-    background-image: url("https://main--esri--aemsites.hlx.page/assets/esri-about-us-banner-background.jpeg");
+    background-image: url("/assets/esri-about-us-banner-background.jpeg");
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
     text-align: center;
 }
 
-.contact-local-office.block {
+.large-content-stack.block {
     padding: 0;
 }
 
@@ -29,7 +29,7 @@
     inset-block-start: 50%;
     inset-inline-start: 50%;
     transform: translate(-50%, -50%);
-}   
+}
 
 .about-main-heading {
     font-size: var(--font-8);

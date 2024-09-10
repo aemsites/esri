@@ -629,6 +629,7 @@ async function loadBlock(block) {
               `${window.hlx.codeBasePath}/blocks/${blockName}/${blockName}.js`
             );
             if (mod.default) {
+              console.log('decorating', blockName, block);
               await mod.default(block);
             }
           } catch (error) {

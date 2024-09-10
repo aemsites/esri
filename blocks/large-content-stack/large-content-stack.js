@@ -1,21 +1,16 @@
-import {
-  calciteButton,
-  div,
-} from '../../scripts/dom-helpers.js';
+import { calciteButton, div } from '../../scripts/dom-helpers.js';
 
-function getContactOfficeButton(textContent) {
-  const contactOfficeButton = calciteButton({
+function convertToCalciteButton(button) {
+  return calciteButton({
     'icon-end': 'arrowRight',
-    href: 'https://www.esri.com/en-us/contact',
+    href: button.href,
     appearance: 'outline',
     alignment: 'center',
     scale: 'm',
     type: 'button',
     width: 'auto',
     kind: 'inverse',
-  }, textContent);
-
-  return contactOfficeButton;
+  }, button.textContent);
 }
 
 function getVideoInteractionElement(videoAnchor) {
@@ -45,12 +40,14 @@ function getVideoInteractionElement(videoAnchor) {
   return videoButtonWrapper;
 }
 
-function getContactOfficeDomElements(heading, buttonTextContent, ...media) {
-  const contentWrapper = div({ class: 'about-content-wrapper calcite-theme-light calcite-mode-light' });
+function getContactOfficeDomElements(heading, button, ...media) {
+  const contentWrapper = div({ class: 'about-content-wrapper' });
   const headingWrapper = div({ class: 'about-heading-wrapper' });
   headingWrapper.appendChild(heading);
-  const buttonWrapper = div({ class: 'about-button-wrapper calcite-button-wrapper calcite-animate calcite-animate__in-up' });
-  buttonWrapper.appendChild(getContactOfficeButton(buttonTextContent));
+  const buttonWrapper = div(
+    { class: 'about-button-wrapper calcite-button-wrapper calcite-animate calcite-animate__in-up' },
+    convertToCalciteButton(button),
+  );
   const mediaWrapper = div({ class: 'about-media-wrapper' });
   media.forEach((m) => {
     mediaWrapper.appendChild(m);
@@ -64,22 +61,23 @@ function getContactOfficeDomElements(heading, buttonTextContent, ...media) {
 
   return contentWrapper;
 }
-export default function decorate() {
-  const aboutMainContent = document.querySelector('.contact-local-office > div > div');
+export default function decorate(block) {
+  const aboutMainContent = block.querySelector(':scope > div > div');
 
   const aboutMainHeading = aboutMainContent.children[0];
   aboutMainHeading.classList.add('about-main-heading');
   const aboutContactButton = aboutMainContent.children[1];
-  const videoAnchor = document.querySelector('.contact-local-office > div > div > p:last-child > a');
+  const videoAnchor = aboutMainContent.querySelector(':scope > div > div > p:last-child > a');
+  console.log('video anchor', videoAnchor);
 
   const videoElement = getVideoInteractionElement(videoAnchor);
   const mediaContent = aboutMainContent.children[2].children[0];
 
-  const buttonTextContent = aboutContactButton.children[0].textContent;
+  const button = aboutContactButton.children[0];
 
   const elems = getContactOfficeDomElements(
     aboutMainHeading,
-    buttonTextContent,
+    button,
     mediaContent,
     videoElement,
   );
