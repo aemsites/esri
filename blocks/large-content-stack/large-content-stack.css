@@ -1,12 +1,9 @@
 .large-content-stack.block {
   padding: 0;
-
-  .about-content-wrapper {
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    text-align: center;
-  }
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  text-align: center;
 
   .about-button-wrapper {
     display: inline-block;

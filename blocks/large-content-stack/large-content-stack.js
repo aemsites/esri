@@ -35,19 +35,7 @@ function getVideoInteractionElement(videoAnchor) {
   videoAnchor.classList.add('video-play-anchor');
   videoAnchor.replaceChildren(playButton);
 
-  return div({ class: 'calcite-button-wrapper calcite-button-wrapper--nomargin video-play-button' }, videoAnchor);
-}
-
-function getContactOfficeDomElements(heading, button, ...media) {
-  return div(
-    { class: 'about-content-wrapper' },
-    div({ class: 'about-heading-wrapper' }, heading),
-    div(
-      { class: 'about-button-wrapper calcite-button-wrapper calcite-animate calcite-animate__in-up' },
-      convertToCalciteButton(button),
-    ),
-    div({ class: 'about-media-wrapper' }, ...media),
-  );
+  return div(videoAnchor);
 }
 
 export default function decorate(block) {
@@ -66,15 +54,15 @@ export default function decorate(block) {
   // TODO background picture quality is low, fix it
   const backgroundPicture = mainCell.querySelector(':scope > p:last-child > picture');
 
-  const elems = getContactOfficeDomElements(
-    aboutMainHeading,
-    button,
-    mediaContent,
-    videoElement,
-  );
-
   const backgroundPictureSrc = backgroundPicture.querySelector('source').srcset;
-  elems.style.backgroundImage = `url(${backgroundPictureSrc})`;
+  block.style.backgroundImage = `url(${backgroundPictureSrc})`;
 
-  block.replaceChildren(elems);
+  block.replaceChildren(
+    div({ class: 'about-heading-wrapper' }, aboutMainHeading),
+    div(
+      { class: 'about-button-wrapper calcite-animate calcite-animate__in-up' },
+      convertToCalciteButton(button),
+    ),
+    div({ class: 'about-media-wrapper' }, mediaContent, videoElement),
+  );
 }
