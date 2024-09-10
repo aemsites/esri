@@ -33,11 +33,9 @@ function getVideoInteractionElement(videoAnchor) {
   });
 
   videoAnchor.classList.add('video-play-anchor');
-  videoAnchor.innerText = '';
-  videoAnchor.appendChild(playButton);
+  videoAnchor.replaceChildren(playButton);
 
-  const videoButtonWrapper = div({ class: 'calcite-button-wrapper calcite-button-wrapper--nomargin video-play-button' }, videoAnchor);
-  return videoButtonWrapper;
+  return div({ class: 'calcite-button-wrapper calcite-button-wrapper--nomargin video-play-button' }, videoAnchor);
 }
 
 function getContactOfficeDomElements(heading, button, ...media) {
@@ -62,18 +60,19 @@ function getContactOfficeDomElements(heading, button, ...media) {
   return contentWrapper;
 }
 export default function decorate(block) {
-  const aboutMainContent = block.querySelector(':scope > div > div');
+  const mainCell = block.querySelector(':scope > div > div');
 
-  const aboutMainHeading = aboutMainContent.children[0];
+  const aboutMainHeading = mainCell.children[0];
   aboutMainHeading.classList.add('about-main-heading');
-  const aboutContactButton = aboutMainContent.children[1];
-  const videoAnchor = aboutMainContent.querySelector(':scope > div > div > p:last-child > a');
-  console.log('video anchor', videoAnchor);
+  const aboutContactButton = mainCell.children[1];
+  const videoAnchor = mainCell.querySelector(':scope > p:nth-last-child(2) > a');
 
   const videoElement = getVideoInteractionElement(videoAnchor);
-  const mediaContent = aboutMainContent.children[2].children[0];
+  const mediaContent = mainCell.children[2].children[0];
 
   const button = aboutContactButton.children[0];
+
+  const backgroundPicture = mainCell.querySelector(':scope > p:last-child > picture');
 
   const elems = getContactOfficeDomElements(
     aboutMainHeading,
@@ -82,7 +81,8 @@ export default function decorate(block) {
     videoElement,
   );
 
-  const contentParent = aboutMainContent.parentNode;
-  contentParent.removeChild(aboutMainContent);
-  contentParent.appendChild(elems);
+  const backgorundPictureSrc = backgroundPicture.querySelector('source').srcset;
+  elems.style.backgroundImage = `url(${backgorundPictureSrc})`;
+
+  block.replaceChildren(elems);
 }
