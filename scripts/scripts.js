@@ -92,7 +92,7 @@ for (let i = 0; i < hreflangArray.length; i++) {
   link.href = window.location.origin + matchingEntries[i].path;
   head.appendChild(link);
 }
-// add canonical link and x-default alternate link
+// add x-default alternate link
 const xDefaultLink = document.createElement('link');
 xDefaultLink.rel = 'alternate';
 xDefaultLink.hreflang = 'x-default';
