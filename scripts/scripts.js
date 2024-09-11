@@ -61,7 +61,6 @@ let splitPattern = '';
 for (let i = 0; i < pathArrayLength; i++) {
   if (i === 1 && /^[a-z]{2}-[a-z]{2}$/.test(pathArray[i])) {
     splitPattern = pathArray[i]; // save the /xx-xx/ pattern
-    continue; // skip the /xx-xx/ pattern
   }
   if (pathArray[i] !== '') {
     pathArrayString += '/' + pathArray[i];
@@ -83,7 +82,7 @@ for await (const entry of entries) {
 }
 
 // <link rel="alternate" hreflang="en" href="https://www.example.com/en/page.html" />
-// using the hreflangArray and matchingEntries arrays, 
+// using the hreflangArray and matchingEntries arrays,
 //create alternate links for all entries in arrays
 const head = document.querySelector('head');
 for (let i = 0; i < hreflangArray.length; i++) {
