@@ -45,7 +45,7 @@ async function loadFonts() {
   }
 }
 
-/** 
+/**
  * get all entries from the index and prep
  */
 // get current page url, parse and remove the protocol and domain
@@ -83,7 +83,8 @@ for await (const entry of entries) {
 }
 
 // <link rel="alternate" hreflang="en" href="https://www.example.com/en/page.html" />
-// using the hreflangArray and matchingEntries arrays, create alternate links for all entries in arrays
+// using the hreflangArray and matchingEntries arrays, 
+//create alternate links for all entries in arrays
 const head = document.querySelector('head');
 for (let i = 0; i < hreflangArray.length; i++) {
   const link = document.createElement('link');
@@ -96,7 +97,7 @@ for (let i = 0; i < hreflangArray.length; i++) {
 const xDefaultLink = document.createElement('link');
 xDefaultLink.rel = 'alternate';
 xDefaultLink.hreflang = 'x-default';
-xDefaultLink.setAttribute('href', window.location.origin + '/en-us' + pathArrayString); 
+xDefaultLink.setAttribute('href', window.location.origin + '/en-us' + pathArrayString);
 head.appendChild(xDefaultLink);
 
 /**
