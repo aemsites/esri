@@ -5,7 +5,6 @@ export default function decorate(block) {
   block.classList.add('calcite-mode-dark');
 
   const processSimpleCard = (div) => {
-    if (!block.classList.contains('simple')) return;
     const anchorEl = div.querySelector('a');
     const cardBodyContent = domEl('div', { class: 'card-body-content' });
     if (anchorEl) {
@@ -21,8 +20,6 @@ export default function decorate(block) {
   };
 
   const processStandardCard = (div) => {
-    if (!block.classList.contains('standard')) return;
-
     const anchorEl = div.querySelector('a');
     const cardBodyContent = domEl('div', { class: 'card-body-content' });
     if (anchorEl) {
@@ -59,8 +56,8 @@ export default function decorate(block) {
     [...li.children].forEach((div) => {
       if (div.children.length === 1 && div.querySelector('picture')) div.className = 'cards-card-image';
       else { div.className = 'cards-card-body'; }
-      processSimpleCard(div);
-      processStandardCard(div);
+      if (block.classList.contains('simple')) processSimpleCard(div);
+      if (block.classList.contains('standard')) processStandardCard(div);
     });
     ul.append(li);
   });
