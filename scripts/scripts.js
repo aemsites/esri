@@ -46,7 +46,8 @@ async function loadFonts() {
 }
 
 /**
- * get all entries from the index and prep
+ * get all entries from the index
+ * create alternate langauge links for each entry
  */
 // get current page url, parse and remove the protocol and domain
 const url = window.location.href;
@@ -61,6 +62,7 @@ let splitPattern = '';
 for (let i = 0; i < pathArrayLength; i++) {
   if (i === 1 && /^[a-z]{2}-[a-z]{2}$/.test(pathArray[i])) {
     splitPattern = pathArray[i]; // save the /xx-xx/ pattern
+    continue;
   }
   if (pathArray[i] !== '') {
     pathArrayString += '/' + pathArray[i];
@@ -83,7 +85,7 @@ for await (const entry of entries) {
 
 // <link rel="alternate" hreflang="en" href="https://www.example.com/en/page.html" />
 // using the hreflangArray and matchingEntries arrays,
-//create alternate links for all entries in arrays
+// create alternate links for all entries in arrays
 const head = document.querySelector('head');
 for (let i = 0; i < hreflangArray.length; i++) {
   const link = document.createElement('link');
