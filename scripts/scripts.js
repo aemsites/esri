@@ -46,7 +46,7 @@ async function loadFonts() {
 }
 
 /** 
- * create alterante language urls and enable global nav
+ * get all entries from the index and prep
  */
 // get current page url, parse and remove the protocol and domain
 const url = window.location.href;
@@ -92,7 +92,12 @@ for (let i = 0; i < hreflangArray.length; i++) {
   link.href = window.location.origin + matchingEntries[i].path;
   head.appendChild(link);
 }
-
+// add canonical link and x-default alternate link
+const xDefaultLink = document.createElement('link');
+xDefaultLink.rel = 'alternate';
+xDefaultLink.hreflang = 'x-default';
+xDefaultLink.setAttribute('href', window.location.origin + '/en-us' + pathArrayString); 
+head.appendChild(xDefaultLink);
 
 /**
  * Opens an iframe with the video when clicking on anchor tags.
