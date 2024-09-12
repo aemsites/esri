@@ -14,9 +14,8 @@ import {
 } from './aem.js';
 
 import { div, iframe, domEl } from './dom-helpers.js';
-import ffetch from './ffetch.js';
 
-const LCP_BLOCKS = []; // add your LCP blocks to the list
+const LCP_BLOCKS = ['header']; // add your LCP blocks to the list
 
 /**
  * Builds hero block and prepends to main in a new section.
@@ -46,66 +45,9 @@ async function loadFonts() {
 }
 
 /**
- * get all entries from the index
- * create alternate langauge links for each entry
- */
-// get current page url, parse and remove the protocol and domain
-const url = window.location.href;
-const origin = '/en-us';
-const path = url.replace(window.location.origin, '');
-// parse path to remove the /xx-xx/ from the beginning
-const pathArray = path.split('/');
-const pathArrayLength = pathArray.length;
-let pathArrayString = '';
-let splitPattern = '';
-
-for (let i = 0; i < pathArrayLength; i++) {
-  if (i === 1 && /^[a-z]{2}-[a-z]{2}$/.test(pathArray[i])) {
-    splitPattern = pathArray[i]; // save the /xx-xx/ pattern
-    continue;
-  }
-  if (pathArray[i] !== '') {
-    pathArrayString += '/' + pathArray[i];
-  }
-}
-
-const entries = ffetch('/query-index.json');
-const matchingEntries = [];
-const hreflangArray = [];
-
-for await (const entry of entries) {
-  if (entry.path.includes(pathArrayString)) {
-    matchingEntries.push(entry);
-    const match = entry.path.match(/^\/([a-z]{2}-[a-z]{2})\//);
-    if (match) {
-      hreflangArray.push(match[1]);
-    }
-  }
-}
-
-// <link rel="alternate" hreflang="en" href="https://www.example.com/en/page.html" />
-// using the hreflangArray and matchingEntries arrays,
-// create alternate links for all entries in arrays
-const head = document.querySelector('head');
-for (let i = 0; i < hreflangArray.length; i++) {
-  const link = document.createElement('link');
-  link.rel = 'alternate';
-  link.hreflang = hreflangArray[i];
-  link.href = window.location.origin + matchingEntries[i].path;
-  head.appendChild(link);
-}
-// add x-default alternate link
-const xDefaultLink = document.createElement('link');
-xDefaultLink.rel = 'alternate';
-xDefaultLink.hreflang = 'x-default';
-xDefaultLink.setAttribute('href', window.location.origin + origin + pathArrayString);
-head.appendChild(xDefaultLink);
-
-/**
  * Opens an iframe with the video when clicking on anchor tags.
  * @param {Element} element container element
  */
-
 function decorateVideoLinks(element) {
   const anchors = element.querySelectorAll('a');
   anchors.forEach((a) => {
