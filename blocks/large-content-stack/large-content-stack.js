@@ -1,8 +1,9 @@
 import { calciteButton, div } from '../../scripts/dom-helpers.js';
 
 function convertToCalciteButton(button) {
+  const isVideo = button.classList.contains('video-link');
   button.replaceChildren(calciteButton({
-    'icon-end': 'arrowRight',
+    'icon-end': (isVideo) ? 'play-f' : 'arrowRight',
     href: button.href,
     appearance: 'outline',
     alignment: 'center',
