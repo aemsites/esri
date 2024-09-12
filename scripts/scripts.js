@@ -51,7 +51,7 @@ async function loadFonts() {
  */
 // get current page url, parse and remove the protocol and domain
 const url = window.location.href;
-const origin="/en-us";
+const origin = '/en-us';
 const path = url.replace(window.location.origin, '');
 // parse path to remove the /xx-xx/ from the beginning
 const pathArray = path.split('/');
