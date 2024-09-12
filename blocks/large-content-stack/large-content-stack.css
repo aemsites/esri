@@ -5,13 +5,12 @@
   background-size: cover;
   text-align: center;
 
-  p.button-container {
-    display: inline-block;
+  p {
+    margin-block: 0;
     margin-inline-end: var(--space-2);
-    margin-block-end: var(--space-2);
   }
 
-  .about-media-wrapper {
+  .media-wrapper {
     margin: var(--space-10) auto 0;
     max-inline-size: 1050px;
     inline-size: 92%;
@@ -32,7 +31,7 @@
     font-size: var(--font-8);
   }
 
-  .about-media-wrapper > picture > img {
+  .media-wrapper > picture > img {
     display: block;
   }
 

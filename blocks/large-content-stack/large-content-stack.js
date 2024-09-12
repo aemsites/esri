@@ -40,9 +40,6 @@ function getVideoInteractionElement(videoAnchor) {
 }
 
 export default function decorate(block) {
-  block.querySelectorAll('p').forEach((p, idx) => {
-    p.classList.add(`about-p-${idx}`);
-  });
   const mainCell = block.querySelector(':scope > div > div');
 
   let videoElement = null;
@@ -63,14 +60,13 @@ export default function decorate(block) {
   backgroundPicture.parentElement.remove();
 
   const picture = block.querySelector('p > picture');
-  const mediaWrapper = picture.parentElement;
-  const aboutMediaWrapper = div(
-    { class: 'about-media-wrapper' },
+  const pictureWrapper = picture.parentElement;
+  const mediaWrapper = div(
+    { class: 'media-wrapper' },
     picture,
   );
   if (videoElement) {
-    aboutMediaWrapper.appendChild(videoElement);
+    mediaWrapper.appendChild(videoElement);
   }
-
-  mediaWrapper.replaceWith(aboutMediaWrapper);
+  pictureWrapper.replaceWith(mediaWrapper);
 }
