@@ -138,8 +138,8 @@ export function decorateMain(main) {
   decorateIcons(main);
   buildAutoBlocks(main);
   decorateSections(main);
-  decorateVideoLinks(main);
   decorateBlocks(main);
+  decorateVideoLinks(main);
 }
 
 function decorateTemplateAndTheme() {

@@ -1,7 +1,7 @@
 import { calciteButton, div } from '../../scripts/dom-helpers.js';
 
 function convertToCalciteButton(button) {
-  return calciteButton({
+  button.replaceChildren(calciteButton({
     'icon-end': 'arrowRight',
     href: button.href,
     appearance: 'outline',
@@ -10,7 +10,8 @@ function convertToCalciteButton(button) {
     type: 'button',
     width: 'auto',
     kind: 'inverse',
-  }, button.textContent);
+  }, button.textContent));
+  button.classList.remove('button');
 }
 
 function getVideoInteractionElement(videoAnchor) {
@@ -39,19 +40,20 @@ function getVideoInteractionElement(videoAnchor) {
 }
 
 export default function decorate(block) {
-  console.log('decorating large content stack start');
   block.querySelectorAll('p').forEach((p, idx) => {
     p.classList.add(`about-p-${idx}`);
   });
   const mainCell = block.querySelector(':scope > div > div');
 
+  let videoElement = null;
   const videoAnchor = mainCell.querySelector(':scope > p:nth-last-child(2) > a');
-  videoAnchor.parentElement.remove();
-  const videoElement = getVideoInteractionElement(videoAnchor);
+  if (videoAnchor) {
+    videoAnchor.parentElement.remove();
+    videoElement = getVideoInteractionElement(videoAnchor);
+  }
 
   const button = block.querySelector('a');
-  const newButton = convertToCalciteButton(button);
-  button.replaceWith(newButton);
+  convertToCalciteButton(button);
 
   // TODO background picture quality is low, fix it
   const backgroundPicture = mainCell.querySelector(':scope > p:last-child > picture');
@@ -62,21 +64,13 @@ export default function decorate(block) {
 
   const picture = block.querySelector('p > picture');
   const mediaWrapper = picture.parentElement;
-  mediaWrapper.replaceWith(div(
+  const aboutMediaWrapper = div(
     { class: 'about-media-wrapper' },
     picture,
-    videoElement,
-  ));
+  );
+  if (videoElement) {
+    aboutMediaWrapper.appendChild(videoElement);
+  }
 
-  //
-  // block.replaceChildren(
-  //   aboutMainHeading,
-  //   div(
-  //     { class: 'about-button-wrapper calcite-animate calcite-animate__in-up' },
-  //     convertToCalciteButton(button),
-  //   ),
-  //   div({ class: 'about-media-wrapper' }, mediaContent, videoElement),
-  // );
-
-  console.log('decorating large content stack END');
+  mediaWrapper.replaceWith(aboutMediaWrapper);
 }
