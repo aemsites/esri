@@ -1,0 +1,4 @@
+/* remove styles coming from styles.css */
+.gnav_top-nav_language-chooser-button {
+    margin: unset;
+}
