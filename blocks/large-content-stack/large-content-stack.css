@@ -42,7 +42,7 @@
 
   .media-wrapper > picture > img {
     display: block;
-    width: 100%;
+    inline-size: 100%;
   }
 
   @media (width > 480px) {

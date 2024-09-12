@@ -56,7 +56,11 @@ export default function decorate(block) {
   // TODO background picture quality is low, fix it
   const backgroundPicture = mainCell.querySelector(':scope > p:last-child > picture');
 
-  const backgroundPictureSrc = backgroundPicture.querySelector('source').srcset;
+  const backgroundPictureSrc = backgroundPicture
+    .querySelector('source')
+    .srcset
+    .replace('optimize=medium', 'optimize=false');
+
   block.style.backgroundImage = `url(${backgroundPictureSrc})`;
   backgroundPicture.parentElement.remove();
 
