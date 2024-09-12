@@ -63,9 +63,8 @@ async function alternateHeaders() {
  * @param {Element} block The header block element
  */
 export default async function decorate() {
-  alternateHeaders().then(() => {
+  await alternateHeaders().then(async () => {
     window.gnav_jsonPath = '/2022-nav-config.25.json';
-    loadScript('https://webapps-cdn.esri.com/CDN/components/global-nav/js/gn.js');
+    await Promise.all([loadScript('https://webapps-cdn.esri.com/CDN/components/global-nav/js/gn.js'), loadCSS('https://webapps-cdn.esri.com/CDN/components/global-nav/css/gn.css')]);
   });
-  loadCSS('https://webapps-cdn.esri.com/CDN/components/global-nav/css/gn.css');
 }
