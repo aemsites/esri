@@ -1,4 +1,5 @@
 /* remove styles coming from styles.css */
+/* stylelint-disable */
 .gnav_top-nav_language-chooser-button {
     margin: unset;
 }
