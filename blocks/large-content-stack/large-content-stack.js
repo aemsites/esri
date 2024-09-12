@@ -39,30 +39,44 @@ function getVideoInteractionElement(videoAnchor) {
 }
 
 export default function decorate(block) {
+  console.log('decorating large content stack start');
+  block.querySelectorAll('p').forEach((p, idx) => {
+    p.classList.add(`about-p-${idx}`);
+  });
   const mainCell = block.querySelector(':scope > div > div');
 
-  const aboutMainHeading = mainCell.children[0];
-  aboutMainHeading.classList.add('about-main-heading');
-  const aboutContactButton = mainCell.children[1];
   const videoAnchor = mainCell.querySelector(':scope > p:nth-last-child(2) > a');
-
+  videoAnchor.parentElement.remove();
   const videoElement = getVideoInteractionElement(videoAnchor);
-  const mediaContent = mainCell.children[2].children[0];
 
-  const button = aboutContactButton.children[0];
+  const button = block.querySelector('a');
+  const newButton = convertToCalciteButton(button);
+  button.replaceWith(newButton);
 
   // TODO background picture quality is low, fix it
   const backgroundPicture = mainCell.querySelector(':scope > p:last-child > picture');
 
   const backgroundPictureSrc = backgroundPicture.querySelector('source').srcset;
   block.style.backgroundImage = `url(${backgroundPictureSrc})`;
+  backgroundPicture.parentElement.remove();
 
-  block.replaceChildren(
-    div({ class: 'about-heading-wrapper' }, aboutMainHeading),
-    div(
-      { class: 'about-button-wrapper calcite-animate calcite-animate__in-up' },
-      convertToCalciteButton(button),
-    ),
-    div({ class: 'about-media-wrapper' }, mediaContent, videoElement),
-  );
+  const picture = block.querySelector('p > picture');
+  const mediaWrapper = picture.parentElement;
+  mediaWrapper.replaceWith(div(
+    { class: 'about-media-wrapper' },
+    picture,
+    videoElement,
+  ));
+
+  //
+  // block.replaceChildren(
+  //   aboutMainHeading,
+  //   div(
+  //     { class: 'about-button-wrapper calcite-animate calcite-animate__in-up' },
+  //     convertToCalciteButton(button),
+  //   ),
+  //   div({ class: 'about-media-wrapper' }, mediaContent, videoElement),
+  // );
+
+  console.log('decorating large content stack END');
 }

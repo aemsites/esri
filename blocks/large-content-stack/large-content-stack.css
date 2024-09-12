@@ -5,7 +5,7 @@
   background-size: cover;
   text-align: center;
 
-  .about-button-wrapper {
+  p.button-container {
     display: inline-block;
     margin-inline-end: var(--space-2);
     margin-block-end: var(--space-2);
@@ -25,17 +25,11 @@
     transform: translate(-50%, -50%);
   }
 
-  .about-main-heading {
-    font-size: var(--font-8);
-    font-weight: var(--calcite-font-weight-bold);
-    margin: 0 auto;
-    color: var(--calcite-ui-text-1);
-  }
-
-  .about-heading-wrapper {
+  h2 {
     inline-size: 90%;
     margin: 0 auto;
     padding-block-start: var(--space-10);
+    font-size: var(--font-8);
   }
 
   .about-media-wrapper > picture > img {
@@ -43,7 +37,7 @@
   }
 
   @media (width > 480px) {
-    .about-heading-wrapper {
+    h2 {
       inline-size: 65%;
       max-inline-size: 600px;
     }
