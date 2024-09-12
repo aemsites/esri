@@ -51,8 +51,8 @@ async function loadFonts() {
  */
 // get current page url, parse and remove the protocol and domain
 const url = window.location.href;
+const origin="/en-us";
 const path = url.replace(window.location.origin, '');
-
 // parse path to remove the /xx-xx/ from the beginning
 const pathArray = path.split('/');
 const pathArrayLength = pathArray.length;
@@ -98,7 +98,7 @@ for (let i = 0; i < hreflangArray.length; i++) {
 const xDefaultLink = document.createElement('link');
 xDefaultLink.rel = 'alternate';
 xDefaultLink.hreflang = 'x-default';
-xDefaultLink.setAttribute('href', window.location.origin + '/en-us' + pathArrayString);
+xDefaultLink.setAttribute('href', window.location.origin + origin + pathArrayString);
 head.appendChild(xDefaultLink);
 
 /**
