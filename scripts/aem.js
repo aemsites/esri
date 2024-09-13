@@ -465,6 +465,20 @@ function decorateIcon(span, prefix = '', alt = '') {
   span.append(img);
 }
 
+function decorateInnerHrefButtonsWithArrowIcon(block) {
+  block.querySelectorAll('a').forEach((a) => {
+    
+    const icon = document.createElement('calcite-icon');
+    icon.icon = "arrowRight"
+    icon.scale = "s"
+    icon.style.marginInlineStart = "4px"
+    if (a.href.includes("esri.com")) {
+
+      a.appendChild(icon)
+    }
+  })
+}
+
 /**
  * Add <img> for icons, prefixed with codeBasePath and optional prefix.
  * @param {Element} [element] Element containing icons
@@ -762,4 +776,5 @@ export {
   updateSectionsStatus,
   waitForLCP,
   wrapTextNodes,
+  decorateInnerHrefButtonsWithArrowIcon,
 };

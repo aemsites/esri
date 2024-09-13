@@ -8,8 +8,8 @@ import {
 } from '../../scripts/dom-helpers.js';
 
 import {
-  decorateIcons,
-} from '../../scripts/aem.js';
+  decorateInnerHrefButtonsWithArrowIcon
+} from '../../scripts/aem.js'
 
 function getLearnMoreIcon() {
   const learnMoreIcon = domEl('calcite-icon', {
@@ -68,28 +68,29 @@ function getLocationOverviewDomElements(cardCount, headingTexts, genericTexts, c
 }
 export default function decorate(block) {
   block.classList.add('calcite-mode-dark')
-  const locationOverviewCards = document.querySelector('.location-overview-wrapper > div');
+  decorateInnerHrefButtonsWithArrowIcon(block)
+  // const locationOverviewCards = document.querySelector('.location-overview-wrapper > div');
 
-  const cardHeadingTexts = [];
-  const cardGenericText = [];
-  const overviewCardLinks = [];
+  // const cardHeadingTexts = [];
+  // const cardGenericText = [];
+  // const overviewCardLinks = [];
 
-  const overviewCards = locationOverviewCards.children.length;
-  [...locationOverviewCards.children].forEach((card) => {
-    [...card.children].forEach((c) => {
-      cardHeadingTexts.push(c.children[0].innerText);
-      overviewCardLinks.push(c.children[2].children[0].href);
-      cardGenericText.push(c.children[1].innerText);
-    });
-  });
+  // const overviewCards = locationOverviewCards.children.length;
+  // [...locationOverviewCards.children].forEach((card) => {
+  //   [...card.children].forEach((c) => {
+  //     cardHeadingTexts.push(c.children[0].innerText);
+  //     overviewCardLinks.push(c.children[2].children[0].href);
+  //     cardGenericText.push(c.children[1].innerText);
+  //   });
+  // });
 
-  const locationOverviewDOMElements = getLocationOverviewDomElements(
-    overviewCards,
-    cardHeadingTexts,
-    cardGenericText,
-    overviewCardLinks,
-  );
-  locationOverviewCards.innerHTML = '';
-  decorateIcons(locationOverviewDOMElements);
-  locationOverviewCards.appendChild(locationOverviewDOMElements);
+  // const locationOverviewDOMElements = getLocationOverviewDomElements(
+  //   overviewCards,
+  //   cardHeadingTexts,
+  //   cardGenericText,
+  //   overviewCardLinks,
+  // );
+  // locationOverviewCards.innerHTML = '';
+  // decorateIcons(locationOverviewDOMElements);
+  // locationOverviewCards.appendChild(locationOverviewDOMElements);
 }
