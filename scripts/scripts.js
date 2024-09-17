@@ -15,7 +15,7 @@ import {
 
 import { div, iframe, domEl } from './dom-helpers.js';
 
-const LCP_BLOCKS = []; // add your LCP blocks to the list
+const LCP_BLOCKS = ['header']; // add your LCP blocks to the list
 
 /**
  * Builds hero block and prepends to main in a new section.
@@ -48,7 +48,6 @@ async function loadFonts() {
  * Opens an iframe with the video when clicking on anchor tags.
  * @param {Element} element container element
  */
-
 function decorateVideoLinks(element) {
   const anchors = element.querySelectorAll('a');
   anchors.forEach((a) => {
@@ -65,6 +64,7 @@ function decorateVideoLinks(element) {
       a.href.startsWith('https://mediaspace.esri.com/')
    || a.href.startsWith('https://www.youtube.com/')
     ) {
+      a.classList.add('video-link');
       const closeButton = div(
         {
           class: 'video-close-button',
