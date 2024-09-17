@@ -142,23 +142,23 @@ export function decorateMain(main) {
   decorateVideoLinks(main);
 }
 
-export function decorateBlockMode(block) {
-  decorateMode(block)
-}
-export function decorateTemplateAndTheme() {
-  aemDecorateTemplateAndTheme();
-  decorateMode(document.body)
-  
-}
-
 function decorateMode(element) {
   const { classList } = element;
   if (classList.contains('light')) {
     classList.add('calcite-mode-light');
   } else if (classList.contains('dark')) {
     classList.add('calcite-mode-dark');
+  }
 }
+
+export function decorateBlockMode(block) {
+  decorateMode(block);
 }
+export function decorateTemplateAndTheme() {
+  aemDecorateTemplateAndTheme();
+  decorateMode(document.body);
+}
+
 /**
  * Loads everything needed to get to LCP.
  * @param {Element} doc The container element
@@ -228,7 +228,7 @@ export function decorateInnerHrefButtonsWithArrowIcon(block) {
   block.querySelectorAll('a').forEach((a) => {
     const icon = domEl('calcite-icon', { icon: 'arrowRight', scale: 's' });
     icon.style.marginInlineStart = '4px';
-    if (a.href.includes('esri.com') || (a.href.includes("main--esri"))) {
+    if (a.href.includes('esri.com') || (a.href.includes('main--esri'))) {
       a.appendChild(icon);
     }
   });

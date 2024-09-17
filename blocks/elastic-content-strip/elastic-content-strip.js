@@ -7,8 +7,8 @@ import {
 
 export default function decorate(block) {
   block.querySelectorAll('.elastic-content-strip > div > div').forEach((div) => {
-    const linkHref = div.querySelectorAll("a")[0].href
-    
+    const linkHref = div.querySelectorAll('a')[0].href;
+
     const elasticContentWrapper = a({
       class: 'elastic-content-link-wrapper',
       href: linkHref,
