@@ -7,9 +7,11 @@ import {
 
 export default function decorate(block) {
   block.querySelectorAll('.elastic-content-strip > div > div').forEach((div) => {
+    const linkHref = div.querySelectorAll("a")[0].href
+    
     const elasticContentWrapper = a({
       class: 'elastic-content-link-wrapper',
-      href: div.children[3].children[0].href,
+      href: linkHref,
     });
     div.parentNode.insertBefore(elasticContentWrapper, div);
     elasticContentWrapper.appendChild(div);
