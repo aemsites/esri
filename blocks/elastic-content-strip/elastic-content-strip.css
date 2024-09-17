@@ -52,10 +52,27 @@
         background-image: url("/assets/location-overview-programs-background.jpeg");
         background-size: cover;
     }
+
     > div:hover {
         box-shadow: 0 0 0 10px inset var(--shadow-color);
     }
 
+    .learn-more-icon-container {
+        display: flex;
+        align-items: center;
+        inline-size: fit-content;
+        margin: auto;
+        background-image: linear-gradient(to right, currentcolor 0, currentcolor 100%);
+        background-position: 0% 100%,100% 100%;
+        background-repeat: no-repeat;
+        background-size: 0% 1px,100% 1px;
+        transition: all .3s ease-in-out;
+    }
+    
+    .learn-more-icon-container:any-link {
+        color: var(--calcite-ui-text-1);
+    }
+    
     > div:is(:focus-within,:focus,:hover) .learn-more-icon-container {
         background-size: 100% 1px,100% 1px;
     }
@@ -79,21 +96,7 @@
         }
     }
 
-    .learn-more-icon-container {
-        display: flex;
-        align-items: center;
-        inline-size: fit-content;
-        margin: auto;
-        background-image: linear-gradient(to right, currentcolor 0, currentcolor 100%);
-        background-position: 0% 100%,100% 100%;
-        background-repeat: no-repeat;
-        background-size: 0% 1px,100% 1px;
-        transition: all .3s ease-in-out;
-    }
-    
-    .learn-more-icon-container:any-link {
-        color: var(--calcite-ui-text-1);
-    }
+
 }
 
 
