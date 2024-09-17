@@ -1,42 +1,67 @@
+
+.elastic-content-strip > div > div {
+    inline-size: 85%;
+    position: relative;
+    z-index: 3;
+    margin: auto;
+    animation-delay: calc(var(--calcite-animation-delay)*1);
+}
 .elastic-content-strip.block {
     display: flex;
     flex-wrap: wrap;
     overflow: hidden;
     position: relative;
     inline-size: 100%;
-    cursor: default;  
-    padding: 0;
+    cursor: default;
+    text-decoration: none;
+}
+.elastic-content-strip > div {
+    text-align: center;
+    flex: 1 0 100%;
+    background-position: center;
+    transition: all .25s ease-in-out;
     color: var(--calcite-ui-text-1);
+    --bg-color: var(--calcite-ui-foreground-1);
+    --shadow-color: var(--calcite-ui-text-1);
+
+    background-image: url("/assets/location-overview-programs-background.jpeg");
+    background-size: cover;
 }
 
-.elastic-content-strip > div > div {
+.elastic-content-link-wrapper:hover {
+    text-decoration: none;
+}
+.elastic-content-strip > div:hover {
+    box-shadow: 0 0 0 10px inset var(--shadow-color);
+}
+
+.elastic-content-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    overflow: hidden;
+    position: relative;
+    inline-size: 100%;
+    cursor: default;
+}
+
+.elastic-content-link-wrapper {
+    display: block;
     overflow: hidden;
     margin-block-end: 0;
     text-decoration: none;
     color: var(--calcite-ui-text-1);
     padding-block: var(--space-20);
     padding-inline: var(--space-5);
-    inline-size: 100%;    
+    inline-size: 100%;
+    text-decoration: none;
 }
 
-.elastic-content-strip > div {
-    background-image: url("/assets/location-overview-programs-background.jpeg");
-    background-size: cover;
-    flex: 1 0 100%;
+.elastic-content-link-wrapper > div {
+    inline-size: 85%;
+    align-self: center;
     position: relative;
-    overflow: hidden;
-    text-align: center;
-    display: flex;
-    background-position: center;
-    transition: all .25s ease-in-out;
-    color: var(--calcite-ui-text-1);
-
-    --bg-color: var(--calcite-ui-foreground-1);
-    --shadow-color: var(--esri-ui-opacity80-inverse);
-}
-
-.elastic-content-strip > div:hover {
-    box-shadow: 0 0 0 10px inset var(--shadow-color);
+    z-index: 3;
+    margin: auto;
 }
 
 .elastic-content-strip span {
@@ -51,30 +76,19 @@
     transition: all .3s ease-in-out;
     color: var(--calcite-ui-text-1);
 }
-.location-overview-link-wrapper:is(:focus-within,:focus,:hover) .learn-more-icon-container {
-    background-size: 100% 1px,100% 1px;    
-}
 
 .elastic-content-strip h2 {
     margin-block: var(--space-8);
     color: var(--calcite-ui-text-1);
-
     --title-size: var(--font-3);
-
     font-size: var(--title-size);
     font-weight: var(--calcite-font-weight-normal);
 }
 
-
-/* .location-overview-link-wrapper {
-    overflow: hidden;
-    margin-block-end: 0;
-    text-decoration: none;
+.elastic-content-strip p {
     color: var(--calcite-ui-text-1);
-    padding-block: var(--space-20);
-    padding-inline: var(--space-5);
-    inline-size: 100%;
-} */
+    font-size: var(--description-size);
+}
 
 .learn-more-icon-container {
     display: flex;
@@ -86,26 +100,11 @@
     background-repeat: no-repeat;
     background-size: 0% 1px,100% 1px;
     transition: all .3s ease-in-out;
-    color: var(--calcite-ui-text-1);
+    color: var(--calcite-ui-text-1) !important;
 }
 
-.location-overview-link-wrapper:is(:focus-within,:focus,:hover) .learn-more-icon-container {
-    background-size: 100% 1px,100% 1px;    
-}
-
-.location-overview-card-text {
-    color: var(--calcite-ui-text-1);
-    font-size: var(--description-size);
-    padding-block-end: var(--space-4);
-    margin-block-end: var(--space-6);
-}
-
-.location-overview-card-container *:is(:focus,:focus-visible) {
-    outline: none;
-}
-
-.location-overview-link-wrapper:hover {
-    text-decoration: none;
+.elastic-content-strip > div:is(:focus-within,:focus,:hover) .learn-more-icon-container {
+    background-size: 100% 1px,100% 1px;
 }
 
 .elastic-content-strip span {
@@ -117,22 +116,13 @@
     filter: var(--image-white-filter);
 }
 
-.location-overview-content-wrapper {
-    inline-size: 85%;
-    position: relative;
-    z-index: 3;
-    margin: auto;
-    animation-delay: calc(var(--calcite-animation-delay)*1);
-}
-
-
 @media (width > 640px)  {
     .elastic-content-strip > div {
         flex: 0 0 50%;
         max-inline-size: 50%;
     }
 
-    .elastic-content-strip > div:nth-last-child(3) {
+    .elastic-content-strip > div:last-child {
         flex: 0 0 100%;
         max-inline-size: 100%;
     }
@@ -144,7 +134,7 @@
         max-inline-size: 33.33%;
     }
 
-    .elastic-content-strip > div:nth-last-child(3) {
+    .elastic-content-strip > div:last-child {
         flex: 0 0 33.33%;
         max-inline-size: 33.33%;
     }
