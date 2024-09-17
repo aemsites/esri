@@ -1,14 +1,11 @@
 import { a } from '../../scripts/dom-helpers.js';
 
-
 import {
   decorateInnerHrefButtonsWithArrowIcon,
-  decorateTemplateAndTheme
+  decorateTemplateAndTheme,
 } from '../../scripts/scripts.js';
 
-
 export default function decorate(block) {
-
   block.querySelectorAll('.elastic-content-strip > div > div').forEach((div) => {
     const elasticContentWrapper = a({
       class: 'elastic-content-link-wrapper',
@@ -25,5 +22,5 @@ export default function decorate(block) {
     bc.children[0].classList.add('learn-more-icon-container');
   });
 
-  decorateTemplateAndTheme(block)
+  decorateTemplateAndTheme(block);
 }

@@ -230,8 +230,4 @@ export function decorateInnerHrefButtonsWithArrowIcon(block) {
   });
 }
 
-export function decorateBlockWithMode(block) {
-
-}
-
 loadPage();
