@@ -223,7 +223,6 @@ export function decorateInnerHrefButtonsWithArrowIcon(block) {
     const icon = domEl('calcite-icon', { icon: "arrowRight", scale: "s"});
     icon.style.marginInlineStart = "4px"
     if (a.href.includes("esri.com")) {
-
       a.appendChild(icon)
     }
   })
