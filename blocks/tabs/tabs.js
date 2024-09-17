@@ -14,17 +14,25 @@ import {
 
 export default async function decorate(block) {
   const isTabsCardsVariant = block.classList.contains('tabs-cards-variant');
+  const isTabsIconsVariant = block.classList.contains('with-icons');
 
   block.querySelectorAll('img').forEach((img) => img
-    .closest('picture')
-    .replaceWith(
+    .closest('picture')?.replaceWith(
       createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }]),
     ));
 
   const loadBlocks = [];
-  const tabTitles = [...block.children].map((child) => child.children[0].children[0].textContent);
+
+  let tabTitles;
   const tabContents = [...block.children].map((child) => [...child.children[1].children]);
-  if (!isTabsCardsVariant) {
+
+  if (isTabsIconsVariant) {
+    tabTitles = [...block.children].map((child) => child.children[0].children[0].innerHTML);
+  } else {
+    tabTitles = [...block.children].map((child) => child.children[0].children[0].textContent);
+  }
+
+  if (!isTabsCardsVariant && !isTabsIconsVariant) {
     document.querySelector('.tabs-container').classList.add('calcite-mode-dark');
 
     tabContents.forEach((content) => {
@@ -62,21 +70,37 @@ export default async function decorate(block) {
       const buttonsWrapper = div({ class: 'buttons-wrapper' }, ...buttons);
       content.splice(2, 2, buttonsWrapper);
     });
-  } else {
+  } else if (isTabsCardsVariant) {
     document.querySelector('.tabs-container').classList.add('calcite-mode-light');
   }
 
+  let titles;
   const contents = tabContents.map((content) => div({
     class: 'tab-content',
     role: 'tabpanel',
     'aria-hidden': true,
   }, ...content));
-  const titles = tabTitles.map((title) => li({
-    class: 'tab-title',
-    id: title.toLowerCase().replace(' ', '-'),
-    role: 'tab',
-    'aria-hidden': true,
-  }, button(...title)));
+
+  if (isTabsIconsVariant) {
+    titles = tabTitles.map((title) => {
+      const tempDiv = div();
+      tempDiv.innerHTML = title;
+
+      return li({
+        class: 'tab-title',
+        id: title.toLowerCase().replace(' ', '-'),
+        role: 'tab',
+        'aria-hidden': true,
+      }, button(...tempDiv.children, tempDiv.textContent));
+    });
+  } else {
+    titles = tabTitles.map((title) => li({
+      class: 'tab-title',
+      id: title.toLowerCase().replace(' ', '-'),
+      role: 'tab',
+      'aria-hidden': true,
+    }, button(...title)));
+  }
 
   if (isTabsCardsVariant) {
     contents.forEach((content) => {
@@ -84,6 +108,17 @@ export default async function decorate(block) {
       content.replaceChildren(tabsCardsBlock);
       decorateBlock(tabsCardsBlock);
       loadBlocks.push(loadBlock(tabsCardsBlock));
+    });
+
+    await Promise.all(loadBlocks);
+  }
+
+  if (isTabsIconsVariant) {
+    contents.forEach((content) => {
+      const tabsIconsBlock = buildBlock('tabs-icons', [[content.innerHTML]]);
+      content.replaceChildren(tabsIconsBlock);
+      decorateBlock(tabsIconsBlock);
+      loadBlocks.push(loadBlock(tabsIconsBlock));
     });
 
     await Promise.all(loadBlocks);
@@ -186,8 +221,9 @@ export default async function decorate(block) {
     });
   });
 
+  const widthBreakpoint = (isTabsIconsVariant ? 1250 : 1024);
   const addAccessiblityAttributes = () => {
-    if (window.innerWidth >= 1024) {
+    if (window.innerWidth >= widthBreakpoint) {
       titles.forEach((title, index) => {
         title.setAttribute('aria-hidden', 'false');
         title.setAttribute('aria-selected', 'false');
@@ -213,8 +249,16 @@ export default async function decorate(block) {
     }
   };
 
-  addAccessiblityAttributes();
-  window.addEventListener('resize', () => addAccessiblityAttributes());
+  const resizeBlock = () => {
+    addAccessiblityAttributes();
+    if (window.innerWidth >= widthBreakpoint) {
+      block.querySelector('.tab-nav')?.classList.add('expanded');
+    } else {
+      block.querySelector('.tab-nav')?.classList.remove('expanded');
+    }
+  };
 
   block.replaceChildren(tabComponent);
+  resizeBlock();
+  window.addEventListener('resize', () => resizeBlock());
 }
