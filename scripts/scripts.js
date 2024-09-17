@@ -219,13 +219,12 @@ async function loadPage() {
 
 export function decorateInnerHrefButtonsWithArrowIcon(block) {
   block.querySelectorAll('a').forEach((a) => {
-    
-    const icon = domEl('calcite-icon', { icon: "arrowRight", scale: "s"});
-    icon.style.marginInlineStart = "4px"
-    if (a.href.includes("esri.com")) {
-      a.appendChild(icon)
+    const icon = domEl('calcite-icon', { icon: 'arrowRight', scale: 's' });
+    icon.style.marginInlineStart = '4px';
+    if (a.href.includes('esri.com')) {
+      a.appendChild(icon);
     }
-  })
+  });
 }
 
 loadPage();

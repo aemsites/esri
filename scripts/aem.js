@@ -465,7 +465,6 @@ function decorateIcon(span, prefix = '', alt = '') {
   span.append(img);
 }
 
-
 /**
  * Add <img> for icons, prefixed with codeBasePath and optional prefix.
  * @param {Element} [element] Element containing icons
