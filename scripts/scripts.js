@@ -142,19 +142,23 @@ export function decorateMain(main) {
   decorateVideoLinks(main);
 }
 
-// if it gets a block as argument, treat that as specific styling
-// only for that block
-// otherweise style the entire body
-export function decorateTemplateAndTheme(block = document.body) {
+export function decorateBlockMode(block) {
+  decorateMode(block)
+}
+export function decorateTemplateAndTheme() {
   aemDecorateTemplateAndTheme();
-  const { classList } = block;
+  decorateMode(document.body)
+  
+}
+
+function decorateMode(element) {
+  const { classList } = element;
   if (classList.contains('light')) {
     classList.add('calcite-mode-light');
   } else if (classList.contains('dark')) {
     classList.add('calcite-mode-dark');
-  }
 }
-
+}
 /**
  * Loads everything needed to get to LCP.
  * @param {Element} doc The container element

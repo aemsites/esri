@@ -2,7 +2,7 @@ import { a } from '../../scripts/dom-helpers.js';
 
 import {
   decorateInnerHrefButtonsWithArrowIcon,
-  decorateTemplateAndTheme,
+  decorateBlockMode,
 } from '../../scripts/scripts.js';
 
 export default function decorate(block) {
@@ -24,5 +24,5 @@ export default function decorate(block) {
     bc.children[0].classList.add('learn-more-icon-container');
   });
 
-  decorateTemplateAndTheme(block);
+  decorateBlockMode(block);
 }
