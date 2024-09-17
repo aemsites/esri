@@ -33,14 +33,6 @@
     margin: auto;
 }
 
-.elastic-content-strip > div > div {
-    inline-size: 85%;
-    position: relative;
-    z-index: 3;
-    margin: auto;
-    animation-delay: calc(var(--calcite-animation-delay)*1);
-}
-
 .elastic-content-link-wrapper {
     display: block;
     overflow: hidden;
