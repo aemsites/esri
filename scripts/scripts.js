@@ -142,9 +142,12 @@ export function decorateMain(main) {
   decorateVideoLinks(main);
 }
 
-function decorateTemplateAndTheme() {
+// if it gets a block as argument, treat that as specific styling
+// only for that block
+// otherweise style the entire body
+export function decorateTemplateAndTheme(block = document.body) {
   aemDecorateTemplateAndTheme();
-  const { classList } = document.body;
+  const { classList } = block;
   if (classList.contains('light')) {
     classList.add('calcite-mode-light');
   } else if (classList.contains('dark')) {
@@ -225,6 +228,10 @@ export function decorateInnerHrefButtonsWithArrowIcon(block) {
       a.appendChild(icon);
     }
   });
+}
+
+export function decorateBlockWithMode(block) {
+
 }
 
 loadPage();

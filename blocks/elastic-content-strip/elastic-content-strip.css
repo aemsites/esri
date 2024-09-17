@@ -104,6 +104,9 @@
     background-repeat: no-repeat;
     background-size: 0% 1px,100% 1px;
     transition: all .3s ease-in-out;
+}
+
+.learn-more-icon-container:any-link {
     color: var(--calcite-ui-text-1);
 }
 
