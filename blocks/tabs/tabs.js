@@ -54,8 +54,6 @@ export default async function decorate(block) {
   }
 
   if (!isTabsCardsVariant && !tabsContainFragments) {
-    document.querySelector('.tabs-container').classList.add('calcite-mode-dark');
-
     tabContents.forEach((content) => {
       const text = [content[1], content[2], content[3]];
       const textWrapper = div({ class: 'text-wrapper' }, ...text);
@@ -91,8 +89,6 @@ export default async function decorate(block) {
       const buttonsWrapper = div({ class: 'buttons-wrapper' }, ...buttons);
       content.splice(2, 2, buttonsWrapper);
     });
-  } else if (!tabsContainFragments) {
-    document.querySelector('.tabs-container').classList.add('calcite-mode-light');
   }
 
   if (!tabsContainFragments) {
