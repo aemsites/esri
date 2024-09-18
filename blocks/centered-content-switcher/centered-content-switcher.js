@@ -54,10 +54,13 @@ export default function decorate(block) {
   );
 
   // create desktop nav
+  const numberOfColumns = [...block.children].length === 6 ? 3 : 2;
   const desktopNav = div(
     { class: 'desktop-nav calcite-animate calcite-animate__in-up' },
     ul(
-      { class: 'desktop-nav-list' },
+      { class: 'desktop-nav-list',
+        style: `grid-template-columns: repeat(${numberOfColumns}, 1fr)`
+       },
       ...[...block.children].map((child, idx) => {
         const picture = child.children[0].querySelector('picture');
         const headingText = child.querySelector('h2').textContent;
@@ -67,10 +70,12 @@ export default function decorate(block) {
           picture,
           p(headingText),
         );
+
         return listItem;
       }),
     ),
   );
+
 
   const changeSelectedTab = (index) => {
     mobileNav.parentElement?.removeChild(mobileNav);
