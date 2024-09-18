@@ -226,7 +226,7 @@ async function loadPage() {
 
 export function decorateInnerHrefButtonsWithArrowIcon(block) {
   block.querySelectorAll('a').forEach((a) => {
-    const icon = domEl('calcite-icon', { class: "default-arrow-right", icon: 'arrowRight', scale: 's' });
+    const icon = domEl('calcite-icon', { class: 'default-arrow-right', icon: 'arrowRight', scale: 's' });
     if (a.href.includes('esri.com') || (a.href.includes('esri--aemsites'))) {
       a.appendChild(icon);
     }
