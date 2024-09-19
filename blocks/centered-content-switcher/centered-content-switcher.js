@@ -8,9 +8,6 @@ import {
 } from '../../scripts/dom-helpers.js';
 
 export default function decorate(block) {
-  block.classList.add('calcite-mode-dark');
-  document.querySelector('.centered-content-switcher-container').classList.add('calcite-mode-dark');
-
   block.querySelectorAll('img').forEach((image) => image
     .closest('picture')
     .replaceWith(

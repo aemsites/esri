@@ -1,4 +1,4 @@
-.mosaic-reveal-container {
+.mosaic-reveal-wrapper {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -146,10 +146,8 @@
 }
 
 @media (width >= 560px) {
-  .mosaic-reveal-container {
-    & > div:first-child {
-      padding: 12%;
-    }
+  .mosaic-reveal-wrapper:first-child {
+    padding: 12%;
   }
 
   .mosaic-reveal {
@@ -173,7 +171,7 @@
 }
 
 @media (width >= 1024px) {
-  .mosaic-reveal-container {
+  .mosaic-reveal-wrapper {
     h2 {
       font-size: 4.75rem;
       line-height: 1.11;
@@ -182,7 +180,7 @@
 }
 
 @media (width >= 1200px) {
-  .mosaic-reveal-container {
+  .mosaic-reveal-wrapper {
     flex-direction: row;
 
     & > div:first-child {
@@ -193,6 +191,7 @@
     }
   }
 
+  /* mosaic-reveal.block ?*/
   .mosaic-reveal-wrapper {
     flex-basis: 50%;
     inline-size: 50%;

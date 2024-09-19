@@ -1,5 +1,5 @@
 
-.section.map-container {
+.map-wrapper {
     background-position-x: center;
     background-position-y: center;
     padding-block: 3rem;
@@ -74,7 +74,7 @@ hr.center, .text-center hr {
     margin-inline: auto;
 }
 
-#map-default-content-wrapper > div > p    { 
+#map-default-content-wrapper > div > p    {
     font-weight: var(--calcite-font-weight-normal);
     font-size: var(--font-4);
     margin: 0 0 var(--space-4);
