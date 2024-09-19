@@ -50,6 +50,10 @@
         margin-block: 0 var(--space-2);
       }
 
+      calcite-button {
+        text-transform: none;
+      }
+
       & > h2 {
         color: var(--calcite-ui-text-1);
         font-size: var(--font-4);
@@ -123,7 +127,8 @@
       padding: 0;
 
       li {
-        display: flex;
+        display: grid;
+        grid-template-columns: calc(64px + 2 * var(--space-2)) 1fr;
         align-items: center;
         outline: 1px solid var(--calcite-ui-border-1);
       }
