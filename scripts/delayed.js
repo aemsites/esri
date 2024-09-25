@@ -18,6 +18,6 @@ window.dataLayer.push({
     pageName: document.title,
     pageTitle: document.title,
     pagePath: window.location.href,
-    locale: document.documentElement.lang,
+    locale: document.documentElement.lang
   },
 });
