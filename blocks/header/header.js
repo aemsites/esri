@@ -1,4 +1,4 @@
-import { loadCSS, loadScript } from '../../scripts/aem.js';
+import { getMetadata, loadCSS, loadScript } from '../../scripts/aem.js';
 import ffetch from '../../scripts/ffetch.js';
 import { link } from '../../scripts/dom-helpers.js';
 
@@ -58,13 +58,41 @@ async function alternateHeaders() {
   head.appendChild(xDefaultLink);
 }
 
+function createSchema() {
+  const jsonElement = document.createElement('script');
+  jsonElement.type = 'application/ld+json';
+  jsonElement.classList.add('schema-graph');
+
+  const schema = {
+    '@context': 'http://schema.org',
+    '@type': 'WebPage',
+    name: document.title,
+    sourceOrganization: {
+      '@type': 'Organization',
+      name: 'Esri',
+    },
+    url: document.querySelector('link[rel="canonical"]').href,
+    image: getMetadata('og:image'),
+    inLanguage: {
+      '@type': 'Language',
+      name: getMetadata('og:locale'),
+    },
+    description: document.querySelector('meta[name="description"]').content,
+  };
+
+  jsonElement.innerHTML = JSON.stringify(schema);
+  document.head.appendChild(jsonElement);
+}
+
 /**
  * loads and decorates the header, mainly the nav
  * @param {Element} block The header block element
  */
 export default async function decorate() {
-  await alternateHeaders().then(async () => {
-    window.gnav_jsonPath = '/2022-nav-config.25.json';
-    await Promise.all([loadScript('https://webapps-cdn.esri.com/CDN/components/global-nav/js/gn.js'), loadCSS('https://webapps-cdn.esri.com/CDN/components/global-nav/css/gn.css')]);
-  });
+  createSchema();
+  await alternateHeaders()
+    .then(async () => {
+      window.gnav_jsonPath = '/2022-nav-config.25.json';
+      await Promise.all([loadScript('https://webapps-cdn.esri.com/CDN/components/global-nav/js/gn.js'), loadCSS('https://webapps-cdn.esri.com/CDN/components/global-nav/css/gn.css')]);
+    });
 }
