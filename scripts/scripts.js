@@ -225,9 +225,29 @@ function loadDelayed() {
   // load anything that can be postponed to the latest here
 }
 
+/**
+ * Loads analytic attributes to all links inside a block.
+ * @param {Element} doc The container element
+ */
+async function loadAnalytics(doc) {
+  doc.querySelectorAll('.block').forEach((block) => {
+    block.querySelectorAll('[href]').forEach((link) => {
+      if ((link.tagName === 'A') || (link.tagName === 'CALCITE-BUTTON')) {
+        link.setAttribute('data-event', 'track-component');
+        link.setAttribute('data-component-name', block.getAttribute('data-block-name'));
+        link.setAttribute('data-component-link-type', 'link');
+        if (/^[a-zA-Z ]+$/.test(link.innerHTML)) {
+          link.setAttribute('data-component-link', link.innerHTML);
+        }
+      }
+    });
+  });
+}
+
 async function loadPage() {
   await loadEager(document);
   await loadLazy(document);
+  await loadAnalytics(document);
   loadDelayed();
 }
 
