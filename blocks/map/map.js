@@ -35,7 +35,7 @@ const getMapFrame = (url) => {
 
 export default function decorate(block) {
   const blockParams = block.querySelectorAll('p');
-  const heading = block.querySelector('h2')
+  const heading = block.querySelector('h2');
   const blockText = blockParams[0].innerText;
   const mapLink = blockParams[1].innerText;
   block.textContent = '';
