@@ -15,7 +15,7 @@ export default function decorate(block) {
     ));
 
   const tabs = [...block.children].slice(1);
-  const nav = div({ class: 'image-switcher-nav' }, ul({ class: 'nav-list' }));
+  const nav = div({ class: 'nav' }, ul({ class: 'nav-list' }));
   const navList = nav.children[0];
 
   let selectedIndex = 0;
@@ -61,14 +61,25 @@ export default function decorate(block) {
     });
   };
 
-  mediaQuery1.onchange(mediaQuery1);
-  mediaQuery2.onchange(mediaQuery2);
+  if (navItems.length > 4 && mediaQuery2.matches) {
+    navItems.forEach((item) => {
+      item.style.inlineSize = '50%';
+    });
+  } else if (mediaQuery1.matches) {
+    navItems.forEach((item) => {
+      item.style.inlineSize = '100%';
+    });
+  } else {
+    navItems.forEach((item) => {
+      item.style.inlineSize = '64px';
+    });
+  }
 
   const imageSwitcherContent = block.children[0];
-  imageSwitcherContent.classList.add('image-switcher-content');
+  imageSwitcherContent.classList.add('content');
   imageSwitcherContent.appendChild(nav);
 
-  const imageSwitcherImages = div({ class: 'image-switcher-images' }, ...tabs);
+  const imageSwitcherImages = div({ class: 'images' }, ...tabs);
 
   tabs.forEach((tab) => {
     const buttonContainer = tab.querySelector('.button-container');
