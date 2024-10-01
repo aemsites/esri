@@ -3,23 +3,25 @@
   justify-content: center;
   align-items: center;
   block-size: 64px;
+  margin: auto;
 
   .nav-list {
     text-decoration: none;
     list-style-type: none;
     display: flex;
+    flex-wrap: wrap;
     padding: 0;
 
     .nav-item {
       block-size: 64px;
-      inline-size: 64px;
       border: 1px solid var(--calcite-ui-border-1);
       display: flex;
       justify-content: center;
       align-items: center;
+      transition: background-color 180ms, box-shadow 180ms;
     }
 
-    .nav-item.active {
+    .nav-item.active, .nav-item:hover {
       box-shadow: 0 0 0 .5px var(--calcite-ui-brand), inset 0 0 0 .5px var(--calcite-ui-brand), inset 0 3px 0 0 var(--calcite-ui-brand);
     }
 
@@ -45,7 +47,7 @@
 .image-switcher-content {
   padding: var(--space-5);
 
-  div:first-child {
+  div {
     max-inline-size: 600px;  
   }
 
@@ -140,13 +142,27 @@
   .image-switcher {
     display: flex;
     flex-direction: row-reverse;
-    block-size: 900px;
+    block-size: 950px;
+  }
+
+  .image-switcher.flip {
+    flex-direction: row;
   }
 
   .image-switcher-images, .image-switcher-content {
     block-size: 100%;
     inline-size: 50%;
     padding: 0;
+  }
+
+  .image-switcher-images {
+    .image-content {
+      margin: auto auto var(--space-24);
+      max-inline-size: 82%;
+      padding: var(--space-8);
+      inset-inline-end: 0;
+      inset-block: auto 0;
+    }
   }
 
   .image-switcher-content {
@@ -167,9 +183,12 @@
 
       .nav-item {
         block-size: auto;
-        inline-size: auto;
         padding: var(--space-3) var(--space-3) var(--space-3) var(--space-6);
         justify-content: flex-start;
+      }
+
+      .nav-item.active, .nav-item:hover {
+        box-shadow: inset 3px 0 var(--calcite-ui-brand), inset -1px 0 var(--calcite-ui-brand), inset 0 1px var(--calcite-ui-brand), inset 0 -1px var(--calcite-ui-brand);
       }
 
       picture {
@@ -186,13 +205,20 @@
       p {
         display: block;
         color: var(--calcite-ui-text-2);
-        padding: var(--space-2);
         text-align: start;
         font-size: var(--font-0);
         cursor: pointer;
         margin-block: auto;
         padding-inline: 0;
       }
+    }
+  }
+}
+
+@media (width >= 1455px) {
+  .image-switcher-nav {
+    .nav-list {
+      max-block-size: calc(86px * 4);
     }
   }
 }

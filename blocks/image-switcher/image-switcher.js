@@ -38,6 +38,32 @@ export default function decorate(block) {
     navList.appendChild(listItem);
   });
 
+  const navItems = nav.querySelectorAll('.nav-item');
+  const mediaQuery1 = window.matchMedia('(width >= 1096px)');
+  const mediaQuery2 = window.matchMedia('(width >= 1455px)');
+  mediaQuery2.onchange = (e) => {
+    navItems.forEach((item) => {
+      if (navItems.length > 4 && e.matches) {
+        item.style.inlineSize = '50%';
+      } else {
+        item.style.inlineSize = '100%';
+      }
+    });
+  };
+
+  mediaQuery1.onchange = (e) => {
+    navItems.forEach((item) => {
+      if (!e.matches) {
+        item.style.inlineSize = '64px';
+      } else {
+        item.style.inlineSize = '100%';
+      }
+    });
+  };
+
+  mediaQuery1.onchange(mediaQuery1);
+  mediaQuery2.onchange(mediaQuery2);
+
   const imageSwitcherContent = block.children[0];
   imageSwitcherContent.classList.add('image-switcher-content');
   imageSwitcherContent.appendChild(nav);
@@ -46,13 +72,13 @@ export default function decorate(block) {
 
   tabs.forEach((tab) => {
     const buttonContainer = tab.querySelector('.button-container');
-    const url = buttonContainer.querySelector('a').href;
-    const title = buttonContainer.querySelector('a').textContent;
+    const url = buttonContainer?.querySelector('a').href;
+    const title = buttonContainer?.querySelector('a').textContent;
     tab.children[0].classList.add('image-content');
     tab.children[1].classList.add('image-div');
 
     const link = domEl('calcite-link', { href: url, 'icon-end': 'arrow-right' }, title);
-    buttonContainer.parentElement.replaceChild(link, buttonContainer);
+    buttonContainer?.parentElement.replaceChild(link, buttonContainer);
 
     tab.setAttribute('aria-hidden', 'true');
     tab.setAttribute('role', 'tabpanel');
