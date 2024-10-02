@@ -17,9 +17,19 @@
     color: var(--calcite-ui-text-2);
   }
 
-  & > div > div:nth-child(2) {
+  & > div > .columns-text-col {
     padding: 35px 30px 45px;
     inline-size: 81%;
+  }
+
+  .button-container-wrapper {
+    display: flex;
+    align-items: center;
+  }
+
+  .button-container {
+    margin-block-end: var(--space-4);
+    margin-inline-end: var(--space-2);
   }
 }
 
@@ -45,7 +55,7 @@
 
 @media (width >= 859px) {
   .columns {
-    & > div > div:nth-child(2) {
+    & > div > .columns-text-col {
       padding-inline: 6.7% 0;
     }
 
@@ -82,9 +92,8 @@
         }
       }
 
-      & > div:nth-child(2) {
+      & > .columns-text-col {
         padding: 35px 3.35% 45px;
-        max-inline-size: 720px;
         inline-size: 50vw;
       }
     }
