@@ -24,6 +24,17 @@ async function alternateHeaders() {
     }
   }
 
+   /**
+   * Use pathArray to determine the direction of the language
+   * If the language is Arabic, Hebrew or Kuwaiti Arabic, set the direction to rtl
+  */
+   let dir = 'ltr';
+   if (pathArray[1] && (pathArray[1] === 'ar-sa' || pathArray[1] === 'he-il' || pathArray[1] === 'ar-kw')) { dir = 'rtl'; }
+   document.querySelector('html').setAttribute('dir', dir);
+   
+   const lang = (pathArray[1] === 'en-us') ? 'en' : (pathArray[1] || 'en');
+   document.querySelector('html').setAttribute('lang', lang);
+
   const entries = await ffetch('/query-index.json')
     .all();
 
