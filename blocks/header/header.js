@@ -1,6 +1,22 @@
-import { loadCSS, loadScript } from '../../scripts/aem.js';
+import { loadCSS, loadScript, getMetadata } from '../../scripts/aem.js';
 import ffetch from '../../scripts/ffetch.js';
 import { link } from '../../scripts/dom-helpers.js';
+
+/**
+  * Use getMetadata to get the locale of the page
+  * * Update the html lang attribute to the locale
+  * If the language is Arabic, Hebrew or Kuwaiti Arabic, set the direction to rtl
+  */
+async function setLocaleAndDirection() {
+  const locale = getMetadata('og:locale') || 'en-us';
+  const dir = (locale === 'ar-sa' || locale === 'he-il' || locale === 'ar-kw') ? 'rtl' : 'ltr';
+  document.querySelector('html').setAttribute('dir', dir);
+
+  const lang = (locale === 'en-us') ? 'en' : locale;
+  document.querySelector('html').setAttribute('lang', lang);
+}
+
+await setLocaleAndDirection();
 
 /**
  * get all entries from the index
@@ -23,17 +39,6 @@ async function alternateHeaders() {
       }
     }
   }
-
-  /**
-  * Use pathArray to determine the direction of the language
-  * If the language is Arabic, Hebrew or Kuwaiti Arabic, set the direction to rtl
-  */
-  let dir = 'ltr';
-  if (pathArray[1] && (pathArray[1] === 'ar-sa' || pathArray[1] === 'he-il' || pathArray[1] === 'ar-kw')) { dir = 'rtl'; }
-  document.querySelector('html').setAttribute('dir', dir);
-
-  const lang = (pathArray[1] === 'en-us') ? 'en' : (pathArray[1] || 'en');
-  document.querySelector('html').setAttribute('lang', lang);
 
   const entries = await ffetch('/query-index.json')
     .all();
