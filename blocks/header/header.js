@@ -7,7 +7,7 @@ import { link } from '../../scripts/dom-helpers.js';
   * * Update the html lang attribute to the locale
   * If the language is Arabic, Hebrew or Kuwaiti Arabic, set the direction to rtl
   */
-async function setLocaleAndDirection() {
+function setLocaleAndDirection() {
   const locale = getMetadata('og:locale') || 'en-us';
   const dir = (locale === 'ar-sa' || locale === 'he-il' || locale === 'ar-kw') ? 'rtl' : 'ltr';
   document.querySelector('html').setAttribute('dir', dir);
@@ -15,8 +15,6 @@ async function setLocaleAndDirection() {
   const lang = (locale === 'en-us') ? 'en' : locale;
   document.querySelector('html').setAttribute('lang', lang);
 }
-
-await setLocaleAndDirection();
 
 /**
  * get all entries from the index
@@ -83,4 +81,5 @@ export default async function decorate() {
     window.gnav_jsonPath = '/2022-nav-config.25.json';
     await Promise.all([loadScript('https://webapps-cdn.esri.com/CDN/components/global-nav/js/gn.js'), loadCSS('https://webapps-cdn.esri.com/CDN/components/global-nav/css/gn.css')]);
   });
+  setLocaleAndDirection();
 }
