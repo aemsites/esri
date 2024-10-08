@@ -82,6 +82,6 @@ export default async function decorate() {
   await Promise.all([
     alternateHeaders(),
     loadScript('https://webapps-cdn.esri.com/CDN/components/global-nav/js/gn.js'),
-    loadCSS('https://webapps-cdn.esri.com/CDN/components/global-nav/css/gn.css')
+    loadCSS('https://webapps-cdn.esri.com/CDN/components/global-nav/css/gn.css'),
   ]);
 }
