@@ -78,8 +78,10 @@ async function alternateHeaders() {
  */
 export default async function decorate() {
   setLocaleAndDirection();
-  await alternateHeaders().then(async () => {
-    window.gnav_jsonPath = '/2022-nav-config.25.json';
-    await Promise.all([loadScript('https://webapps-cdn.esri.com/CDN/components/global-nav/js/gn.js'), loadCSS('https://webapps-cdn.esri.com/CDN/components/global-nav/css/gn.css')]);
-  });
+  window.gnav_jsonPath = '/2022-nav-config.25.json';
+  await Promise.all([
+    alternateHeaders(),
+    loadScript('https://webapps-cdn.esri.com/CDN/components/global-nav/js/gn.js'),
+    loadCSS('https://webapps-cdn.esri.com/CDN/components/global-nav/css/gn.css')
+  ]);
 }
