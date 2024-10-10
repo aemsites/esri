@@ -10,7 +10,7 @@ sampleRUM('cwv');
  * Loads analytic attributes to all links inside a block.
  * @param {Element} doc The container element
  */
-function loadAnalytics() {
+function loadAnalytics(dataLayer) {
   document.querySelectorAll('.block').forEach((block) => {
     block.querySelectorAll('[href]').forEach((link) => {
       if ((link.tagName === 'A') || (link.tagName === 'CALCITE-BUTTON')) {
@@ -24,7 +24,7 @@ function loadAnalytics() {
     });
   });
 
-  if (typeof dataLayer !== "undefined") {
+  if (typeof dataLayer !== 'undefined') {
     document.querySelectorAll('.block').forEach((block) => {
       block.querySelectorAll('[href]').forEach((link) => {
         if ((link.tagName === 'A') || (link.tagName === 'CALCITE-BUTTON')) {
@@ -36,7 +36,7 @@ function loadAnalytics() {
                 name: block.getAttribute('data-block-name'),
                 url: link.href,
                 linkType: link.getAttribute('data-component-link-type'),
-                linkText: link.innerHTML
+                linkText: link.innerHTML,
               },
             });
           });
@@ -62,5 +62,4 @@ window.dataLayer.push({
   },
 });
 
-loadAnalytics();
-
+loadAnalytics(window.dataLayer);
