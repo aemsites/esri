@@ -1,6 +1,4 @@
-import {
-  getMetadata, loadCSS, loadScript, toClassName,
-} from '../../scripts/aem.js';
+import { getMetadata, loadCSS, loadScript } from '../../scripts/aem.js';
 import ffetch from '../../scripts/ffetch.js';
 import { link, script } from '../../scripts/dom-helpers.js';
 
@@ -60,15 +58,6 @@ async function alternateHeaders() {
   head.appendChild(xDefaultLink);
 }
 
-function createBreadcrumbsElement(position, breadcrumb, breadcrumbsSchemaUrl) {
-  return {
-    '@type': 'ListItem',
-    position,
-    breadcrumb,
-    item: breadcrumbsSchemaUrl,
-  };
-}
-
 function createBreadcrumbs() {
   const breadcrumbsDictionary = {
     'About,À propos d’Esri': '/about/about-esri/overview',
@@ -92,11 +81,6 @@ function createBreadcrumbs() {
     'Intelligence géographique': '/location-intelligence/overview',
   };
 
-  const languageHomeBreadcrumb = {
-    'en-us': 'Home',
-    'fr-fr': 'Accueil Esri',
-  };
-
   const breadcrumbs = getMetadata('breadcrumbs')
     .split(',')
     .map((breadcrumb) => breadcrumb.trim());
@@ -105,27 +89,9 @@ function createBreadcrumbs() {
 
   const urlSegments = window.location.pathname.split('/').slice(2);
 
-  /*
-  <script type="application/ld+json" id="breadcrumbs">
-    {
-      '@context': 'https://schema.org',
-      '@type': 'BreadcrumbList',
-      'itemListElement':  [
-      {'@type': 'ListItem','position': 1,
-      'name':'About','item':'https://www.esri.com/en-us/about/about-esri/overview'},{'@type': 'ListItem','position': 2,'name':'About Esri','item':'https://www.esri.com/en-us/about/about-esri/overview'},{'@type': 'ListItem','position': 3,'name':'Americas','item':'https://www.esri.com/en-us/about/about-esri/americas'}]
-    }
-  </script>;
-  */
-
   const language = getMetadata('og:locale');
 
-  // const accumulatedUrl = urlSegments.reduce((acc, segment) => {
-  //   const url = `${acc}/${segment}`;
-  //   return url;
-  // });
-
-  const urlPrefix = `https://www.esri.com/${language}`;
-  let accUrl = urlPrefix;
+  let accUrl = `https://www.esri.com/${language}`;
   const accBreadcrumbs = [];
 
   const breadcrumbsSchema = breadcrumbs.map((breadcrumb, index) => {
@@ -134,35 +100,25 @@ function createBreadcrumbs() {
 
     const breadcrumbsSchemaUrl = breadcrumbsDictionary[accBreadcrumbs.join(',')] || accUrl;
     const position = index + 1;
-    return createBreadcrumbsElement(position, breadcrumb, breadcrumbsSchemaUrl);
+    return {
+      '@type': 'ListItem',
+      position,
+      name: breadcrumb,
+      item: breadcrumbsSchemaUrl,
+    };
   });
 
-  // push before the first element of breadcrumbsSchema
-  // breadcrumbsSchema.unshift(createBreadcrumbsElement(1, languageHomeBreadcrumb[language], `${urlPrefix}/home`));
-
   document.head.appendChild(script(
-      {
-        type: 'application/ld+json',
-        id: 'breadcrumbs',
-      },
-    `{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement":  [{"@type": "ListItem","position": 1,"name":"About","item":"https://www.esri.com/fr-fr/about/about-esri/overview"},{"@type": "ListItem","position": 2,"name":"À propos d’Esri","item":"https://www.esri.com/en-us/about/about-esri/overview"},{"@type": "ListItem","position": 3,"name":"Vue d’ensemble","item":"https://www.esri.com/fr-fr/about/about-esri/overview"}]
- }`,
+    {
+      type: 'application/ld+json',
+      id: 'breadcrumbs',
+    },
+    JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: breadcrumbsSchema,
+    }),
   ));
-
-  // document.head.appendChild(script(
-  //   {
-  //     type: 'application/ld+json',
-  //     id: 'breadcrumbs',
-  //   },
-  //   JSON.stringify({
-  //     '@context': 'https://schema.org',
-  //     '@type': 'BreadcrumbList',
-  //     itemListElement: breadcrumbsSchema,
-  //   }),
-  // ));
 }
 
 function createSchema() {
