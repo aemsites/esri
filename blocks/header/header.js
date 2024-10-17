@@ -205,5 +205,6 @@ export default async function decorate() {
         loadScript('https://webapps-cdn.esri.com/CDN/components/global-nav/js/gn.js'),
         loadCSS('https://webapps-cdn.esri.com/CDN/components/global-nav/css/gn.css'),
       ]);
+      document.querySelector('#globalfooter').classList.add('calcite-mode-light');
     });
 }
