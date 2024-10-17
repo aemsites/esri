@@ -87,7 +87,9 @@ function createBreadcrumbs() {
     .split(',')
     .map((breadcrumb) => breadcrumb.trim());
 
-  const urlSegments = window.location.pathname.split('/').slice(1);
+  console.log('window pathname', window.location.pathname, window.location.pathname.split('/'));
+
+  const urlSegments = window.location.pathname.split('/').slice(2);
 
   /*
   <script type="application/ld+json" id="breadcrumbs">
@@ -121,7 +123,7 @@ function createBreadcrumbs() {
       '@context': 'https://schema.org',
       '@type': 'BreadcrumbList',
       itemListElement: breadcrumbs.map((breadcrumb, index) => {
-        accUrl += `/${toClassName(breadcrumb)}`;
+        accUrl += `/${urlSegments[index]}`;
         accBreadcrumbs.push(breadcrumb);
 
         return {
