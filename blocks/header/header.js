@@ -60,6 +60,15 @@ async function alternateHeaders() {
   head.appendChild(xDefaultLink);
 }
 
+function createBreadcrumbsElement(position, breadcrumb, breadcrumbsSchemaUrl) {
+  return {
+    '@type': 'ListItem',
+    position,
+    breadcrumb,
+    item: breadcrumbsSchemaUrl,
+  };
+}
+
 function createBreadcrumbs() {
   const breadcrumbsDictionary = {
     'About,À propos d’Esri': '/about/about-esri/overview',
@@ -81,6 +90,11 @@ function createBreadcrumbs() {
     'Intelligence artificielle': '/artificial-intelligence',
     'Transformation numérique': '/digital-transformation/overview',
     'Intelligence géographique': '/location-intelligence/overview',
+  };
+
+  const languageHomeBreadcrumb = {
+    'en-us': 'Home',
+    'fr-fr': 'Accueil Esri',
   };
 
   const breadcrumbs = getMetadata('breadcrumbs')
@@ -114,27 +128,41 @@ function createBreadcrumbs() {
   let accUrl = urlPrefix;
   const accBreadcrumbs = [];
 
-  document.head.appendChild(script(
-    {
-      type: 'application/ld+json',
-      id: 'breadcrumbs',
-    },
-    JSON.stringify({
-      '@context': 'https://schema.org',
-      '@type': 'BreadcrumbList',
-      itemListElement: breadcrumbs.map((breadcrumb, index) => {
-        accUrl += `/${urlSegments[index]}`;
-        accBreadcrumbs.push(breadcrumb);
+  const breadcrumbsSchema = breadcrumbs.map((breadcrumb, index) => {
+    accUrl += `/${urlSegments[index]}`;
+    accBreadcrumbs.push(breadcrumb);
 
-        return {
-          '@type': 'ListItem',
-          position: index + 1,
-          breadcrumb,
-          item: breadcrumbsDictionary[accBreadcrumbs.join(',')] || accUrl,
-        };
-      }),
-    }),
+    const breadcrumbsSchemaUrl = breadcrumbsDictionary[accBreadcrumbs.join(',')] || accUrl;
+    const position = index + 1;
+    return createBreadcrumbsElement(position, breadcrumb, breadcrumbsSchemaUrl);
+  });
+
+  // push before the first element of breadcrumbsSchema
+  // breadcrumbsSchema.unshift(createBreadcrumbsElement(1, languageHomeBreadcrumb[language], `${urlPrefix}/home`));
+
+  document.head.appendChild(script(
+      {
+        type: 'application/ld+json',
+        id: 'breadcrumbs',
+      },
+    `{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement":  [{"@type": "ListItem","position": 1,"name":"About","item":"https://www.esri.com/fr-fr/about/about-esri/overview"},{"@type": "ListItem","position": 2,"name":"À propos d’Esri","item":"https://www.esri.com/en-us/about/about-esri/overview"},{"@type": "ListItem","position": 3,"name":"Vue d’ensemble","item":"https://www.esri.com/fr-fr/about/about-esri/overview"}]
+ }`,
   ));
+
+  // document.head.appendChild(script(
+  //   {
+  //     type: 'application/ld+json',
+  //     id: 'breadcrumbs',
+  //   },
+  //   JSON.stringify({
+  //     '@context': 'https://schema.org',
+  //     '@type': 'BreadcrumbList',
+  //     itemListElement: breadcrumbsSchema,
+  //   }),
+  // ));
 }
 
 function createSchema() {
@@ -173,6 +201,9 @@ export default async function decorate() {
   await alternateHeaders()
     .then(async () => {
       window.gnav_jsonPath = '/2022-nav-config.25.json';
-      await Promise.all([loadScript('https://webapps-cdn.esri.com/CDN/components/global-nav/js/gn.js'), loadCSS('https://webapps-cdn.esri.com/CDN/components/global-nav/css/gn.css')]);
+      await Promise.all([
+        loadScript('https://webapps-cdn.esri.com/CDN/components/global-nav/js/gn.js'),
+        loadCSS('https://webapps-cdn.esri.com/CDN/components/global-nav/css/gn.css'),
+      ]);
     });
 }
