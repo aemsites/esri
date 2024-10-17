@@ -161,9 +161,6 @@ main {
 
   pre {
     overflow: scroll;
-  }
-
-  pre {
     background-color: var(--calcite-ui-foreground-2);
     padding: 1em;
     border-radius: 0.25em;

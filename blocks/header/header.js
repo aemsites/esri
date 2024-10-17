@@ -85,8 +85,6 @@ function createBreadcrumbs() {
     .split(',')
     .map((breadcrumb) => breadcrumb.trim());
 
-  console.log('window pathname', window.location.pathname, window.location.pathname.split('/'));
-
   const urlSegments = window.location.pathname.split('/').slice(2);
 
   const language = getMetadata('og:locale');
