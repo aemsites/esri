@@ -1,6 +1,8 @@
-import { getMetadata, loadCSS, loadScript } from '../../scripts/aem.js';
+import {
+  getMetadata, loadCSS, loadScript, toClassName,
+} from '../../scripts/aem.js';
 import ffetch from '../../scripts/ffetch.js';
-import { link } from '../../scripts/dom-helpers.js';
+import { link, script } from '../../scripts/dom-helpers.js';
 
 /**
  * get all entries from the index
@@ -58,11 +60,82 @@ async function alternateHeaders() {
   head.appendChild(xDefaultLink);
 }
 
-function createSchema() {
-  const jsonElement = document.createElement('script');
-  jsonElement.type = 'application/ld+json';
-  jsonElement.classList.add('schema-graph');
+function createBreadcrumbs() {
+  const breadcrumbsDictionary = {
+    'About,À propos d’Esri': '/about/about-esri/overview',
+    'About,À propos d’Esri,Europe': '/about/about-esri/europe',
+    Fonctionnalités: '/arcgis/geospatial-platform/overview',
+    'Fonctionnalités,SIG 3D': '/capabilities/3d-gis/overview',
+    'Fonctionnalités,SIG 3D,Fonctionnalités': '/capabilities/3d-gis/overview',
+    'Fonctionnalités,Opérations sur le terrain': '/capabilities/field-operations/overview',
+    'Fonctionnalités,GeoAI': '/capabilities/geoai/overview',
+    'Fonctionnalités,Imagerie et télédétection': '/capabilities/imagery-remote-sensing/overview',
+    'Fonctionnalités,Imagerie et télédétection,Fonctionnalités': '/capabilities/imagery-remote-sensing/overview',
+    'Fonctionnalités,SIG Indoor': '/capabilities/indoor-gis/overview',
+    'Fonctionnalités,SIG Indoor,Piliers': '/capabilities/indoor-gis/overview',
+    'Fonctionnalités,Mapping': '/capabilities/mapping/overview',
+    'Fonctionnalités,Visualisation et analyse en temps réel': '/capabilities/real-time/overview',
+    'Fonctionnalités,Visualisation et analyse en temps réel,Fonctionnalités': '/capabilities/real-time/overview',
+    'Fonctionnalités,Visualisation et analyse en temps réel,Partenaires': '/capabilities/real-time/overview',
+    'Fonctionnalités,Analyse spatiale et Data Science': '/capabilities/spatial-analytics-data-science/overview',
+    'Intelligence artificielle': '/artificial-intelligence',
+    'Transformation numérique': '/digital-transformation/overview',
+    'Intelligence géographique': '/location-intelligence/overview',
+  };
 
+  const breadcrumbs = getMetadata('breadcrumbs')
+    .split(',')
+    .map((breadcrumb) => breadcrumb.trim());
+
+  const urlSegments = window.location.pathname.split('/').slice(1);
+
+  /*
+  <script type="application/ld+json" id="breadcrumbs">
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      'itemListElement':  [
+      {'@type': 'ListItem','position': 1,
+      'name':'About','item':'https://www.esri.com/en-us/about/about-esri/overview'},{'@type': 'ListItem','position': 2,'name':'About Esri','item':'https://www.esri.com/en-us/about/about-esri/overview'},{'@type': 'ListItem','position': 3,'name':'Americas','item':'https://www.esri.com/en-us/about/about-esri/americas'}]
+    }
+  </script>;
+  */
+
+  const language = getMetadata('og:locale');
+
+  // const accumulatedUrl = urlSegments.reduce((acc, segment) => {
+  //   const url = `${acc}/${segment}`;
+  //   return url;
+  // });
+
+  const urlPrefix = `https://www.esri.com/${language}`;
+  let accUrl = urlPrefix;
+  const accBreadcrumbs = [];
+
+  document.head.appendChild(script(
+    {
+      type: 'application/ld+json',
+      id: 'breadcrumbs',
+    },
+    JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: breadcrumbs.map((breadcrumb, index) => {
+        accUrl += `/${toClassName(breadcrumb)}`;
+        accBreadcrumbs.push(breadcrumb);
+
+        return {
+          '@type': 'ListItem',
+          position: index + 1,
+          breadcrumb,
+          item: breadcrumbsDictionary[accBreadcrumbs.join(',')] || accUrl,
+        };
+      }),
+    }),
+  ));
+}
+
+function createSchema() {
   const schema = {
     '@context': 'http://schema.org',
     '@type': 'WebPage',
@@ -80,6 +153,10 @@ function createSchema() {
     description: document.querySelector('meta[name="description"]').content,
   };
 
+  const jsonElement = document.createElement('script');
+  jsonElement.type = 'application/ld+json';
+  jsonElement.classList.add('schema-graph');
+
   jsonElement.innerHTML = JSON.stringify(schema);
   document.head.appendChild(jsonElement);
 }
@@ -90,6 +167,7 @@ function createSchema() {
  */
 export default async function decorate() {
   createSchema();
+  createBreadcrumbs();
   await alternateHeaders()
     .then(async () => {
       window.gnav_jsonPath = '/2022-nav-config.25.json';
