@@ -103,7 +103,7 @@ async function createBreadcrumbs() {
 
       return { length, path };
     })
-    .reduce((acc, {length, path}) => {
+    .reduce((acc, { length, path }) => {
       const position = length - 1;
       if (acc.length >= position) {
         // resize acc to be able to add the new entry
